@@ -5,9 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChordnomiconWebApplication.Tests
+namespace ChordnomiconWebApplication
 {
-    /*
     [TestFixture]
     class ModeTest
     {
@@ -39,5 +38,4 @@ namespace ChordnomiconWebApplication.Tests
             Assert.IsFalse(mode.containsNote(NoteFactory.getNoteByName("F#"), key));
         }
     }
-    */
 }

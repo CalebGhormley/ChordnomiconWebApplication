@@ -5,9 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChordnomiconWebApplication.Tests
+namespace ChordnomiconWebApplication
 {
-    /*
     [TestFixture]
     class ChordFactoryTest
     {
@@ -216,5 +215,4 @@ namespace ChordnomiconWebApplication.Tests
             Assert.IsTrue(recomendations.Count() > 1);
         }
     }
-    */
 }

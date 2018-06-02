@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 using NUnit;
 using NUnit.Framework;
 
-namespace ChordnomiconWebApplication.Tests
+namespace ChordnomiconWebApplication
 {
-    /*
     [TestFixture]
     class NoteFactoryTest
     {
@@ -504,5 +503,4 @@ namespace ChordnomiconWebApplication.Tests
         }
 
     }
-    */
 }

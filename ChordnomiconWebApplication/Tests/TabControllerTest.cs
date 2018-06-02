@@ -5,9 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChordnomiconWebApplication.Tests
+namespace ChordnomiconWebApplication
 {
-    /*
     [TestFixture]
     class TabControllerTest
     {
@@ -21,5 +20,4 @@ namespace ChordnomiconWebApplication.Tests
             Assert.IsFalse(TabController.checkPitchRange(10, NoteFactory.getNoteByName("C"), guitar));
         }
     }
-    */
 }

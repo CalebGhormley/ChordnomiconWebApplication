@@ -5,9 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChordnomiconWebApplication.Tests
+namespace ChordnomiconWebApplication
 {
-    /*
     [TestFixture]
     class ChordControllerTest
     {
@@ -40,5 +39,4 @@ namespace ChordnomiconWebApplication.Tests
             Assert.IsTrue(ChordController.checkChordName(chordName));
         }
     }
-    */
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chordnomicon_Prototype_1
+namespace ChordnomiconWebApplication
 {
     class IntervalFactory
     {

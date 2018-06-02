@@ -5,9 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChordnomiconWebApplication.Tests
+namespace ChordnomiconWebApplication
 {
-    /*
     [TestFixture]
     class TabChordFactoryTest
     {
@@ -97,5 +96,4 @@ namespace ChordnomiconWebApplication.Tests
         }
 
     }
-    */
 }

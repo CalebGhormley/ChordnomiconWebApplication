@@ -5,9 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChordnomiconWebApplication.Tests
+namespace ChordnomiconWebApplication
 {
-    /*
     [TestFixture]
     class ProgressionTest
     {
@@ -116,5 +115,4 @@ namespace ChordnomiconWebApplication.Tests
             Assert.AreEqual("3", _progression.getTabNumber(1, 1));
         }
     }
-    */
 }
