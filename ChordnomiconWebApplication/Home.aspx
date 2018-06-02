@@ -22,7 +22,8 @@
             <div>
                 <p style="text-align:center">
                     The Chord-nom-icon is a collection of all possible chords and their names. It also allows you to build chord progressions and
-                    displays pictoral representations of the harmony between chords and modes.
+                    displays pictoral representations of the harmony between chords and modes. The Chordnomicon will suggest chords that fall
+                    within the chosen mode and also allows modal interchange.
                 </p>
             </div>
         </div>
