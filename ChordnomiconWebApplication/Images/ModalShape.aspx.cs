@@ -1,31 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Drawing;
+using System.Drawing.Imaging;
 
-namespace ChordnomiconWebApplication
+namespace ChordnomiconWebApplication.Images
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
-        Bitmap bitmap;
-        
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
-            {
-                drawModalShape();
-            }
-        }
-
-        private void drawModalShape()
-        {
-            bitmap = new Bitmap(400, 400);
+            Bitmap bitmap = new Bitmap(400, 400);
             Graphics g = Graphics.FromImage(bitmap);
-
             Font font = new Font(FontFamily.GenericSerif, 18, FontStyle.Italic);
             StringFormat stringFormat = new StringFormat();
             stringFormat.Alignment = StringAlignment.Center;
@@ -103,9 +92,10 @@ namespace ChordnomiconWebApplication
             g.DrawString(m7, font, Brushes.Black, new RectangleF(30, 85, 40, 40), stringFormat);
             g.DrawString(M7, font, Brushes.Black, new RectangleF(85, 30, 40, 40), stringFormat);
 
-            string path = Server.MapPath("~/Pages/modalShape.jpg");
-            bitmap.Save(path, ImageFormat.Jpeg);
-            Image1.ImageUrl = "~/Pages/modalShape.jpg";
+            Response.ContentType = "image/jpeg";
+            bitmap.Save(Response.OutputStream, ImageFormat.Jpeg);
+            Response.End();
+
             g.Dispose();
             bitmap.Dispose();
         }

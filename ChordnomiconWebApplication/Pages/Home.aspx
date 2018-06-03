@@ -5,20 +5,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <style>
+        .center {
+            display:block;
+            margin-left:auto;
+            margin-right:auto;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
             <div>
-                
                 <h1 style="text-align:center; font-family:'Old English Text MT'; font-size:300%;">
                     Chordnomicon
                 </h1>
                 <p style="text-align:center">
                     Created by Caleb Ghormley
                 </p>
+                <asp:Image ID="Image1" runat="server" class="center"/>
             </div>
-
             <div>
                 <p style="text-align:center">
                     The Chord-nom-icon is a collection of all possible chords and their names. It also allows you to build chord progressions and

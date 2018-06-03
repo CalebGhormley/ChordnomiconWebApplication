@@ -38,3 +38,5 @@ C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplicatio
 C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication\bin\nunit.framework.dll
 C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication\bin\nunit.framework.pdb
 C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication\bin\nunit.framework.xml
+C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication\obj\Debug\ChordnomiconWebApplication.Properties.Resources.resources
+C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication\obj\Debug\ChordnomiconWebApplication.csproj.GenerateResource.Cache
