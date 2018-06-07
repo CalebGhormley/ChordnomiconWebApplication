@@ -11,6 +11,18 @@
             margin-left:auto;
             margin-right:auto;
         }
+        .centerText {
+            display:block;
+            margin-left:auto;
+            margin-right:auto;
+            width:50%;
+        }
+        .linkButton{
+            display:block;
+            margin-left:auto;
+            margin-right:auto;
+
+        }
     </style>
 </head>
 <body>
@@ -23,17 +35,16 @@
                 <p style="text-align:center">
                     Created by Caleb Ghormley
                 </p>
-                <asp:Image ID="Image1" runat="server" class="center"/>
+                <asp:Image ID="Image1" runat="server" class="center" Height="200px" Width="200px" AlternateText="Chromatic Shape"/>
             </div>
             <div>
-                <p style="text-align:center">
+                    <p class="centerText">
                     The Chord-nom-icon is a collection of all possible chords and their names. It also allows you to build chord progressions and
                     displays pictoral representations of the harmony between chords and modes. The Chordnomicon will suggest chords that fall
-                    within the chosen mode and also allows modal interchange.
+                    within the chosen mode but also allows modal interchange.
                 </p>
             </div>
         </div>
-        <asp:Button ID="Button1" runat="server" Text="Button" />
     </form>
 </body>
 </html>

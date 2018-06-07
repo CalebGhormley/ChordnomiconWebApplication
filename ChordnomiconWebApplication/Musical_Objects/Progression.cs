@@ -6,32 +6,19 @@ using System.Threading.Tasks;
 
 namespace ChordnomiconWebApplication
 {
-    class Progression
+    static class Progression
     {
-        public Progression()
-        {
-            _key = new Note(4, "C");
-            _mode = new Mode();
-            _mode = ModeFactory.getModeByName("Ionian");
-        }
-        public Progression(string key, string mode)
-        {
-            _key = NoteFactory.getNoteByName(key);
-            _mode = new Mode();
-            _mode = ModeFactory.getModeByName(mode);
-        }
+        private static Note _key;
+        public static void changeKey(Note key) { _key = key; }
+        public static Note getKey() { return _key; }
 
-        private Note _key;
-        public void changeKey(Note key) { _key = key; }
-        public Note getKey() { return _key; }
+        private static Mode _mode;
+        public static void changeMode(string mode) { _mode = ModeFactory.getModeByName(mode); }
+        public static Mode getMode() { return _mode; }
 
-        private Mode _mode;
-        public void changeMode(string mode) { _mode = ModeFactory.getModeByName(mode); }
-        public Mode getMode() { return _mode; }
-
-        private Guitar _guitar = new Guitar();
-        public Guitar getGuitar() { return _guitar; }
-        public void changeTuning(Note six, Note five, Note four, Note three, Note two, Note one) 
+        private static Guitar _guitar = new Guitar();
+        public static Guitar getGuitar() { return _guitar; }
+        public static void changeTuning(Note six, Note five, Note four, Note three, Note two, Note one) 
         {
             _guitar.changeTunning(six, five, four, three, two, one);
             TabChord tempTab;
@@ -42,7 +29,7 @@ namespace ChordnomiconWebApplication
                 tablature.Insert(i, tempTab);
             }
         }
-        public string getTuning()
+        public static string getTuning()
         {
             string tuning = "";
             for (int i = 6; i > 0; i--)
@@ -53,21 +40,21 @@ namespace ChordnomiconWebApplication
             return tuning;
         }
 
-        private List<Chord> chords = new List<Chord>();
-        private List<TabChord> tablature = new List<TabChord>();
+        private static List<Chord> chords = new List<Chord>();
+        private static List<TabChord> tablature = new List<TabChord>();
 
-        public void addChord(Chord chord)
+        public static void addChord(Chord chord)
         {
             chords.Add(chord);
             tablature.Add(TabChordFactory.getTabByChord(chord, 1, _guitar));
         }
-        public void replaceChord(int location, Chord chord)
+        public static void replaceChord(int location, Chord chord)
         {
             chords.RemoveAt(location);
             chords.Insert(location, chord);
             tablature.Insert(location, TabChordFactory.getTabByChord(chord, 1, _guitar));
         }
-        public void swapChords(int locationOne, int locationTwo)
+        public static void swapChords(int locationOne, int locationTwo)
         {
             Chord tempOne = chords.ElementAt(locationOne);
             Chord tempTwo = chords.ElementAt(locationTwo);
@@ -83,17 +70,17 @@ namespace ChordnomiconWebApplication
             tablature.RemoveAt(locationTwo);
             tablature.Insert(locationTwo, tempTabOne);
         }
-        public void removeChord(int location)
+        public static void removeChord(int location)
         {
             chords.RemoveAt(location);
             tablature.RemoveAt(location);
         }
-        public void clearProgression()
+        public static void clearProgression()
         {
             chords.Clear();
             tablature.Clear();
         }
-        public string getChordNames ()
+        public static string getChordNames ()
         {
             string names = "";
             Chord _chord;
@@ -105,16 +92,16 @@ namespace ChordnomiconWebApplication
             }
             return names;
         }
-        public Chord getChord(int position)
+        public static Chord getChord(int position)
         {
             return(chords.ElementAt(position));
         }
-        public int getSize() { return chords.Count; }
-        public string getTabNumber(int _chord, int _string)
+        public static int getSize() { return chords.Count; }
+        public static string getTabNumber(int _chord, int _string)
         { return tablature.ElementAt(_chord - 1).getFretNumber(_string); }
-        public int getTabPitch(int _chord)
+        public static int getTabPitch(int _chord)
         { return tablature.ElementAt(_chord - 1).getPitch(); }
-        public void changeTabPitch (int chordPosition, int newPitchPosition)
+        public static void changeTabPitch (int chordPosition, int newPitchPosition)
         {
             Chord tempChord = chords.ElementAt(chordPosition - 1);
             tablature.RemoveAt(chordPosition - 1);
