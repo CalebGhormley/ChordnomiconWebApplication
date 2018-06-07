@@ -12,7 +12,9 @@ namespace ChordnomiconWebApplication
     public partial class WebForm1 : System.Web.UI.Page
     {
         Bitmap bitmap;
-        
+        bool keyIsSet = false;
+        bool modeIsSet = false;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -110,6 +112,22 @@ namespace ChordnomiconWebApplication
             bitmap.Dispose();
         }
 
-        
+        protected void KeyEntryBox_TextChanged(object sender, EventArgs e)
+        {
+            if (NoteController.checkNoteName(KeyEntryBox.Text))
+            {
+                Progression.changeKey(NoteFactory.getNoteByName(KeyEntryBox.Text));
+                keyIsSet = true;
+            }
+        }
+
+        protected void KeyEntryButton_Click(object sender, EventArgs e)
+        {
+            if (keyIsSet)
+            {
+                KeyEntryLabel.Text = "The current key is: " + Progression.getKey().getName();
+            }
+            else { KeyEntryLabel.Text = "Please select a valid key name"; }
+        }
     }
 }

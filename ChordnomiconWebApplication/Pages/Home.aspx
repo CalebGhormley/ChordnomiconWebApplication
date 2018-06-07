@@ -44,6 +44,19 @@
                     within the chosen mode but also allows modal interchange.
                 </p>
             </div>
+                <div class="centerText">
+
+                Please enter the key for your progression.<br />
+                Use the &#39;#&#39; (number sign) character for sharp and the<br />
+                &#39;b&#39; (lower case b) character for flat.<br />
+
+                <asp:TextBox ID="KeyEntryBox" runat="server" OnTextChanged="KeyEntryBox_TextChanged"></asp:TextBox>
+
+                <asp:Button ID="KeyEntryButton" runat="server" OnClick="KeyEntryButton_Click" Text="Enter Key" />
+                <br />
+                <asp:Label ID="KeyEntryLabel" runat="server" Text="Enter a note" ForeColor="DarkRed"></asp:Label>
+
+            </div>
         </div>
     </form>
 </body>
