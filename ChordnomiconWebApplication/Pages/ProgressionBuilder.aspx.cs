@@ -10,28 +10,28 @@ namespace ChordnomiconWebApplication.Pages
     public partial class ProgressionBuilder : System.Web.UI.Page
     {
         bool keyIsSet = false;
-        bool modeIsSet = false;
 
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
-        protected void TextBox1_TextChanged(object sender, EventArgs e)
+
+        protected void KeyEntryBox_TextChanged(object sender, EventArgs e)
         {
-            if (NoteController.checkNoteName(TextBox1.Text))
+            if (NoteController.checkNoteName(KeyEntryBox.Text))
             {
-                Progression.changeKey(NoteFactory.getNoteByName(TextBox1.Text));
+                Progression.changeKey(NoteFactory.getNoteByName(KeyEntryBox.Text));
                 keyIsSet = true;
             }
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void KeyEntryButton_Click(object sender, EventArgs e)
         {
             if (keyIsSet)
             {
-                Label1.Text = "The current key is: " + Progression.getKey().getName();
+                KeyEntryLabel.Text = "The current key is: " + Progression.getKey().getName();
             }
-            else { Label1.Text = "Please select a valid key name"; }
+            else { KeyEntryLabel.Text = "Please select a valid key name"; }
         }
     }
 }
