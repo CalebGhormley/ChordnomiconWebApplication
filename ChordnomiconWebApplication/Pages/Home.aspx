@@ -6,8 +6,11 @@
 <head runat="server">
     <title>Entry Page</title>
     <style>
-        div.frame {
+        body {
+            
             background-color:black;
+        }
+        div.frame {
             border:none;
             padding:0px;
             margin:0px;

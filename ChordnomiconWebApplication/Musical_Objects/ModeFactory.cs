@@ -22,7 +22,7 @@ namespace ChordnomiconWebApplication
                 mode.addInterval(IntervalFactory.getIntervalByName("M6"));
                 mode.addInterval(IntervalFactory.getIntervalByName("M7"));
             }
-            else if (name == "Ionian")
+            else if (name == "Ionian" || name == "Major")
             {
                 mode.addInterval(IntervalFactory.getIntervalByName("R"));
                 mode.addInterval(IntervalFactory.getIntervalByName("M2"));
@@ -52,7 +52,7 @@ namespace ChordnomiconWebApplication
                 mode.addInterval(IntervalFactory.getIntervalByName("M6"));
                 mode.addInterval(IntervalFactory.getIntervalByName("m7"));
             }
-            else if (name == "Aeolian")
+            else if (name == "Aeolian" || name == "Minor")
             {
                 mode.addInterval(IntervalFactory.getIntervalByName("R"));
                 mode.addInterval(IntervalFactory.getIntervalByName("M2"));

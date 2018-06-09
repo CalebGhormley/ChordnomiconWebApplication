@@ -34,6 +34,17 @@
                 <asp:Label ID="KeyEntryLabel" runat="server" Text="Enter a note" ForeColor="DarkRed"></asp:Label>
 
             </div>
+            <div class="entryArea">
+
+                Please enter the mode for your progression.<br />
+
+                <asp:TextBox ID="ModeEntryBox" runat="server" OnTextChanged="ModeEntryBox_TextChanged" style=""></asp:TextBox>
+
+                <asp:Button ID="ModeEntryButton" runat="server" OnClick="ModeEntryButton_Click" Text="Enter Mode" />
+                <br />
+                <asp:Label ID="ModeEntryLabel" runat="server" Text="Enter a mode" ForeColor="DarkRed"></asp:Label>
+
+            </div>
         </div>
     </form>
 </body>

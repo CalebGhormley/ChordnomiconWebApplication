@@ -13,6 +13,7 @@ namespace ChordnomiconWebApplication
         public static Note getKey() { return _key; }
 
         private static Mode _mode;
+        public static void setMode (Mode mode) { _mode = mode; }
         public static void changeMode(string mode) { _mode = ModeFactory.getModeByName(mode); }
         public static Mode getMode() { return _mode; }
 
