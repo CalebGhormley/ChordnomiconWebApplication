@@ -8,11 +8,11 @@ namespace ChordnomiconWebApplication
 {
     static class Progression
     {
-        private static Note _key;
+        private static Note _key = NoteFactory.getNoteByName("D");
         public static void changeKey(Note key) { _key = key; }
         public static Note getKey() { return _key; }
 
-        private static Mode _mode;
+        private static Mode _mode = ModeFactory.getModeByName("Dorian");
         public static void setMode (Mode mode) { _mode = mode; }
         public static void changeMode(string mode) { _mode = ModeFactory.getModeByName(mode); }
         public static Mode getMode() { return _mode; }

@@ -16,6 +16,11 @@
             width: 50%;
             padding:20px;
         }
+        .center{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
     </style>
 </head>
 <body>
@@ -45,6 +50,8 @@
                 <asp:Label ID="ModeEntryLabel" runat="server" Text="Enter a mode" ForeColor="DarkRed"></asp:Label>
 
             </div>
+
+            <asp:Image ID="ProgressionChromaticCircle" runat="server" class="center" Height="300px" Width="300px" AlternateText="Chromatic Circle" />
         </div>
     </form>
 </body>
