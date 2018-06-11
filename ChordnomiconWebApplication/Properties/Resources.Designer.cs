@@ -59,24 +59,5 @@ namespace ChordnomiconWebApplication.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap _400px_with_300px_Circle {
-            get {
-                object obj = ResourceManager.GetObject("_400px_with_300px_Circle", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;%@ Page Language=&quot;C#&quot; AutoEventWireup=&quot;false&quot; CodeBehind=&quot;ModalShape.aspx.cs&quot; Inherits=&quot;ChordnomiconWebApplication.Images.WebForm1&quot; %&gt;.
-        /// </summary>
-        internal static string ModalShape {
-            get {
-                return ResourceManager.GetString("ModalShape", resourceCulture);
-            }
-        }
     }
 }

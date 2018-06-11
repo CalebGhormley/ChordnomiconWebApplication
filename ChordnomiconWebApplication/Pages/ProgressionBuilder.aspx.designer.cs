@@ -22,6 +22,15 @@ namespace ChordnomiconWebApplication.Pages {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// ProgressionChromaticCircle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image ProgressionChromaticCircle;
+        
+        /// <summary>
         /// KeyEntryBox control.
         /// </summary>
         /// <remarks>
@@ -76,12 +85,12 @@ namespace ChordnomiconWebApplication.Pages {
         protected global::System.Web.UI.WebControls.Label ModeEntryLabel;
         
         /// <summary>
-        /// ProgressionChromaticCircle control.
+        /// Image1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ProgressionChromaticCircle;
+        protected global::System.Web.UI.WebControls.Image Image1;
     }
 }

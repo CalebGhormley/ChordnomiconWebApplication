@@ -149,10 +149,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Images\400px_with_300px_Circle.jpg" />
-    <Content Include="Images\ModalShape.aspx" />
-    <Content Include="Images\WebForm2.aspx" />
-    <Content Include="Images\WebForm3.aspx" />
     <Content Include="Pages\About.aspx" />
     <Content Include="Pages\ChordBuilder.aspx" />
     <Content Include="Content\bootstrap.css" />
@@ -212,27 +208,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="Images\ModalShape.aspx.cs">
-      <DependentUpon>ModalShape.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Images\ModalShape.aspx.designer.cs">
-      <DependentUpon>ModalShape.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Images\WebForm2.aspx.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Images\WebForm2.aspx.designer.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Images\WebForm3.aspx.cs">
-      <DependentUpon>WebForm3.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Images\WebForm3.aspx.designer.cs">
-      <DependentUpon>WebForm3.aspx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Musical_Objects\Chord.cs" />
     <Compile Include="Musical_Objects\ChordController.cs" />
@@ -346,6 +321,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -360,6 +336,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

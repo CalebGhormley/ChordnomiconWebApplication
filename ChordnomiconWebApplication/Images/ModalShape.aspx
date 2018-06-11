@@ -1,1 +1,0 @@
-﻿<%@ Page Language="C#" AutoEventWireup="false" CodeBehind="ModalShape.aspx.cs" Inherits="ChordnomiconWebApplication.Images.ModalShape" %>
