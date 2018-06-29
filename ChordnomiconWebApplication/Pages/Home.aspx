@@ -27,12 +27,20 @@
             display:block;
             margin-left:auto;
             margin-right:auto;
+            margin-bottom:0px;
+            margin-top:0px;
+            padding:0px;
+            border:0px;
             text-align:center;
         }
 
         .topnav p {
             margin-left:auto;
             margin-right:auto;
+            margin-bottom:5px;
+            margin-top:5px;
+            padding:0px;
+            border:0px;
             display:block;
             color:white;
             font-family:'Old English Text MT';
@@ -65,7 +73,7 @@
                 </p>
                 </div>
             </div>
-            <iframe src="About.aspx" name="main_iframe" style="height:480px; width:100%; border:none;"></iframe>
+            <iframe src="About.aspx" name="main_iframe" style="height:520px; width:100%; border:none;"></iframe>
     </form>
 </body>
 </html>

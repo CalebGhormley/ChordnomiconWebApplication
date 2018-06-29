@@ -22,6 +22,51 @@ namespace ChordnomiconWebApplication.Pages {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// keyOrModeOptions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button keyOrModeOptions;
+        
+        /// <summary>
+        /// addChordOptions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button addChordOptions;
+        
+        /// <summary>
+        /// modifyChordOptions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button modifyChordOptions;
+        
+        /// <summary>
+        /// modifyInstrumentOptions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button modifyInstrumentOptions;
+        
+        /// <summary>
+        /// clearProgressionOtions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button clearProgressionOtions;
+        
+        /// <summary>
         /// ProgressionChromaticCircle control.
         /// </summary>
         /// <remarks>
@@ -29,6 +74,15 @@ namespace ChordnomiconWebApplication.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image ProgressionChromaticCircle;
+        
+        /// <summary>
+        /// keyOrMode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl keyOrMode;
         
         /// <summary>
         /// KeyEntryBox control.
@@ -85,12 +139,48 @@ namespace ChordnomiconWebApplication.Pages {
         protected global::System.Web.UI.WebControls.Label ModeEntryLabel;
         
         /// <summary>
-        /// Image1 control.
+        /// addChord control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl addChord;
+        
+        /// <summary>
+        /// ChordEntryBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ChordEntryBox;
+        
+        /// <summary>
+        /// ChordEntryButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ChordEntryButton;
+        
+        /// <summary>
+        /// ChordEntryLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ChordEntryLabel;
+        
+        /// <summary>
+        /// ProgressionSheetMusic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image ProgressionSheetMusic;
     }
 }

@@ -1,4 +1,5 @@
-﻿using ChordnomiconWebApplication.Musical_Objects;
+﻿using ChordnomiconWebApplication.Images;
+using ChordnomiconWebApplication.Musical_Objects;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -14,12 +15,28 @@ namespace ChordnomiconWebApplication.Pages
     {
         Bitmap bitmap;
         int nextNote;
+        bool tabOrSheet = false;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(!Page.IsCallback)
+            {
+                keyOrMode.Visible = true;
+                addChord.Visible = false;
+            }
+        
             drawModalShape();
+            if (tabOrSheet)
+            {
+                drawTablature();
+            }
+            else
+            {
+                drawSheetMusic();
+            }
+            //ChromaticGraphicFactory.drawChromaticGeometry("~/Images/ProgressionChromaticCircle.jpg", ProgressionChromaticCircle);
         }
-
+        
         private void drawModalShape()
         {
             bitmap = new Bitmap(400, 400);
@@ -131,6 +148,300 @@ namespace ChordnomiconWebApplication.Pages
             bitmap.Dispose();
         }
 
+        private void drawTablature()
+        {
+            bitmap = new Bitmap(1200 + (Progression.getSize() * 200), 525);
+            Graphics g = Graphics.FromImage(bitmap);
+
+            Font tabFont = new Font(FontFamily.GenericSerif, 50, FontStyle.Italic);
+            Font font = new Font(FontFamily.GenericSansSerif, 34, FontStyle.Bold);
+            StringFormat stringFormat = new StringFormat();
+            stringFormat.Alignment = StringAlignment.Center;
+            stringFormat.LineAlignment = StringAlignment.Center;
+            Pen blackPen = new Pen(Color.Black, 3);
+
+            g.DrawString("T", tabFont, Brushes.Black, new RectangleF(75, 10, 50, 75));
+            g.DrawString("A", tabFont, Brushes.Black, new RectangleF(75, 10, 50, 75));
+            g.DrawString("B", tabFont, Brushes.Black, new RectangleF(75, 10, 50, 75));
+
+            g.DrawLine(blackPen, 0, 75, 1200 + (Progression.getSize() * 200), 75);
+            g.DrawLine(blackPen, 0, 150, 1200 + (Progression.getSize() * 200), 150);
+            g.DrawLine(blackPen, 0, 225, 1200 + (Progression.getSize() * 200), 225);
+            g.DrawLine(blackPen, 0, 300, 1200 + (Progression.getSize() * 200), 300);
+            g.DrawLine(blackPen, 0, 375, 1200 + (Progression.getSize() * 200), 375);
+            g.DrawLine(blackPen, 0, 450, 1200 + (Progression.getSize() * 200), 450);
+        }
+
+        private void drawSheetMusic ()
+        {
+            bitmap = new Bitmap(1200 + (Progression.getSize() * 200), 450);
+            Graphics g = Graphics.FromImage(bitmap);
+
+            Font keyFont = new Font(FontFamily.GenericSerif, 50, FontStyle.Italic);
+            Font modeFont = new Font(FontFamily.GenericSerif, 28);
+            Font font = new Font(FontFamily.GenericSerif, 34, FontStyle.Bold);
+            StringFormat stringFormat = new StringFormat();
+            stringFormat.Alignment = StringAlignment.Center;
+            stringFormat.LineAlignment = StringAlignment.Center;
+            Pen blackPen = new Pen(Color.Black, 3);
+
+            string key = "C";
+            string mode = "Ionian";
+            string chordOne = "vi6";
+            string chordTwo = "ii";
+            string chordThree = "V6";
+            string chordFour = "I";
+
+            bool hasFirstSharp = false;
+            bool hasSecondSharp = false;
+            bool hasThirdSharp = false;
+            bool hasFourthSharp = false;
+            bool hasFifthSharp = false;
+            bool hasSixthSharp = false;
+            bool hasSeventhSharp = false;
+
+            bool hasFirstFlat = false;
+            bool hasSecondFlat = false;
+            bool hasThirdFlat = false;
+            bool hasFourthFlat = false;
+            bool hasFifthFlat = false;
+            bool hasSixthFlat = false;
+            bool hasSeventhFlat = false;
+
+            bool firstTopBar = false;
+            bool secondTopBar = false;
+            bool thirdTopBar = false;
+            bool fourthTopBar = false;
+
+            bool firstBottomBar = false;
+            bool secondBottomBar = false;
+            bool thirdBottomBar = false;
+            bool fourthBottomBar = false;
+
+            Rectangle firstTrebleA5 = new Rectangle(400, 25, 65, 50);
+            Rectangle secondTrebleA5 = new Rectangle(600, 25, 65, 50);
+            Rectangle thirdTrebleA5 = new Rectangle(800, 25, 65, 50);
+            Rectangle fourthTrebleA5 = new Rectangle(1000, 25, 65, 50);
+            Rectangle firstTrebleG5 = new Rectangle(400, 50, 65, 50);
+            Rectangle secondTrebleG5 = new Rectangle(600, 50, 65, 50);
+            Rectangle thirdTrebleG5 = new Rectangle(800, 50, 65, 50);
+            Rectangle fourthTrebleG5 = new Rectangle(1000, 50, 65, 50);
+            Rectangle firstTrebleF5 = new Rectangle(400, 75, 65, 50);
+            Rectangle secondTrebleF5 = new Rectangle(600, 75, 65, 50);
+            Rectangle thirdTrebleF5 = new Rectangle(800, 75, 65, 50);
+            Rectangle fourthTrebleF5 = new Rectangle(1000, 75, 65, 50);
+            Rectangle firstTrebleE5 = new Rectangle(400, 100, 65, 50);
+            Rectangle secondTrebleE5 = new Rectangle(600, 100, 65, 50);
+            Rectangle thirdTrebleE5 = new Rectangle(800, 100, 65, 50);
+            Rectangle fourthTrebleE5 = new Rectangle(1000, 100, 65, 50);
+            Rectangle firstTrebleD5 = new Rectangle(400, 125, 65, 50);
+            Rectangle secondTrebleD5 = new Rectangle(600, 125, 65, 50);
+            Rectangle thirdTrebleD5 = new Rectangle(800, 125, 65, 50);
+            Rectangle fourthTrebleD5 = new Rectangle(1000, 125, 65, 50);
+            Rectangle firstTrebleC5 = new Rectangle(400, 150, 65, 50);
+            Rectangle secondTrebleC5 = new Rectangle(600, 150, 65, 50);
+            Rectangle thirdTrebleC5 = new Rectangle(800, 150, 65, 50);
+            Rectangle fourthTrebleC5 = new Rectangle(1000, 150, 65, 50);
+            Rectangle firstTrebleB4 = new Rectangle(400, 175, 65, 50);
+            Rectangle secondTrebleB4 = new Rectangle(600, 175, 65, 50);
+            Rectangle thirdTrebleB4 = new Rectangle(800, 175, 65, 50);
+            Rectangle fourthTrebleB4 = new Rectangle(1000, 175, 65, 50);
+            Rectangle firstTrebleA4 = new Rectangle(400, 200, 65, 50);
+            Rectangle secondTrebleA4 = new Rectangle(600, 200, 65, 50);
+            Rectangle thirdTrebleA4 = new Rectangle(800, 200, 65, 50);
+            Rectangle fourthTrebleA4 = new Rectangle(1000, 200, 65, 50);
+            Rectangle firstTrebleG4 = new Rectangle(400, 225, 65, 50);
+            Rectangle secondTrebleG4 = new Rectangle(600, 225, 65, 50);
+            Rectangle thirdTrebleG4 = new Rectangle(800, 225, 65, 50);
+            Rectangle fourthTrebleG4 = new Rectangle(1000, 225, 65, 50);
+            Rectangle firstTrebleF4 = new Rectangle(400, 250, 65, 50);
+            Rectangle secondTrebleF4 = new Rectangle(600, 250, 65, 50);
+            Rectangle thirdTrebleF4 = new Rectangle(800, 250, 65, 50);
+            Rectangle fourthTrebleF4 = new Rectangle(1000, 250, 65, 50);
+            Rectangle firstTrebleE4 = new Rectangle(400, 275, 65, 50);
+            Rectangle secondTrebleE4 = new Rectangle(600, 275, 65, 50);
+            Rectangle thirdTrebleE4 = new Rectangle(800, 275, 65, 50);
+            Rectangle fourthTrebleE4 = new Rectangle(1000, 275, 65, 50);
+            Rectangle firstTrebleD4 = new Rectangle(400, 300, 65, 50);
+            Rectangle secondTrebleD4 = new Rectangle(600, 300, 65, 50);
+            Rectangle thirdTrebleD4 = new Rectangle(800, 300, 65, 50);
+            Rectangle fourthTrebleD4 = new Rectangle(1000, 300, 65, 50);
+            Rectangle firstTrebleC4 = new Rectangle(400, 325, 65, 50);
+            Rectangle secondTrebleC4 = new Rectangle(600, 325, 65, 50);
+            Rectangle thirdTrebleC4 = new Rectangle(800, 325, 65, 50);
+            Rectangle fourthTrebleC4 = new Rectangle(1000, 325, 65, 50);
+
+            Rectangle firstBassC4 = new Rectangle(400, 25, 65, 50);
+            Rectangle secondBassC4 = new Rectangle(600, 25, 65, 50);
+            Rectangle thirdBassC4 = new Rectangle(800, 25, 65, 50);
+            Rectangle fourthBassC4 = new Rectangle(1000, 25, 65, 50);
+            Rectangle firstBassB3 = new Rectangle(400, 50, 65, 50);
+            Rectangle secondBassB3 = new Rectangle(600, 50, 65, 50);
+            Rectangle thirdBassB3 = new Rectangle(800, 50, 65, 50);
+            Rectangle fourthBassB3 = new Rectangle(1000, 50, 65, 50);
+            Rectangle firstBassA3 = new Rectangle(400, 75, 65, 50);
+            Rectangle secondBassA3 = new Rectangle(600, 75, 65, 50);
+            Rectangle thirdBassA3 = new Rectangle(800, 75, 65, 50);
+            Rectangle fourthBassA3 = new Rectangle(1000, 75, 65, 50);
+            Rectangle firstBassG3 = new Rectangle(400, 100, 65, 50);
+            Rectangle secondBassG3 = new Rectangle(600, 100, 65, 50);
+            Rectangle thirdBassG3 = new Rectangle(800, 100, 65, 50);
+            Rectangle fourthBassG3 = new Rectangle(1000, 100, 65, 50);
+            Rectangle firstBassF3 = new Rectangle(400, 125, 65, 50);
+            Rectangle secondBassF3 = new Rectangle(600, 125, 65, 50);
+            Rectangle thirdBassF3 = new Rectangle(800, 125, 65, 50);
+            Rectangle fourthBassF3 = new Rectangle(1000, 125, 65, 50);
+            Rectangle firstBassE3 = new Rectangle(400, 150, 65, 50);
+            Rectangle secondBassE3 = new Rectangle(600, 150, 65, 50);
+            Rectangle thirdBassE3 = new Rectangle(800, 150, 65, 50);
+            Rectangle fourthBassE3 = new Rectangle(1000, 150, 65, 50);
+            Rectangle firstBassD3 = new Rectangle(400, 175, 65, 50);
+            Rectangle secondBassD3 = new Rectangle(600, 175, 65, 50);
+            Rectangle thirdBassD3 = new Rectangle(800, 175, 65, 50);
+            Rectangle fourthBassD3 = new Rectangle(1000, 175, 65, 50);
+            Rectangle firstBassC3 = new Rectangle(400, 200, 65, 50);
+            Rectangle secondBassC3 = new Rectangle(600, 200, 65, 50);
+            Rectangle thirdBassC3 = new Rectangle(800, 200, 65, 50);
+            Rectangle fourthBassC3 = new Rectangle(1000, 200, 65, 50);
+            Rectangle firstBassB2 = new Rectangle(400, 225, 65, 50);
+            Rectangle secondBassB2 = new Rectangle(600, 225, 65, 50);
+            Rectangle thirdBassB2 = new Rectangle(800, 225, 65, 50);
+            Rectangle fourthBassB2 = new Rectangle(1000, 225, 65, 50);
+            Rectangle firstBassA2 = new Rectangle(400, 250, 65, 50);
+            Rectangle secondBassA2 = new Rectangle(600, 250, 65, 50);
+            Rectangle thirdBassA2 = new Rectangle(800, 250, 65, 50);
+            Rectangle fourthBassA2 = new Rectangle(1000, 250, 65, 50);
+            Rectangle firstBassG2 = new Rectangle(400, 275, 65, 50);
+            Rectangle secondBassG2 = new Rectangle(600, 275, 65, 50);
+            Rectangle thirdBassG2 = new Rectangle(800, 275, 65, 50);
+            Rectangle fourthBassG2 = new Rectangle(1000, 275, 65, 50);
+            Rectangle firstBassF2 = new Rectangle(400, 300, 65, 50);
+            Rectangle secondBassF2 = new Rectangle(600, 300, 65, 50);
+            Rectangle thirdBassF2 = new Rectangle(800, 300, 65, 50);
+            Rectangle fourthBassF2 = new Rectangle(1000, 300, 65, 50);
+            Rectangle firstBassE2 = new Rectangle(400, 325, 65, 50);
+            Rectangle secondBassE2 = new Rectangle(600, 325, 65, 50);
+            Rectangle thirdBassE2 = new Rectangle(800, 325, 65, 50);
+            Rectangle fourthBassE2 = new Rectangle(1000, 325, 65, 50);
+
+            Rectangle firstSharp = new Rectangle(135, 70, 25, 60);
+            Rectangle secondSharp = new Rectangle(160, 120, 25, 60);
+            Rectangle thirdSharp = new Rectangle(190, 95, 25, 60);
+            Rectangle fourthSharp = new Rectangle(215, 145, 25, 60);
+            Rectangle fifthSharp = new Rectangle(240, 195, 25, 60);
+            Rectangle sixthSharp = new Rectangle(270, 170, 25, 60);
+            Rectangle seventhSharp = new Rectangle(295, 220, 25, 60);
+
+            Rectangle firstFlat = new Rectangle(140, 155, 25, 70);
+            Rectangle secondFlat = new Rectangle(165, 80, 25, 70);
+            Rectangle thirdFlat = new Rectangle(190, 180, 25, 70);
+            Rectangle fourthFlat = new Rectangle(215, 105, 25, 70);
+            Rectangle fifthFlat = new Rectangle(240, 205, 25, 70);
+            Rectangle sixthFlat = new Rectangle(265, 130, 25, 70);
+            Rectangle seventhFlat = new Rectangle(290, 230, 25, 70);
+
+            //firstTopBar = true;
+            //secondTopBar = true;
+            //thirdTopBar = true;
+            //fourthTopBar = true;
+
+            //firstBottomBar = true;
+            //secondBottomBar = true;
+            thirdBottomBar = true;
+            //fourthBottomBar = true;
+
+            //hasFirstSharp = true;
+            //hasSecondSharp = true;
+            //hasThirdSharp = true;
+            //hasFourthSharp = true;
+            //hasFifthSharp = true;
+            //hasSixthSharp = true;
+            //hasSeventhSharp = true;
+
+            hasFirstFlat = true;
+            hasSecondFlat = true;
+            hasThirdFlat = true;
+            hasFourthFlat = true;
+            hasFifthFlat = true;
+            hasSixthFlat = true;
+            hasSeventhFlat = true;
+
+            g.FillRectangle(Brushes.White, 0, 0, 1200, 450);
+
+            g.DrawImage(Properties.Resources.TrebleClef, 5, 45, 140, 325);
+            //g.DrawImage(Properties.Resources.BassClef, 5, 95, 150, 175);
+            //g.DrawImage(Properties.Resources.AltoClef, 5, 100, 130, 200);
+
+            if (hasFirstSharp) { g.DrawImage(Properties.Resources.SharpSign, firstSharp); }
+            if (hasSecondSharp) { g.DrawImage(Properties.Resources.SharpSign, secondSharp); }
+            if (hasThirdSharp) { g.DrawImage(Properties.Resources.SharpSign, thirdSharp); }
+            if (hasFourthSharp) { g.DrawImage(Properties.Resources.SharpSign, fourthSharp); }
+            if (hasFifthSharp) { g.DrawImage(Properties.Resources.SharpSign, fifthSharp); }
+            if (hasSixthSharp) { g.DrawImage(Properties.Resources.SharpSign, sixthSharp); }
+            if (hasSeventhSharp) { g.DrawImage(Properties.Resources.SharpSign, seventhSharp); }
+
+            if (hasFirstFlat) { g.DrawImage(Properties.Resources.FlatSign, firstFlat); }
+            if (hasSecondFlat) { g.DrawImage(Properties.Resources.FlatSign, secondFlat); }
+            if (hasThirdFlat) { g.DrawImage(Properties.Resources.FlatSign, thirdFlat); }
+            if (hasFourthFlat) { g.DrawImage(Properties.Resources.FlatSign, fourthFlat); }
+            if (hasFifthFlat) { g.DrawImage(Properties.Resources.FlatSign, fifthFlat); }
+            if (hasSixthFlat) { g.DrawImage(Properties.Resources.FlatSign, sixthFlat); }
+            if (hasSeventhFlat) { g.DrawImage(Properties.Resources.FlatSign, seventhFlat); }
+
+            g.DrawImage(Properties.Resources.WholeNote, firstBassC3);
+            g.DrawImage(Properties.Resources.WholeNote, firstBassE3);
+            g.DrawImage(Properties.Resources.WholeNote, firstBassA3);
+
+            g.DrawImage(Properties.Resources.WholeNote, secondBassD3);
+            g.DrawImage(Properties.Resources.WholeNote, secondBassF3);
+            g.DrawImage(Properties.Resources.WholeNote, secondBassA3);
+
+            g.DrawImage(Properties.Resources.WholeNote, thirdBassB2);
+            g.DrawImage(Properties.Resources.WholeNote, thirdBassD3);
+            g.DrawImage(Properties.Resources.WholeNote, thirdBassG3);
+            g.DrawImage(Properties.Resources.WholeNote, thirdBassE2);
+
+            g.DrawImage(Properties.Resources.WholeNote, fourthBassC3);
+            g.DrawImage(Properties.Resources.WholeNote, fourthBassE3);
+            g.DrawImage(Properties.Resources.WholeNote, fourthBassG3);
+
+            g.DrawLine(blackPen, 0, 100, 1200, 100);
+            g.DrawLine(blackPen, 0, 150, 1200, 150);
+            g.DrawLine(blackPen, 0, 200, 1200, 200);
+            g.DrawLine(blackPen, 0, 250, 1200, 250);
+            g.DrawLine(blackPen, 0, 300, 1200, 300);
+
+            g.DrawLine(blackPen, 550, 100, 550, 300);
+            g.DrawLine(blackPen, 750, 100, 750, 300);
+            g.DrawLine(blackPen, 950, 100, 950, 300);
+            g.DrawLine(blackPen, 1150, 100, 1150, 300);
+            g.FillRectangle(Brushes.Black, new Rectangle(1175, 100, 25, 200));
+
+            if (firstTopBar) { g.DrawLine(blackPen, 385, 50, 480, 50); }
+            if (secondTopBar) { g.DrawLine(blackPen, 585, 50, 680, 50); }
+            if (thirdTopBar) { g.DrawLine(blackPen, 785, 50, 880, 50); }
+            if (fourthTopBar) { g.DrawLine(blackPen, 985, 50, 1080, 50); }
+
+            if (firstBottomBar) { g.DrawLine(blackPen, 385, 350, 480, 350); }
+            if (secondBottomBar) { g.DrawLine(blackPen, 585, 350, 680, 350); }
+            if (thirdBottomBar) { g.DrawLine(blackPen, 785, 350, 880, 350); }
+            if (fourthBottomBar) { g.DrawLine(blackPen, 985, 350, 1080, 350); }
+
+            g.DrawString(key, keyFont, Brushes.Black, new RectangleF(50, 325, 200, 100), stringFormat);
+            g.DrawString(mode, modeFont, Brushes.Black, new RectangleF(0, 400, 300, 50), stringFormat);
+
+            g.DrawString(chordOne, font, Brushes.Black, new RectangleF(350, 380, 200, 70), stringFormat);
+            g.DrawString(chordTwo, font, Brushes.Black, new RectangleF(550, 380, 200, 70), stringFormat);
+            g.DrawString(chordThree, font, Brushes.Black, new RectangleF(750, 380, 200, 70), stringFormat);
+            g.DrawString(chordFour, font, Brushes.Black, new RectangleF(950, 380, 200, 70), stringFormat);
+
+            string path = Server.MapPath("~/Images/ProgressionSheetMusic.jpg");
+            bitmap.Save(path, ImageFormat.Jpeg);
+            ProgressionSheetMusic.ImageUrl = "~/Images/ProgressionSheetMusic.jpg";
+            g.Dispose();
+            bitmap.Dispose();
+        }
+
         protected void KeyEntryBox_TextChanged(object sender, EventArgs e)
         {
             if (NoteController.checkNoteName(KeyEntryBox.Text))
@@ -165,6 +476,55 @@ namespace ChordnomiconWebApplication.Pages
                 ModeEntryLabel.Text = "The current mode is: " + Progression.getMode().getName();
             }
             else { KeyEntryLabel.Text = "Please select a valid mode name"; }
+        }
+
+        protected void ChordEntryButton_Click(object sender, EventArgs e)
+        {
+            if (Progression.getSize() != 0)
+            {
+                ChordEntryLabel.Text = "The current chords in your progression are: " + Progression.getChordNames();
+            }
+            else { ChordEntryLabel.Text = "Please select a valid chord name"; }
+        }
+
+        protected void ChordEntryBox_TextChanged(object sender, EventArgs e)
+        {
+            if (ChordController.checkChordName(ChordEntryBox.Text))
+            {
+                Progression.addChord(ChordFactory.getChordByName(ChordEntryBox.Text));
+                drawModalShape();
+            }
+        }
+
+        protected void clearProgFunction(object sender, EventArgs e)
+        {
+            Progression.clearProgression();
+        }
+
+        protected void keyOrModeOptions_Click(object sender, EventArgs e)
+        {
+            keyOrMode.Visible = true;
+            addChord.Visible = false;
+        }
+        protected void addChordOptions_Click(object sender, EventArgs e)
+        {
+            keyOrMode.Visible = false;
+            addChord.Visible = true;
+        }
+
+        protected void modifyChordOptions_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void modifyInstrumentOptions_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void clearProgressionOtions_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

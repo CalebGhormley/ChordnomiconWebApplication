@@ -6,129 +6,115 @@
 <head runat="server">
     <title></title>
     <style>
-        body { background-color:white; }
-
-        .progressionButtons {
-            float:left;
-            width:8%;
-            text-align:center;  
-        }
-
-        @media screen and (max-width: 800px) {
-            .progressionButtons {   
-                float:left;
-                width:10%;
-                text-align:center;;
-            }
-        }
-
-        @media screen and (max-width: 400px) {
-            .progressionButtons {   
-                float:left;
-                width:12%;
-                text-align:center;;
-            }
-        }
-
-        .progressionButtons button {
-            background-color: white;
-            color:black;
-            margin:10px;
-            border:5px;
-            border-style:outset;
+        body { 
+            background-color:white;
+            margin:0px;
+            border:0px;
             padding:0px;
-            width:80px;
+        }
+        .prognav {
+            overflow:hidden;
+            display:block;
+            margin:0px;
+            text-align:center;
+            background-color:black;
+        }
+        .prognav p {
+            margin-left:auto;
+            margin-right:auto;
+            margin-bottom:5px;
+            margin-top:5px;
+            padding:0px;
+            border:0px;
+            display:block;
+            color:white;
+        }
+        .prognav button {
+            background-color:black;
+            color:white;
+            font-family:'Old English Text MT';
+            text-decoration:underline;
+            font-size:medium;
+            border:0px;
+            margin:0px;
+            padding:5px;
         }
 
-        .progressionButtons button:hover {
+        .prognav button:hover {
             background-color: #ddd;
             color: black;
         }
 
-        .progression {
-            float:right;
-            width:92%;
+        .progoptions {
+            background-color:black;
+            color:white;
+            font-family:'Old English Text MT';
+            text-decoration:underline;
+            font-size:medium;
+            border:0px;
+            margin:0px;
+            padding:5px;
         }
 
-        @media screen and (max-width: 800px) {
-            .progression {   
-                float:left;
-                width:90%;
-                text-align:center;;
-            }
+        .progoptions:hover {
+            background-color: #ddd;
+            color: black;
         }
-
-        @media screen and (max-width: 400px) {
-            .progression {   
-                float:left;
-                width:88%;
-                text-align:center;;
-            }
+        .chromaticImageWindow {
+            width:25%;
+            float:left;
+            margin-top:0px;
+            margin-bottom:0px;
+            padding:0px;
         }
-
-        .progressionOptions {
+        .chromaticImageWindow image {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top:0px;
+            margin-bottom:0px;
+            padding:0px;
+        }
+        .progressionOptionsWindow {
+            width:75%;
+            float:left;
+        }
+        .tabOrSheetWindow {
+            float:left;
+            clear:left;
+        }
+        .tabAndSheet {
             overflow:auto;
-            align-content:center;
-        }
-
-        .progressionOptions img {
-            float:right;
-
-        }
-
-        .entryarea {
-            padding:10px;
+            height:200px;
+            width:535px; 
         }
 
         .entrysection {
             margin:20px;
         }
 
-
+        
     </style>
-
-    <script>
-        function keyModeButton() {
-            document.getElementById("keyAndMode").style.display = "block";
-            document.getElementById("instrument").style.display = "none";
-            document.getElementById("addChord").style.display = "none";
-            document.getElementById("modifyChord").style.display = "none";
-        }
-        function instrumentButton() {
-            document.getElementById("keyAndMode").style.display = "none";
-            document.getElementById("instrument").style.display = "block";
-            document.getElementById("addChord").style.display = "none";
-            document.getElementById("modifyChord").style.display = "none";
-        }
-        function addChordButton() {
-            document.getElementById("keyAndMode").style.display = "none";
-            document.getElementById("instrument").style.display = "none";
-            document.getElementById("addChord").style.display = "block";
-            document.getElementById("modifyChord").style.display = "none";
-        }
-        function modifyChordButton() {
-            document.getElementById("keyAndMode").style.display = "none";
-            document.getElementById("instrument").style.display = "none";
-            document.getElementById("addChord").style.display = "none";
-            document.getElementById("modifyChord").style.display = "block";
-        }
-    </script>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div class="progressionButtons">
-            <button onclick="keyModeButton()">Change key<br />or mode</button>
-            <button onclick="instrumentButton()">Change<br />instrument</button>
-            <button onclick="addChordButton()">Add a<br />chord</button>
-            <button onclick="modifyChordButton()">Modify a<br />chord</button>
-            <button onclick="resetProgressionButton()">Reset<br />progression</button>
+        <div class="prognav">
+                <p>
+                    <asp:Button ID="keyOrModeOptions" runat="server" OnClick="keyOrModeOptions_Click" class="progoptions" Text="Change Key or Mode" />
+                    <asp:Button ID="addChordOptions" runat="server" OnClick="addChordOptions_Click" class="progoptions" Text="Add a Chord" />
+                    <asp:Button ID="modifyChordOptions" runat="server" OnClick="modifyChordOptions_Click" class="progoptions" Text="Modify a Chord" />
+                    <asp:Button ID="modifyInstrumentOptions" runat="server" OnClick="modifyInstrumentOptions_Click" class="progoptions" Text="Change or Modify Instrument" />
+                    <asp:Button ID="clearProgressionOtions" runat="server" OnClick="clearProgressionOtions_Click" class="progoptions" Text="Clear Progression" />
+                </p>
         </div>
-        <div class="progression">
-            <div class="progressionOptions">
-                <asp:Image ID="ProgressionChromaticCircle" runat="server" Height="300px" Width="300px" AlternateText="Chromatic Circle" />
-            
-                <div class="entryarea" id="keyAndMode">
-                    <div class="entrysection">
+
+        <div class="chromaticImageWindow">
+            <asp:Image ID="ProgressionChromaticCircle" runat="server" Height="250px" Width="250px" AlternateText="Chromatic Circle" />
+        </div>
+
+        <div class="progressionOptionsWindow">
+            <div runat="server" id="keyOrMode">
+                   <div class="entrysection">
                         Please enter the key for your progression.<br />
                         Use the &#39;#&#39; (number sign) character for sharp and the<br />
                         &#39;b&#39; (lower case b) character for flat.<br />
@@ -148,13 +134,27 @@
                         <br />
                         <asp:Label ID="ModeEntryLabel" runat="server" Text="Enter a mode" ForeColor="DarkRed"></asp:Label>
                     </div>
-                </div>
-
             </div>
-            <asp:Image ID="Image1" runat="server" Height="300px" Width="300px" AlternateText="Chromatic Circle" />
-        </div>
-    </form>
+            <div runat="server" id="addChord">
+                <div class="entrysection">
+                        Please enter the chord you want to add to your progression.<br />
+                        Use the &#39;#&#39; (number sign) character for sharp and the<br />
+                        &#39;b&#39; (lower case b) character for flat.<br />
 
-    
+                        <asp:TextBox ID="ChordEntryBox" runat="server" OnTextChanged="ChordEntryBox_TextChanged" style=""></asp:TextBox>
+
+                        <asp:Button ID="ChordEntryButton" runat="server" OnClick="ChordEntryButton_Click" Text="Enter Chord" />
+                        <br />
+                        <asp:Label ID="ChordEntryLabel" runat="server" Text="Enter a Chord" ForeColor="DarkRed"></asp:Label>
+                    </div>
+            </div>
+        </div>
+
+        <div class="tabOrSheetWindow">
+            <asp:Image ID="ProgressionSheetMusic" class="tabAndSheet" runat="server" AlternateText="Sheet Music" />
+        </div>
+
+        
+    </form>
 </body>
 </html>
