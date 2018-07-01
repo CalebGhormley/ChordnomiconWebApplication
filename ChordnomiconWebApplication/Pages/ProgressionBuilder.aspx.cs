@@ -23,6 +23,9 @@ namespace ChordnomiconWebApplication.Pages
             {
                 keyOrMode.Visible = true;
                 addChord.Visible = false;
+                modifyChord.Visible = false;
+                modifyInstrument.Visible = false;
+                clearProgression.Visible = false;
             }
         
             drawModalShape();
@@ -42,7 +45,7 @@ namespace ChordnomiconWebApplication.Pages
             bitmap = new Bitmap(400, 400);
             Graphics g = Graphics.FromImage(bitmap);
 
-            Font font = new Font(FontFamily.GenericSerif, 18, FontStyle.Italic);
+            Font font = new Font(FontFamily.GenericSerif, 18, FontStyle.Bold);
             StringFormat stringFormat = new StringFormat();
             stringFormat.Alignment = StringAlignment.Center;
             stringFormat.LineAlignment = StringAlignment.Center;
@@ -347,7 +350,7 @@ namespace ChordnomiconWebApplication.Pages
 
             //firstBottomBar = true;
             //secondBottomBar = true;
-            thirdBottomBar = true;
+            //thirdBottomBar = true;
             //fourthBottomBar = true;
 
             //hasFirstSharp = true;
@@ -399,7 +402,7 @@ namespace ChordnomiconWebApplication.Pages
             g.DrawImage(Properties.Resources.WholeNote, thirdBassB2);
             g.DrawImage(Properties.Resources.WholeNote, thirdBassD3);
             g.DrawImage(Properties.Resources.WholeNote, thirdBassG3);
-            g.DrawImage(Properties.Resources.WholeNote, thirdBassE2);
+            //g.DrawImage(Properties.Resources.WholeNote, thirdBassE2);
 
             g.DrawImage(Properties.Resources.WholeNote, fourthBassC3);
             g.DrawImage(Properties.Resources.WholeNote, fourthBassE3);
@@ -505,24 +508,47 @@ namespace ChordnomiconWebApplication.Pages
         {
             keyOrMode.Visible = true;
             addChord.Visible = false;
+            modifyChord.Visible = false;
+            modifyInstrument.Visible = false;
+            clearProgression.Visible = false;
         }
         protected void addChordOptions_Click(object sender, EventArgs e)
         {
             keyOrMode.Visible = false;
             addChord.Visible = true;
+            modifyChord.Visible = false;
+            modifyInstrument.Visible = false;
+            clearProgression.Visible = false;
         }
 
         protected void modifyChordOptions_Click(object sender, EventArgs e)
         {
-
+            keyOrMode.Visible = false;
+            addChord.Visible = false;
+            modifyChord.Visible = true;
+            modifyInstrument.Visible = false;
+            clearProgression.Visible = false;
         }
 
         protected void modifyInstrumentOptions_Click(object sender, EventArgs e)
         {
-
+            keyOrMode.Visible = false;
+            addChord.Visible = false;
+            modifyChord.Visible = false;
+            modifyInstrument.Visible = true;
+            clearProgression.Visible = false;
         }
 
         protected void clearProgressionOtions_Click(object sender, EventArgs e)
+        {
+            keyOrMode.Visible = false;
+            addChord.Visible = false;
+            modifyChord.Visible = false;
+            modifyInstrument.Visible = false;
+            clearProgression.Visible = true;
+        }
+
+        protected void RadioButtonList1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

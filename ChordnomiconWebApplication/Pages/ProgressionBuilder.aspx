@@ -60,11 +60,22 @@
             background-color: #ddd;
             color: black;
         }
+
+        .imageoptions {
+            font-family:'Old English Text MT';
+            text-decoration:underline;
+            font-size:medium;
+            border:0px;
+            margin:0px;
+            padding:0px;
+        }
         .chromaticImageWindow {
             width:25%;
             float:left;
             margin-top:0px;
             margin-bottom:0px;
+            margin-left: auto;
+            margin-right: auto;
             padding:0px;
         }
         .chromaticImageWindow image {
@@ -85,12 +96,21 @@
         }
         .tabAndSheet {
             overflow:auto;
-            height:200px;
-            width:535px; 
+            height:195px;
+            width:520px; 
         }
 
-        .entrysection {
-            margin:20px;
+        .leftoptions {
+            margin-top:20px;
+            font-weight:bold;
+            width:50%;
+            float:left;
+        }
+        .rightoptions {
+            margin-top:20px;
+            font-weight:bold;
+            width:50%;
+            float:right;
         }
 
         
@@ -114,7 +134,7 @@
 
         <div class="progressionOptionsWindow">
             <div runat="server" id="keyOrMode">
-                   <div class="entrysection">
+                   <div class="leftoptions">
                         Please enter the key for your progression.<br />
                         Use the &#39;#&#39; (number sign) character for sharp and the<br />
                         &#39;b&#39; (lower case b) character for flat.<br />
@@ -125,7 +145,7 @@
                         <br />
                         <asp:Label ID="KeyEntryLabel" runat="server" Text="Enter a note" ForeColor="DarkRed"></asp:Label>
                     </div>
-                    <div class="entrysection">
+                    <div class="rightoptions">
                         Please enter the mode for your progression.<br />
 
                         <asp:TextBox ID="ModeEntryBox" runat="server" OnTextChanged="ModeEntryBox_TextChanged" style=""></asp:TextBox>
@@ -136,7 +156,7 @@
                     </div>
             </div>
             <div runat="server" id="addChord">
-                <div class="entrysection">
+                <div class="leftoptions">
                         Please enter the chord you want to add to your progression.<br />
                         Use the &#39;#&#39; (number sign) character for sharp and the<br />
                         &#39;b&#39; (lower case b) character for flat.<br />
@@ -146,11 +166,43 @@
                         <asp:Button ID="ChordEntryButton" runat="server" OnClick="ChordEntryButton_Click" Text="Enter Chord" />
                         <br />
                         <asp:Label ID="ChordEntryLabel" runat="server" Text="Enter a Chord" ForeColor="DarkRed"></asp:Label>
-                    </div>
+                        <br />
+                </div>
+                <div class="rightoptions">
+
+                    <asp:DropDownList ID="DropDownList1" runat="server">
+                    </asp:DropDownList>
+
+                </div>
+            </div>
+            <div runat="server" id="modifyChord">
+                <div class="leftoptions">
+
+                </div>
+                <div class="rightoptions">
+
+                </div>
+            </div>
+            <div runat="server" id="modifyInstrument">
+                <div class="leftoptions">
+                    
+                </div>
+                <div class="rightoptions">
+
+                </div>
+            </div>
+            <div runat="server" id="clearProgression">
+                Are you sure you want to delete your current progression?
+                <asp:Button ID="yesClearButton" runat="server" OnClick="yesClearButton_Click" Text="Yes" />
+                <asp:Button ID="noClearButton" runat="server" OnClick="noClearButton_Click" Text="No" />
             </div>
         </div>
 
         <div class="tabOrSheetWindow">
+            <asp:RadioButtonList ID="RadioButtonList1" runat="server" OnSelectedIndexChanged="RadioButtonList1_SelectedIndexChanged" BackColor="White" CssClass="imageoptions" Height="16px" RepeatDirection="Horizontal" Width="214px">
+                <asp:ListItem Selected="True">Sheet Music</asp:ListItem>
+                <asp:ListItem>Tablature</asp:ListItem>
+            </asp:RadioButtonList>
             <asp:Image ID="ProgressionSheetMusic" class="tabAndSheet" runat="server" AlternateText="Sheet Music" />
         </div>
 
