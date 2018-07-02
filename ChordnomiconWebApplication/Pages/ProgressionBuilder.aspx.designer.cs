@@ -175,13 +175,22 @@ namespace ChordnomiconWebApplication.Pages {
         protected global::System.Web.UI.WebControls.Label ChordEntryLabel;
         
         /// <summary>
-        /// DropDownList1 control.
+        /// RecommendedChordDropDownList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.DropDownList RecommendedChordDropDownList;
+        
+        /// <summary>
+        /// ChordRecommendationsObjectDataSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource ChordRecommendationsObjectDataSource;
         
         /// <summary>
         /// modifyChord control.
@@ -200,6 +209,78 @@ namespace ChordnomiconWebApplication.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl modifyInstrument;
+        
+        /// <summary>
+        /// InstrumentDrowDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList InstrumentDrowDownList;
+        
+        /// <summary>
+        /// stringedInstrumentTunning control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl stringedInstrumentTunning;
+        
+        /// <summary>
+        /// FirstStringDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList FirstStringDropDownList;
+        
+        /// <summary>
+        /// SecondStringDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList SecondStringDropDownList;
+        
+        /// <summary>
+        /// ThirdStringDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ThirdStringDropDownList;
+        
+        /// <summary>
+        /// FourthStringDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList FourthStringDropDownList;
+        
+        /// <summary>
+        /// FifthStringDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList FifthStringDropDownList;
+        
+        /// <summary>
+        /// SixthStringDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList SixthStringDropDownList;
         
         /// <summary>
         /// clearProgression control.
