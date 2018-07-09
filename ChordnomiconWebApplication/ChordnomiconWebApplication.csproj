@@ -217,6 +217,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Images\ChromaticGraphicFactory.cs" />
+    <Compile Include="Images\RandomColorFactory.cs" />
     <Compile Include="Images\SheetGraphicFactory.cs" />
     <Compile Include="Images\TabGraphicFactory.cs" />
     <Compile Include="Musical_Objects\Chord.cs" />

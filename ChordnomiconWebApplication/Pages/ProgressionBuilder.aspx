@@ -112,7 +112,11 @@
             width:50%;
             float:right;
         }
-
+        .centeroptions {
+            margin-top:20px;
+            font-weight:bold;
+            width:50%;
+        }
         
     </style>
 </head>
@@ -143,7 +147,7 @@
 
                         <asp:Button ID="KeyEntryButton" runat="server" OnClick="KeyEntryButton_Click" Text="Enter Key" />
                         <br />
-                        <asp:Label ID="KeyEntryLabel" runat="server" Text="Enter a note" ForeColor="DarkRed"></asp:Label>
+                        <asp:Label ID="KeyEntryLabel" runat="server" Text="" ForeColor="DarkRed"></asp:Label>
                     </div>
                     <div class="rightoptions">
                         Please enter the mode for your progression.<br />
@@ -152,7 +156,7 @@
 
                         <asp:Button ID="ModeEntryButton" runat="server" OnClick="ModeEntryButton_Click" Text="Enter Mode" />
                         <br />
-                        <asp:Label ID="ModeEntryLabel" runat="server" Text="Enter a mode" ForeColor="DarkRed"></asp:Label>
+                        <asp:Label ID="ModeEntryLabel" runat="server" Text="" ForeColor="DarkRed"></asp:Label>
                     </div>
             </div>
             <div runat="server" id="addChord">
@@ -165,36 +169,177 @@
 
                         <asp:Button ID="ChordEntryButton" runat="server" OnClick="ChordEntryButton_Click" Text="Enter Chord" />
                         <br />
-                        <asp:Label ID="ChordEntryLabel" runat="server" Text="Enter a Chord" ForeColor="DarkRed"></asp:Label>
+                        <asp:Label ID="ChordEntryLabel" runat="server" Text="" ForeColor="DarkRed"></asp:Label>
                         <br />
                 </div>
                 <div class="rightoptions">
-
-                    <asp:DropDownList ID="DropDownList1" runat="server">
+                    Recommended Chords
+                    <br />
+                    <asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
                     </asp:DropDownList>
 
                 </div>
             </div>
             <div runat="server" id="modifyChord">
                 <div class="leftoptions">
-
+                    Remove a Chord<br />
+                    <asp:DropDownList ID="RemoveChordDropDownList" runat="server" OnSelectedIndexChanged="RemoveChordDropDownList_SelectedIndexChanged">
+                    </asp:DropDownList>
+                    <br />
+                    <br />
+                    Replace a Chrod<br />
+                    Select Chord to be replaced<br />
+                    <asp:DropDownList ID="ReplaceChordDropDownList" runat="server" OnSelectedIndexChanged="ReplaceChordDropDownList_SelectedIndexChanged">
+                    </asp:DropDownList><br />
+                    Enter a Chord to replace this Chord<br />
+&nbsp;<asp:TextBox ID="ReplaceChordTextBox" runat="server" OnTextChanged="ReplaceChordEntryBox_TextChanged" style=""></asp:TextBox>
+                    <asp:Button ID="ReplaceChordButton" runat="server" OnClick="ReplaceChordEntryButton_Click" Text="Replace Chord" />
+                    <br />
+                    <asp:Label ID="ReplaceChordLabel" runat="server" Text="" ForeColor="DarkRed"></asp:Label>
+                    <br />
                 </div>
                 <div class="rightoptions">
-
+                    Switch two Chords<br />
+                    <asp:DropDownList ID="SwitchFirstChordDropDownList" runat="server" OnSelectedIndexChanged="SwitchFirstChordDropDownList_SelectedIndexChanged">
+                    </asp:DropDownList><br />
+                    <asp:DropDownList ID="SwitchSecondDropDownList" runat="server" OnSelectedIndexChanged="SwitchSecondDropDownList_SelectedIndexChanged">
+                    </asp:DropDownList><br />
+                    <asp:Button ID="SwitchChordsButton" runat="server" OnClick="SwitchChordsButton_Click" Text="Switch Chord" />
+                    <br />
+                    <asp:Label ID="SwitchChordsLabel" runat="server" Text="" ForeColor="DarkRed"></asp:Label>
+                    <br />
+                    <br />
+                    Change the pitch of a Chord<br />
+                    Select the chord to alter<br />
+&nbsp;<asp:DropDownList ID="ChordPitchDropDownList" runat="server" OnSelectedIndexChanged="ChordPitchDropDownList_SelectedIndexChanged">
+                    </asp:DropDownList><br />
+                    <asp:Button ID="RaisePitchButton" runat="server" OnClick="RaiseChordPitchButton_Click" Text="Raise Pitch" />
+                    <br />
+                    <asp:Button ID="LowerPutchButton" runat="server" OnClick="LowerChordPitchButton_Click" Text="Lower Pitch" />
+                    <br />
+                    <asp:Label ID="ModifyPitchLabel" runat="server" Text="" ForeColor="DarkRed"></asp:Label>
+                    <br />
                 </div>
             </div>
             <div runat="server" id="modifyInstrument">
                 <div class="leftoptions">
-                    
+                    Choose Instrument<br />
+                    <asp:DropDownList ID="InstrumentDrowDownList" runat="server" OnSelectedIndexChanged="InstrumentDrowDownList_SelectedIndexChanged">
+                    </asp:DropDownList>
                 </div>
                 <div class="rightoptions">
-
+                    <div runat="server" id="stringedInstrumentTunning">
+                        <div class="leftoptions">
+                        First String<br />
+&nbsp;<asp:DropDownList ID="FirstStringDropDownList" runat="server" OnSelectedIndexChanged="FirstStringDropDownList_SelectedIndexChanged">
+                            <asp:ListItem>A</asp:ListItem>
+                            <asp:ListItem>A#/Bb</asp:ListItem>
+                            <asp:ListItem>B</asp:ListItem>
+                            <asp:ListItem>C</asp:ListItem>
+                            <asp:ListItem>C#/Db</asp:ListItem>
+                            <asp:ListItem>D</asp:ListItem>
+                            <asp:ListItem>D#/Eb</asp:ListItem>
+                            <asp:ListItem Selected="True">E</asp:ListItem>
+                            <asp:ListItem>F</asp:ListItem>
+                            <asp:ListItem>F#/Gb</asp:ListItem>
+                            <asp:ListItem>G</asp:ListItem>
+                            <asp:ListItem>G#/Ab</asp:ListItem>
+                        </asp:DropDownList>
+                        <br />
+                        Second String<br />
+&nbsp;<asp:DropDownList ID="SecondStringDropDownList" runat="server" OnSelectedIndexChanged="SecondStringDropDownList_SelectedIndexChanged">
+                            <asp:ListItem>A</asp:ListItem>
+                            <asp:ListItem>A#/Bb</asp:ListItem>
+                            <asp:ListItem>B</asp:ListItem>
+                            <asp:ListItem>C</asp:ListItem>
+                            <asp:ListItem>C#/Db</asp:ListItem>
+                            <asp:ListItem>D</asp:ListItem>
+                            <asp:ListItem>D#/Eb</asp:ListItem>
+                            <asp:ListItem>E</asp:ListItem>
+                            <asp:ListItem>F</asp:ListItem>
+                            <asp:ListItem>F#/Gb</asp:ListItem>
+                            <asp:ListItem>G</asp:ListItem>
+                            <asp:ListItem>G#/Ab</asp:ListItem>
+                        </asp:DropDownList>
+                        <br />
+                        Third String<br />
+&nbsp;<asp:DropDownList ID="ThirdStringDropDownList" runat="server" OnSelectedIndexChanged="ThirdStringDropDownList_SelectedIndexChanged">
+                            <asp:ListItem>A</asp:ListItem>
+                            <asp:ListItem>A#/Bb</asp:ListItem>
+                            <asp:ListItem>B</asp:ListItem>
+                            <asp:ListItem>C</asp:ListItem>
+                            <asp:ListItem>C#/Db</asp:ListItem>
+                            <asp:ListItem Selected="True">D</asp:ListItem>
+                            <asp:ListItem>D#/Eb</asp:ListItem>
+                            <asp:ListItem>E</asp:ListItem>
+                            <asp:ListItem>F</asp:ListItem>
+                            <asp:ListItem>F#/Gb</asp:ListItem>
+                            <asp:ListItem>G</asp:ListItem>
+                            <asp:ListItem>G#/Ab</asp:ListItem>
+                        </asp:DropDownList>
+                        <br />
+                        </div>
+                        <div class="rightoptions">
+                        Fourth String<br />
+&nbsp;<asp:DropDownList ID="FourthStringDropDownList" runat="server" OnSelectedIndexChanged="FourthStringDropDownList_SelectedIndexChanged">
+                            <asp:ListItem>A</asp:ListItem>
+                            <asp:ListItem>A#/Bb</asp:ListItem>
+                            <asp:ListItem>B</asp:ListItem>
+                            <asp:ListItem>C</asp:ListItem>
+                            <asp:ListItem>C#/Db</asp:ListItem>
+                            <asp:ListItem>D</asp:ListItem>
+                            <asp:ListItem>D#/Eb</asp:ListItem>
+                            <asp:ListItem>E</asp:ListItem>
+                            <asp:ListItem>F</asp:ListItem>
+                            <asp:ListItem>F#/Gb</asp:ListItem>
+                            <asp:ListItem Selected="True">G</asp:ListItem>
+                            <asp:ListItem>G#/Ab</asp:ListItem>
+                        </asp:DropDownList>
+                        <br />
+                        Fifth String
+                        <br />
+                        <asp:DropDownList ID="FifthStringDropDownList" runat="server" OnSelectedIndexChanged="FifthStringDropDownList_SelectedIndexChanged">
+                            <asp:ListItem>A</asp:ListItem>
+                            <asp:ListItem>A#/Bb</asp:ListItem>
+                            <asp:ListItem Selected="True">B</asp:ListItem>
+                            <asp:ListItem>C</asp:ListItem>
+                            <asp:ListItem>C#/Db</asp:ListItem>
+                            <asp:ListItem>D</asp:ListItem>
+                            <asp:ListItem>D#/Eb</asp:ListItem>
+                            <asp:ListItem>E</asp:ListItem>
+                            <asp:ListItem>F</asp:ListItem>
+                            <asp:ListItem>F#/Gb</asp:ListItem>
+                            <asp:ListItem>G</asp:ListItem>
+                            <asp:ListItem>G#/Ab</asp:ListItem>
+                        </asp:DropDownList>
+                        <br />
+                        Sixth String
+                        <br />
+                        <asp:DropDownList ID="SixthStringDropDownList" runat="server" OnSelectedIndexChanged="SixthStringDropDownList_SelectedIndexChanged">
+                            <asp:ListItem>A</asp:ListItem>
+                            <asp:ListItem>A#/Bb</asp:ListItem>
+                            <asp:ListItem>B</asp:ListItem>
+                            <asp:ListItem>C</asp:ListItem>
+                            <asp:ListItem>C#/Db</asp:ListItem>
+                            <asp:ListItem>D</asp:ListItem>
+                            <asp:ListItem>D#/Eb</asp:ListItem>
+                            <asp:ListItem Selected="True">E</asp:ListItem>
+                            <asp:ListItem>F</asp:ListItem>
+                            <asp:ListItem>F#/Gb</asp:ListItem>
+                            <asp:ListItem>G</asp:ListItem>
+                            <asp:ListItem>G#/Ab</asp:ListItem>
+                        </asp:DropDownList>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div runat="server" id="clearProgression">
-                Are you sure you want to delete your current progression?
-                <asp:Button ID="yesClearButton" runat="server" OnClick="yesClearButton_Click" Text="Yes" />
+                <div class="centeroptions">
+                Are you sure you want to delete your current progression?<br />
+                &nbsp;<asp:Button ID="yesClearButton" runat="server" OnClick="yesClearButton_Click" Text="Yes" />
+                &nbsp;&nbsp;&nbsp;
                 <asp:Button ID="noClearButton" runat="server" OnClick="noClearButton_Click" Text="No" />
+                </div>
             </div>
         </div>
 

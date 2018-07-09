@@ -16,6 +16,7 @@ namespace ChordnomiconWebApplication.Pages
         Bitmap bitmap;
         int nextNote;
         bool tabOrSheet = false;
+        List<Chord> recomendations;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -143,6 +144,8 @@ namespace ChordnomiconWebApplication.Pages
             g.DrawString(M6, font, Brushes.Black, new RectangleF(10, 180, 40, 40), stringFormat);
             g.DrawString(m7, font, Brushes.Black, new RectangleF(30, 85, 40, 40), stringFormat);
             g.DrawString(M7, font, Brushes.Black, new RectangleF(85, 30, 40, 40), stringFormat);
+
+            //g.FillPolygon()
 
             string path = Server.MapPath("~/Images/ProgressionChromaticCircle.jpg");
             bitmap.Save(path, ImageFormat.Jpeg);
@@ -519,6 +522,7 @@ namespace ChordnomiconWebApplication.Pages
             modifyChord.Visible = false;
             modifyInstrument.Visible = false;
             clearProgression.Visible = false;
+            recomendations = ChordFactory.getChordRecomendationsTriads(Progression.getKey(), Progression.getMode());
         }
 
         protected void modifyChordOptions_Click(object sender, EventArgs e)
@@ -549,6 +553,111 @@ namespace ChordnomiconWebApplication.Pages
         }
 
         protected void RadioButtonList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void RecommendedChordDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void SwitchFirstChordDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void SwitchSecondDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void SwitchChordsButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ChordPitchDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void RaiseChordPitchButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LowerChordPitchButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void RemoveChordDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ReplaceChordDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ReplaceChordEntryBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ReplaceChordEntryButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void InstrumentDrowDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void FirstStringDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void FourthStringDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void SecondStringDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void FifthStringDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ThirdStringDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void SixthStringDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void yesClearButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void noClearButton_Click(object sender, EventArgs e)
         {
 
         }
