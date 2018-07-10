@@ -16,20 +16,39 @@ namespace ChordnomiconWebApplication.Pages
         Bitmap bitmap;
         int nextNote;
         bool tabOrSheet = false;
-        List<Chord> recomendations;
+        List<Chord> recomendations = new List<Chord>();
+        List<Point> ModalShapePoints = new List<Point>()
+        {
+            new Point(200, 50),
+            new Point(275, 70),
+            new Point(330, 125),
+            new Point(350, 200),
+            new Point(330, 275),
+            new Point(275, 330),
+            new Point(200, 350),
+            new Point(125, 330),
+            new Point(70, 275),
+            new Point(50, 200),
+            new Point(70, 125),
+            new Point(125, 70)
+        };
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!Page.IsCallback)
+            if(!Page.IsPostBack)
             {
                 keyOrMode.Visible = true;
                 addChord.Visible = false;
                 modifyChord.Visible = false;
                 modifyInstrument.Visible = false;
                 clearProgression.Visible = false;
+
+                drawModalShape();
+
+                
             }
-        
-            drawModalShape();
+
+
             if (tabOrSheet)
             {
                 drawTablature();
@@ -54,32 +73,7 @@ namespace ChordnomiconWebApplication.Pages
             Pen blackPen = new Pen(Color.Black, 3);
             Pen grayPen = new Pen(Color.Gray, 5);
             Pen goldPen = new Pen(Color.Gold, 3);
-            Point pointOne = new Point(200, 50);
-            Point pointTwo = new Point(275, 70);
-            Point pointThree = new Point(330, 125);
-            Point pointFour = new Point(350, 200);
-            Point pointFive = new Point(330, 275);
-            Point pointSix = new Point(275, 330);
-            Point pointSeven = new Point(200, 350);
-            Point pointEight = new Point(125, 330);
-            Point pointNine = new Point(70, 275);
-            Point pointTen = new Point(50, 200);
-            Point pointEleven = new Point(70, 125);
-            Point pointTwelve = new Point(125, 70);
-            List<Point> points = new List<Point>();
-            points.Add(pointOne);
-            points.Add(pointTwo);
-            points.Add(pointThree);
-            points.Add(pointFour);
-            points.Add(pointFive);
-            points.Add(pointSix);
-            points.Add(pointSeven);
-            points.Add(pointEight);
-            points.Add(pointNine);
-            points.Add(pointTen);
-            points.Add(pointEleven);
-            points.Add(pointTwelve);
-
+            
             string R = Progression.getKey().getName();
             nextNote = Progression.getKey().getValue() + 1;
             if(nextNote > 12) { nextNote = nextNote - 12; }
@@ -126,11 +120,11 @@ namespace ChordnomiconWebApplication.Pages
                 for (int j = 0; j < (Progression.getMode().getSize() - i); j++)
                 {
                     secondPoint = Progression.getMode().getIntervalValue(j + i);
-                    g.DrawLine(goldPen, points.ElementAt(firstPoint), points.ElementAt(secondPoint));
+                    g.DrawLine(goldPen, ModalShapePoints.ElementAt(firstPoint), ModalShapePoints.ElementAt(secondPoint));
                 }
                 firstPoint = Progression.getMode().getIntervalValue(i);
             }
-            g.DrawLine(goldPen, points.ElementAt(firstPoint), points.ElementAt(0));
+            g.DrawLine(goldPen, ModalShapePoints.ElementAt(firstPoint), ModalShapePoints.ElementAt(0));
 
             g.DrawString(R, font, Brushes.Black, new RectangleF(180, 10, 40, 40), stringFormat);
             g.DrawString(m2, font, Brushes.Black, new RectangleF(275, 30, 40, 40), stringFormat);
@@ -145,8 +139,13 @@ namespace ChordnomiconWebApplication.Pages
             g.DrawString(m7, font, Brushes.Black, new RectangleF(30, 85, 40, 40), stringFormat);
             g.DrawString(M7, font, Brushes.Black, new RectangleF(85, 30, 40, 40), stringFormat);
 
-            //g.FillPolygon()
-
+            //ChordPolygons list out of bound exception when adding second chord, resets ChordPolygons with every addition
+            //Move ChordPolygons to Progression OBject
+            for (int i = 0; i < Progression.getSize(); i++)
+            {
+                g.FillPolygon(Progression.getChord(i).color, Progression.getChordPolygon(i));
+            }
+            
             string path = Server.MapPath("~/Images/ProgressionChromaticCircle.jpg");
             bitmap.Save(path, ImageFormat.Jpeg);
             ProgressionChromaticCircle.ImageUrl = "~/Images/ProgressionChromaticCircle.jpg";
@@ -191,8 +190,8 @@ namespace ChordnomiconWebApplication.Pages
             stringFormat.LineAlignment = StringAlignment.Center;
             Pen blackPen = new Pen(Color.Black, 3);
 
-            string key = "C";
-            string mode = "Ionian";
+            string key = Progression.getKey().getName();
+            string mode = Progression.getMode().getName();
             string chordOne = "vi6";
             string chordTwo = "ii";
             string chordThree = "V6";
@@ -486,11 +485,13 @@ namespace ChordnomiconWebApplication.Pages
 
         protected void ChordEntryButton_Click(object sender, EventArgs e)
         {
-            if (Progression.getSize() != 0)
+            
+            if (ChordController.checkChordName(ChordEntryBox.Text))
             {
                 ChordEntryLabel.Text = "The current chords in your progression are: " + Progression.getChordNames();
             }
             else { ChordEntryLabel.Text = "Please select a valid chord name"; }
+
         }
 
         protected void ChordEntryBox_TextChanged(object sender, EventArgs e)
@@ -498,9 +499,11 @@ namespace ChordnomiconWebApplication.Pages
             if (ChordController.checkChordName(ChordEntryBox.Text))
             {
                 Progression.addChord(ChordFactory.getChordByName(ChordEntryBox.Text));
+                CreateChordPointArray(Progression.getChord(Progression.getSize() - 1));
                 drawModalShape();
             }
         }
+
 
         protected void clearProgFunction(object sender, EventArgs e)
         {
@@ -661,5 +664,23 @@ namespace ChordnomiconWebApplication.Pages
         {
 
         }
+
+        private void CreateChordPointArray(Chord chord)
+        {
+            Point[] polygon = new Point[chord.getSize()];
+            int tonicValue = Progression.getKey().getValue();
+            int tonicValueOffset;
+            for (int i = 0; i < chord.getSize(); i++)
+            {
+                for (int j = 0; j < 12; j++)
+                {
+                    tonicValueOffset = tonicValue + j;
+                    if (tonicValueOffset > 12) { tonicValueOffset = tonicValueOffset - 12; }
+                    if (chord.getNoteAt(i).getValue() == tonicValueOffset) { polygon[i] = ModalShapePoints[j]; }
+                }
+            }
+            Progression.addChordPolygon(polygon);
+        }
+
     }
 }

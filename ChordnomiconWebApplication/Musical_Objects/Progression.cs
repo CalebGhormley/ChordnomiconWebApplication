@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace ChordnomiconWebApplication
 {
@@ -19,6 +21,12 @@ namespace ChordnomiconWebApplication
 
         private static Guitar _guitar = new Guitar();
         public static Guitar getGuitar() { return _guitar; }
+        
+        private static List<Chord> chords = new List<Chord>();
+        private static List<TabChord> tablature = new List<TabChord>();
+
+        public static List<Point[]> ChordPolygons = new List<Point[]>();
+
         public static void changeTuning(Note six, Note five, Note four, Note three, Note two, Note one) 
         {
             _guitar.changeTunning(six, five, four, three, two, one);
@@ -40,9 +48,6 @@ namespace ChordnomiconWebApplication
             }
             return tuning;
         }
-
-        private static List<Chord> chords = new List<Chord>();
-        private static List<TabChord> tablature = new List<TabChord>();
 
         public static void addChord(Chord chord)
         {
@@ -108,5 +113,8 @@ namespace ChordnomiconWebApplication
             tablature.RemoveAt(chordPosition - 1);
             tablature.Insert(chordPosition - 1, TabChordFactory.getTabByChord(tempChord, newPitchPosition, _guitar));
         }
+
+        public static void addChordPolygon(Point[] point) { ChordPolygons.Add(point); }
+        public static Point[] getChordPolygon(int position) { return ChordPolygons.ElementAt(position); }
     }
 }

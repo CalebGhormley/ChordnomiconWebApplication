@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChordnomiconWebApplication.Images;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -330,6 +331,8 @@ namespace ChordnomiconWebApplication
             }
             if (i < chordName.Length)
             { throw new System.ArgumentException("\nThe character length for " + name + " is: " + chordName.Length + "\nThe index for " + name + " is: " + i, "Chord Name: " + name); }
+
+            chord.color = RandomColorFactory.GetRandomColor();
 
             return chord;
         }
