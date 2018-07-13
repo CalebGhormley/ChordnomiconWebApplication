@@ -93,11 +93,13 @@
         .tabOrSheetWindow {
             float:left;
             clear:left;
+            width:100%;
+            height:195px;
         }
         .tabAndSheet {
-            overflow:auto;
-            height:195px;
-            width:520px; 
+            overflow:scroll;
+            width:100%;
+            height:100%;
         }
 
         .leftoptions {
@@ -344,11 +346,11 @@
         </div>
 
         <div class="tabOrSheetWindow">
-            <asp:RadioButtonList ID="RadioButtonList1" runat="server" OnSelectedIndexChanged="RadioButtonList1_SelectedIndexChanged" BackColor="White" CssClass="imageoptions" Height="16px" RepeatDirection="Horizontal" Width="214px">
-                <asp:ListItem Selected="True">Sheet Music</asp:ListItem>
-                <asp:ListItem>Tablature</asp:ListItem>
+            <asp:RadioButtonList ID="RadioButtonTabOrSheet" runat="server" OnSelectedIndexChanged="RadioButtonTabOrSheet_SelectedIndexChanged" BackColor="White" CssClass="imageoptions" Height="16px" RepeatDirection="Horizontal" Width="214px" AutoPostBack="True">
+                <asp:ListItem Selected="True" Value="0">Sheet Music</asp:ListItem>
+                <asp:ListItem Value="1">Tablature</asp:ListItem>
             </asp:RadioButtonList>
-            <asp:Image ID="ProgressionSheetMusic" class="tabAndSheet" runat="server" AlternateText="Sheet Music" />
+            <asp:Image ID="ProgressionSheetMusic" class="tabAndSheet" runat="server" AlternateText="Sheet Music Or Tablature" />
         </div>
 
         

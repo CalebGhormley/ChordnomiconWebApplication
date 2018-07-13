@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace ChordnomiconWebApplication
     {
         private string _name;
         private List<Interval> intervals = new List<Interval>();
+        private Brush color;
         public Mode() { }
         
         public void setName (string name) { _name = name; }
@@ -71,5 +73,8 @@ namespace ChordnomiconWebApplication
             note = NoteFactory.getNoteByValue(distance, key);
             return note;
         }
+
+        public Brush getColor() { return color; }
+        public void setColor(Brush brush) { color = brush; }
     }
 }

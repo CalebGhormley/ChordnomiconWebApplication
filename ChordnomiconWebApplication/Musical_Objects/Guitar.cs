@@ -9,6 +9,7 @@ namespace ChordnomiconWebApplication
     class Guitar
     {
         private List<Note> tuning = new List<Note>();
+        int numberOfStrings = 6;
 
         public Guitar ()
         {
@@ -45,6 +46,11 @@ namespace ChordnomiconWebApplication
             int value = fret + tuning.ElementAt(guitarString - 1).getValue();
             while (value > 12) { value = value - 12; }
             return NoteFactory.getNoteByValue(value, key);
+        }
+
+        public int getNumberOfStrings()
+        {
+            return numberOfStrings;
         }
     }
 }

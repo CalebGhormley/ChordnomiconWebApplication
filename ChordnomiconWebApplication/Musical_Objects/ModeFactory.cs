@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ namespace ChordnomiconWebApplication
                 mode.addInterval(IntervalFactory.getIntervalByName("P5"));
                 mode.addInterval(IntervalFactory.getIntervalByName("M6"));
                 mode.addInterval(IntervalFactory.getIntervalByName("M7"));
+                mode.setColor(Brushes.Gold);
             }
             else if (name == "Ionian" || name == "Major")
             {

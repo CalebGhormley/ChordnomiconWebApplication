@@ -63,14 +63,10 @@ namespace ChordnomiconWebApplication.Images
             Brushes.LightBlue,
             Brushes.LightCoral,
             Brushes.LightCyan,
-            Brushes.LightGoldenrodYellow,
             Brushes.LightGreen,
-            Brushes.LightPink,
-            Brushes.LightSalmon,
             Brushes.LightSeaGreen,
             Brushes.LightSkyBlue,
             Brushes.LightSteelBlue,
-            Brushes.LightYellow,
             Brushes.Lime,
             Brushes.LimeGreen,
             Brushes.Linen,
@@ -131,8 +127,11 @@ namespace ChordnomiconWebApplication.Images
         };
         public static Brush GetRandomColor()
         {
-            Random seed = new Random();
-            return brushes.ElementAt(seed.Next(brushes.Count()));
+            Random random = new Random();
+            int seed = random.Next(brushes.Count());
+            Brush tempBrush = brushes.ElementAt(seed);
+            brushes.RemoveAt(seed);
+            return tempBrush;
         }
     }
 }

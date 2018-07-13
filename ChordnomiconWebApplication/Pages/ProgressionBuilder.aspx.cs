@@ -15,7 +15,6 @@ namespace ChordnomiconWebApplication.Pages
     {
         Bitmap bitmap;
         int nextNote;
-        bool tabOrSheet = false;
         List<Chord> recomendations = new List<Chord>();
         List<Point> ModalShapePoints = new List<Point>()
         {
@@ -44,18 +43,15 @@ namespace ChordnomiconWebApplication.Pages
                 clearProgression.Visible = false;
 
                 drawModalShape();
-
-                
             }
-
-
-            if (tabOrSheet)
+            
+            if (RadioButtonTabOrSheet.SelectedIndex == 0)
             {
-                drawTablature();
+                drawSheetMusic();
             }
             else
             {
-                drawSheetMusic();
+                drawTablature();
             }
             //ChromaticGraphicFactory.drawChromaticGeometry("~/Images/ProgressionChromaticCircle.jpg", ProgressionChromaticCircle);
         }
@@ -139,8 +135,6 @@ namespace ChordnomiconWebApplication.Pages
             g.DrawString(m7, font, Brushes.Black, new RectangleF(30, 85, 40, 40), stringFormat);
             g.DrawString(M7, font, Brushes.Black, new RectangleF(85, 30, 40, 40), stringFormat);
 
-            //ChordPolygons list out of bound exception when adding second chord, resets ChordPolygons with every addition
-            //Move ChordPolygons to Progression OBject
             for (int i = 0; i < Progression.getSize(); i++)
             {
                 g.FillPolygon(Progression.getChord(i).color, Progression.getChordPolygon(i));
@@ -155,31 +149,73 @@ namespace ChordnomiconWebApplication.Pages
 
         private void drawTablature()
         {
-            bitmap = new Bitmap(1200 + (Progression.getSize() * 200), 525);
+            int SheetSizeOffset = 0;
+            int SheetLength;
+            if (Progression.getSize() > 12)
+            {
+                SheetSizeOffset = (Progression.getSize() - 12) * 200;
+            }
+            SheetLength = 2800 + SheetSizeOffset;
+            bitmap = new Bitmap(SheetLength, 450);
             Graphics g = Graphics.FromImage(bitmap);
 
-            Font tabFont = new Font(FontFamily.GenericSerif, 50, FontStyle.Italic);
+            Font keyFont = new Font(FontFamily.GenericSerif, 50, FontStyle.Italic);
+            Font modeFont = new Font(FontFamily.GenericSerif, 28);
+            Font tabFont = new Font(FontFamily.GenericSerif, 70, FontStyle.Italic);
             Font font = new Font(FontFamily.GenericSansSerif, 34, FontStyle.Bold);
             StringFormat stringFormat = new StringFormat();
             stringFormat.Alignment = StringAlignment.Center;
             stringFormat.LineAlignment = StringAlignment.Center;
             Pen blackPen = new Pen(Color.Black, 3);
 
-            g.DrawString("T", tabFont, Brushes.Black, new RectangleF(75, 10, 50, 75));
-            g.DrawString("A", tabFont, Brushes.Black, new RectangleF(75, 10, 50, 75));
-            g.DrawString("B", tabFont, Brushes.Black, new RectangleF(75, 10, 50, 75));
+            g.Clear(Color.White);
 
-            g.DrawLine(blackPen, 0, 75, 1200 + (Progression.getSize() * 200), 75);
-            g.DrawLine(blackPen, 0, 150, 1200 + (Progression.getSize() * 200), 150);
-            g.DrawLine(blackPen, 0, 225, 1200 + (Progression.getSize() * 200), 225);
-            g.DrawLine(blackPen, 0, 300, 1200 + (Progression.getSize() * 200), 300);
-            g.DrawLine(blackPen, 0, 375, 1200 + (Progression.getSize() * 200), 375);
-            g.DrawLine(blackPen, 0, 450, 1200 + (Progression.getSize() * 200), 450);
+            g.DrawString("T", tabFont, Brushes.Black, new RectangleF(25, 55, 75, 80), stringFormat);
+            g.DrawString("A", tabFont, Brushes.Black, new RectangleF(25, 135, 75, 80), stringFormat);
+            g.DrawString("B", tabFont, Brushes.Black, new RectangleF(25, 225, 75, 80), stringFormat);
+
+            for(int i = 0; i < Progression.getSize(); i++)
+            {
+                for (int j = 0; j < Progression.getGuitar().getNumberOfStrings(); j++)
+                {
+                    g.DrawString(Progression.getTabNumber(i, j + 1), font, Brushes.Black, new Rectangle(400 + (i * 200), 23 + (j * 50), 65, 50), stringFormat);
+                }
+            }
+
+            for(int i = 0; i < Progression.getSize(); i++)
+            {
+                g.FillRectangle(Progression.getChord(i).color, new Rectangle(360 + (i * 200), 435, 180, 445));
+                g.DrawString(Progression.getChord(i).getName(), font, Brushes.Black, new Rectangle(350 + (i * 200), 380, 200, 70), stringFormat);
+                
+            }
+
+            g.DrawLine(blackPen, 0, 50, 2800 + (SheetSizeOffset * 200), 50);
+            g.DrawLine(blackPen, 0, 100, 2800 + (SheetSizeOffset * 200), 100);
+            g.DrawLine(blackPen, 0, 150, 2800 + (SheetSizeOffset * 200), 150);
+            g.DrawLine(blackPen, 0, 200, 2800 + (SheetSizeOffset * 200), 200);
+            g.DrawLine(blackPen, 0, 250, 2800 + (SheetSizeOffset * 200), 250);
+            g.DrawLine(blackPen, 0, 300, 2800 + (SheetSizeOffset * 200), 300);
+
+            g.DrawString(Progression.getKey().getName(), keyFont, Brushes.Black, new RectangleF(50, 325, 200, 100), stringFormat);
+            g.DrawString(Progression.getMode().getName(), modeFont, Brushes.Black, new RectangleF(0, 400, 300, 50), stringFormat);
+
+            string path = Server.MapPath("~/Images/ProgressionSheetMusic.jpg");
+            bitmap.Save(path, ImageFormat.Jpeg);
+            ProgressionSheetMusic.ImageUrl = "~/Images/ProgressionSheetMusic.jpg";
+            g.Dispose();
+            bitmap.Dispose();
         }
 
         private void drawSheetMusic ()
         {
-            bitmap = new Bitmap(1200 + (Progression.getSize() * 200), 450);
+            int SheetSizeOffset = 0;
+            int SheetLength;
+            if (Progression.getSize() > 12)
+            {
+                SheetSizeOffset = (Progression.getSize() - 12) * 200;
+            }
+            SheetLength = 2800 + SheetSizeOffset;
+            bitmap = new Bitmap(SheetLength, 450);
             Graphics g = Graphics.FromImage(bitmap);
 
             Font keyFont = new Font(FontFamily.GenericSerif, 50, FontStyle.Italic);
@@ -189,6 +225,8 @@ namespace ChordnomiconWebApplication.Pages
             stringFormat.Alignment = StringAlignment.Center;
             stringFormat.LineAlignment = StringAlignment.Center;
             Pen blackPen = new Pen(Color.Black, 3);
+
+            g.Clear(Color.White);
 
             string key = Progression.getKey().getName();
             string mode = Progression.getMode().getName();
@@ -216,12 +254,12 @@ namespace ChordnomiconWebApplication.Pages
             bool firstTopBar = false;
             bool secondTopBar = false;
             bool thirdTopBar = false;
-            bool fourthTopBar = false;
+            //bool fourthTopBar = false;
 
             bool firstBottomBar = false;
             bool secondBottomBar = false;
             bool thirdBottomBar = false;
-            bool fourthBottomBar = false;
+            //bool fourthBottomBar = false;
 
             Rectangle firstTrebleA5 = new Rectangle(400, 25, 65, 50);
             Rectangle secondTrebleA5 = new Rectangle(600, 25, 65, 50);
@@ -329,13 +367,13 @@ namespace ChordnomiconWebApplication.Pages
             Rectangle thirdBassE2 = new Rectangle(800, 325, 65, 50);
             Rectangle fourthBassE2 = new Rectangle(1000, 325, 65, 50);
 
-            Rectangle firstSharp = new Rectangle(135, 70, 25, 60);
-            Rectangle secondSharp = new Rectangle(160, 120, 25, 60);
-            Rectangle thirdSharp = new Rectangle(190, 95, 25, 60);
-            Rectangle fourthSharp = new Rectangle(215, 145, 25, 60);
-            Rectangle fifthSharp = new Rectangle(240, 195, 25, 60);
-            Rectangle sixthSharp = new Rectangle(270, 170, 25, 60);
-            Rectangle seventhSharp = new Rectangle(295, 220, 25, 60);
+            Rectangle firstSharp = new Rectangle(135, 175, 25, 50);
+            Rectangle secondSharp = new Rectangle(160, 100, 25, 50);
+            Rectangle thirdSharp = new Rectangle(190, 200, 25, 50);
+            Rectangle fourthSharp = new Rectangle(215, 125, 25, 50);
+            Rectangle fifthSharp = new Rectangle(240, 225, 25, 50);
+            Rectangle sixthSharp = new Rectangle(270, 150, 25, 50);
+            Rectangle seventhSharp = new Rectangle(295, 250, 25, 50);
 
             Rectangle firstFlat = new Rectangle(140, 155, 25, 70);
             Rectangle secondFlat = new Rectangle(165, 80, 25, 70);
@@ -363,16 +401,14 @@ namespace ChordnomiconWebApplication.Pages
             //hasSixthSharp = true;
             //hasSeventhSharp = true;
 
-            hasFirstFlat = true;
-            hasSecondFlat = true;
-            hasThirdFlat = true;
-            hasFourthFlat = true;
-            hasFifthFlat = true;
-            hasSixthFlat = true;
-            hasSeventhFlat = true;
-
-            g.FillRectangle(Brushes.White, 0, 0, 1200, 450);
-
+            //hasFirstFlat = true;
+            //hasSecondFlat = true;
+            //hasThirdFlat = true;
+            //hasFourthFlat = true;
+            //hasFifthFlat = true;
+            //hasSixthFlat = true;
+            //hasSeventhFlat = true;
+            
             g.DrawImage(Properties.Resources.TrebleClef, 5, 45, 140, 325);
             //g.DrawImage(Properties.Resources.BassClef, 5, 95, 150, 175);
             //g.DrawImage(Properties.Resources.AltoClef, 5, 100, 130, 200);
@@ -410,30 +446,38 @@ namespace ChordnomiconWebApplication.Pages
             g.DrawImage(Properties.Resources.WholeNote, fourthBassE3);
             g.DrawImage(Properties.Resources.WholeNote, fourthBassG3);
 
-            g.DrawLine(blackPen, 0, 100, 1200, 100);
-            g.DrawLine(blackPen, 0, 150, 1200, 150);
-            g.DrawLine(blackPen, 0, 200, 1200, 200);
-            g.DrawLine(blackPen, 0, 250, 1200, 250);
-            g.DrawLine(blackPen, 0, 300, 1200, 300);
+            g.DrawLine(blackPen, 0, 100, 2800, 100);
+            g.DrawLine(blackPen, 0, 150, 2800, 150);
+            g.DrawLine(blackPen, 0, 200, 2800, 200);
+            g.DrawLine(blackPen, 0, 250, 2800, 250);
+            g.DrawLine(blackPen, 0, 300, 2800, 300);
 
             g.DrawLine(blackPen, 550, 100, 550, 300);
             g.DrawLine(blackPen, 750, 100, 750, 300);
             g.DrawLine(blackPen, 950, 100, 950, 300);
             g.DrawLine(blackPen, 1150, 100, 1150, 300);
-            g.FillRectangle(Brushes.Black, new Rectangle(1175, 100, 25, 200));
+            g.DrawLine(blackPen, 1350, 100, 1350, 300);
+            g.DrawLine(blackPen, 1550, 100, 1550, 300);
+            g.DrawLine(blackPen, 1750, 100, 1750, 300);
+            g.DrawLine(blackPen, 1950, 100, 1950, 300);
+            g.DrawLine(blackPen, 2150, 100, 2150, 300);
+            g.DrawLine(blackPen, 2350, 100, 2350, 300);
+            g.DrawLine(blackPen, 2550, 100, 2550, 300);
+            g.DrawLine(blackPen, 2750, 100, 2750, 300);
+            g.FillRectangle(Brushes.Black, new Rectangle(2775, 100, 25, 200));
 
             if (firstTopBar) { g.DrawLine(blackPen, 385, 50, 480, 50); }
             if (secondTopBar) { g.DrawLine(blackPen, 585, 50, 680, 50); }
             if (thirdTopBar) { g.DrawLine(blackPen, 785, 50, 880, 50); }
-            if (fourthTopBar) { g.DrawLine(blackPen, 985, 50, 1080, 50); }
+            //if (fourthTopBar) { g.DrawLine(blackPen, 985, 50, 1080, 50); }
 
             if (firstBottomBar) { g.DrawLine(blackPen, 385, 350, 480, 350); }
             if (secondBottomBar) { g.DrawLine(blackPen, 585, 350, 680, 350); }
             if (thirdBottomBar) { g.DrawLine(blackPen, 785, 350, 880, 350); }
-            if (fourthBottomBar) { g.DrawLine(blackPen, 985, 350, 1080, 350); }
+            //if (fourthBottomBar) { g.DrawLine(blackPen, 985, 350, 1080, 350); }
 
-            g.DrawString(key, keyFont, Brushes.Black, new RectangleF(50, 325, 200, 100), stringFormat);
-            g.DrawString(mode, modeFont, Brushes.Black, new RectangleF(0, 400, 300, 50), stringFormat);
+            g.DrawString(Progression.getKey().getName(), keyFont, Brushes.Black, new RectangleF(50, 325, 200, 100), stringFormat);
+            g.DrawString(Progression.getMode().getName(), modeFont, Brushes.Black, new RectangleF(0, 400, 300, 50), stringFormat);
 
             g.DrawString(chordOne, font, Brushes.Black, new RectangleF(350, 380, 200, 70), stringFormat);
             g.DrawString(chordTwo, font, Brushes.Black, new RectangleF(550, 380, 200, 70), stringFormat);
@@ -453,6 +497,14 @@ namespace ChordnomiconWebApplication.Pages
             {
                 Progression.changeKey(NoteFactory.getNoteByName(KeyEntryBox.Text));
                 drawModalShape();
+                if (RadioButtonTabOrSheet.SelectedIndex == 0)
+                {
+                    drawSheetMusic();
+                }
+                else
+                {
+                    drawTablature();
+                }
             }
         }
 
@@ -471,6 +523,14 @@ namespace ChordnomiconWebApplication.Pages
             {
                 Progression.changeMode(ModeEntryBox.Text);
                 drawModalShape();
+                if (RadioButtonTabOrSheet.SelectedIndex == 0)
+                {
+                    drawSheetMusic();
+                }
+                else
+                {
+                    drawTablature();
+                }
             }
         }
 
@@ -501,6 +561,14 @@ namespace ChordnomiconWebApplication.Pages
                 Progression.addChord(ChordFactory.getChordByName(ChordEntryBox.Text));
                 CreateChordPointArray(Progression.getChord(Progression.getSize() - 1));
                 drawModalShape();
+                if (RadioButtonTabOrSheet.SelectedIndex == 0)
+                {
+                    drawSheetMusic();
+                }
+                else
+                {
+                    drawTablature();
+                }
             }
         }
 
@@ -657,30 +725,59 @@ namespace ChordnomiconWebApplication.Pages
 
         protected void yesClearButton_Click(object sender, EventArgs e)
         {
+            keyOrMode.Visible = true;
+            addChord.Visible = false;
+            modifyChord.Visible = false;
+            modifyInstrument.Visible = false;
+            clearProgression.Visible = false;
 
+            Progression.clearProgression();
+            drawModalShape();
+            if (RadioButtonTabOrSheet.SelectedIndex == 0)
+            {
+                drawSheetMusic();
+            }
+            else
+            {
+                drawTablature();
+            }
         }
 
         protected void noClearButton_Click(object sender, EventArgs e)
         {
-
+            keyOrMode.Visible = true;
+            addChord.Visible = false;
+            modifyChord.Visible = false;
+            modifyInstrument.Visible = false;
+            clearProgression.Visible = false;
         }
 
         private void CreateChordPointArray(Chord chord)
         {
-            Point[] polygon = new Point[chord.getSize()];
+            Point[] polygonPointArray = new Point[chord.getSize()];
             int tonicValue = Progression.getKey().getValue();
-            int tonicValueOffset;
-            for (int i = 0; i < chord.getSize(); i++)
+            int noteValueOffset;
+            int polygonSize = 0;
+
+            for (int i = 0; i < 12; i++)
             {
-                for (int j = 0; j < 12; j++)
+                for (int j = 0; j < chord.getSize(); j++)
                 {
-                    tonicValueOffset = tonicValue + j;
-                    if (tonicValueOffset > 12) { tonicValueOffset = tonicValueOffset - 12; }
-                    if (chord.getNoteAt(i).getValue() == tonicValueOffset) { polygon[i] = ModalShapePoints[j]; }
+                    noteValueOffset = tonicValue + i;
+                    if (noteValueOffset > 12) { noteValueOffset = noteValueOffset - 12; }
+                    if (chord.getNoteAt(j).getValue() == noteValueOffset)
+                    {
+                        polygonPointArray[polygonSize] = ModalShapePoints.ElementAt(i);
+                        polygonSize++;
+                    }
                 }
             }
-            Progression.addChordPolygon(polygon);
+            Progression.addChordPolygon(polygonPointArray);
         }
 
+        protected void RadioButtonTabOrSheet_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

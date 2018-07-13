@@ -85,6 +85,7 @@ namespace ChordnomiconWebApplication
         {
             chords.Clear();
             tablature.Clear();
+            ChordPolygons.Clear();
         }
         public static string getChordNames ()
         {
@@ -103,10 +104,13 @@ namespace ChordnomiconWebApplication
             return(chords.ElementAt(position));
         }
         public static int getSize() { return chords.Count; }
+
         public static string getTabNumber(int _chord, int _string)
-        { return tablature.ElementAt(_chord - 1).getFretNumber(_string); }
+        { return tablature.ElementAt(_chord).getFretNumber(_string); }
+
         public static int getTabPitch(int _chord)
-        { return tablature.ElementAt(_chord - 1).getPitch(); }
+        { return tablature.ElementAt(_chord).getPitch(); }
+
         public static void changeTabPitch (int chordPosition, int newPitchPosition)
         {
             Chord tempChord = chords.ElementAt(chordPosition - 1);
@@ -116,5 +120,6 @@ namespace ChordnomiconWebApplication
 
         public static void addChordPolygon(Point[] point) { ChordPolygons.Add(point); }
         public static Point[] getChordPolygon(int position) { return ChordPolygons.ElementAt(position); }
+        public static void clearChordPolygons() { ChordPolygons.Clear(); }
     }
 }

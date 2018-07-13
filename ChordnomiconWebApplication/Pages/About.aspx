@@ -6,6 +6,15 @@
 <head runat="server">
     <title></title>
     <style>
+        h1 {
+            text-align:center;
+            margin-top:10px;
+            margin-bottom:0px;
+            padding:0px;
+            border:0px;
+            font-family:'Old English Text MT'; 
+            font-size:250%;
+        }
         .center{
             display: block;
             margin-left: auto;
@@ -23,6 +32,7 @@
 <body>
     <form id="form1" runat="server">
         <div style="background-color:white;">
+            <h1>About</h1>
             <asp:Image ID="Image1" runat="server" class="center" Height="300px" Width="300px" AlternateText="Chromatic Shape" />
 
             <p class="centerText">
