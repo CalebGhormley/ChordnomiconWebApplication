@@ -151,17 +151,14 @@ namespace ChordnomiconWebApplication.Pages
         {
             int SheetSizeOffset = 0;
             int SheetLength;
-            if (Progression.getSize() > 12)
-            {
-                SheetSizeOffset = (Progression.getSize() - 12) * 200;
-            }
+            if (Progression.getSize() > 12) { SheetSizeOffset = (Progression.getSize() - 12) * 200; }
             SheetLength = 2800 + SheetSizeOffset;
             bitmap = new Bitmap(SheetLength, 450);
             Graphics g = Graphics.FromImage(bitmap);
 
             Font keyFont = new Font(FontFamily.GenericSerif, 50, FontStyle.Italic);
             Font modeFont = new Font(FontFamily.GenericSerif, 28);
-            Font tabFont = new Font(FontFamily.GenericSerif, 70, FontStyle.Italic);
+            Font tabFont = new Font(FontFamily.GenericSerif, 70, FontStyle.Bold);
             Font font = new Font(FontFamily.GenericSansSerif, 34, FontStyle.Bold);
             StringFormat stringFormat = new StringFormat();
             stringFormat.Alignment = StringAlignment.Center;
@@ -189,15 +186,17 @@ namespace ChordnomiconWebApplication.Pages
                 
             }
 
-            g.DrawLine(blackPen, 0, 50, 2800 + (SheetSizeOffset * 200), 50);
-            g.DrawLine(blackPen, 0, 100, 2800 + (SheetSizeOffset * 200), 100);
-            g.DrawLine(blackPen, 0, 150, 2800 + (SheetSizeOffset * 200), 150);
-            g.DrawLine(blackPen, 0, 200, 2800 + (SheetSizeOffset * 200), 200);
-            g.DrawLine(blackPen, 0, 250, 2800 + (SheetSizeOffset * 200), 250);
-            g.DrawLine(blackPen, 0, 300, 2800 + (SheetSizeOffset * 200), 300);
+            for (int i = 1; i <= Progression.getGuitar().getNumberOfStrings(); i++)
+            {
+                g.DrawLine(blackPen, 0, 50 * i, 2800 + (SheetSizeOffset * 200), 50 * i);
+            }
 
             g.DrawString(Progression.getKey().getName(), keyFont, Brushes.Black, new RectangleF(50, 325, 200, 100), stringFormat);
-            g.DrawString(Progression.getMode().getName(), modeFont, Brushes.Black, new RectangleF(0, 400, 300, 50), stringFormat);
+            if (Progression.getMode() != null)
+            {
+                g.FillRectangle(Progression.getMode().getColor(), new Rectangle(10, 440, 290, 450));
+                g.DrawString(Progression.getMode().getName(), modeFont, Brushes.Black, new RectangleF(0, 400, 300, 50), stringFormat);
+            }
 
             string path = Server.MapPath("~/Images/ProgressionSheetMusic.jpg");
             bitmap.Save(path, ImageFormat.Jpeg);
