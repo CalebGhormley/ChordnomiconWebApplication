@@ -11,7 +11,8 @@ namespace ChordnomiconWebApplication
     {
         private string _name;
         private List<Interval> intervals = new List<Interval>();
-        private Brush color;
+        private Pen pen;
+        private Brush brush;
         public Mode() { }
         
         public void setName (string name) { _name = name; }
@@ -47,7 +48,7 @@ namespace ChordnomiconWebApplication
         }
         public bool containsInterval(int intervalValue)
         {
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < getSize(); i++)
             {
                 if (intervals.ElementAt(i).getIntervalValue() == intervalValue) { return true; }
             }
@@ -58,9 +59,17 @@ namespace ChordnomiconWebApplication
             int distance;
             distance = note.getValue() - key.getValue();
             if (distance < 0) { distance = distance + 12; }
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < getSize(); i++)
             {
                 if (intervals.ElementAt(i).getIntervalValue() == distance) { return true; }
+            }
+            return false;
+        }
+        public bool containsNoteName(Note note, Note key)
+        {
+            for (int i = 0; i < getSize(); i++)
+            {
+                if (getNote(i, key).getName() == note.getName()) { return true; }
             }
             return false;
         }
@@ -74,7 +83,9 @@ namespace ChordnomiconWebApplication
             return note;
         }
 
-        public Brush getColor() { return color; }
-        public void setColor(Brush brush) { color = brush; }
+        public Pen getPen() { return pen; }
+        public void setPen(Pen penColor) { pen = penColor; }
+        public Brush getBrush() { return brush; }
+        public void setBrush(Brush brushColor) { brush = brushColor; }
     }
 }

@@ -68,7 +68,6 @@ namespace ChordnomiconWebApplication.Pages
 
             Pen blackPen = new Pen(Color.Black, 3);
             Pen grayPen = new Pen(Color.Gray, 5);
-            Pen goldPen = new Pen(Color.Gold, 3);
             
             string R = Progression.getKey().getName();
             nextNote = Progression.getKey().getValue() + 1;
@@ -116,24 +115,24 @@ namespace ChordnomiconWebApplication.Pages
                 for (int j = 0; j < (Progression.getMode().getSize() - i); j++)
                 {
                     secondPoint = Progression.getMode().getIntervalValue(j + i);
-                    g.DrawLine(goldPen, ModalShapePoints.ElementAt(firstPoint), ModalShapePoints.ElementAt(secondPoint));
+                    g.DrawLine(Progression.getMode().getPen(), ModalShapePoints.ElementAt(firstPoint), ModalShapePoints.ElementAt(secondPoint));
                 }
                 firstPoint = Progression.getMode().getIntervalValue(i);
             }
-            g.DrawLine(goldPen, ModalShapePoints.ElementAt(firstPoint), ModalShapePoints.ElementAt(0));
+            g.DrawLine(Progression.getMode().getPen(), ModalShapePoints.ElementAt(firstPoint), ModalShapePoints.ElementAt(0));
 
-            g.DrawString(R, font, Brushes.Black, new RectangleF(180, 10, 40, 40), stringFormat);
-            g.DrawString(m2, font, Brushes.Black, new RectangleF(275, 30, 40, 40), stringFormat);
-            g.DrawString(M2, font, Brushes.Black, new RectangleF(330, 85, 40, 40), stringFormat);
-            g.DrawString(m3, font, Brushes.Black, new RectangleF(350, 180, 40, 40), stringFormat);
-            g.DrawString(M3, font, Brushes.Black, new RectangleF(330, 275, 40, 40), stringFormat);
-            g.DrawString(P4, font, Brushes.Black, new RectangleF(275, 330, 40, 40), stringFormat);
-            g.DrawString(b5, font, Brushes.Black, new RectangleF(180, 350, 40, 40), stringFormat);
-            g.DrawString(P5, font, Brushes.Black, new RectangleF(85, 330, 40, 40), stringFormat);
-            g.DrawString(m6, font, Brushes.Black, new RectangleF(30, 275, 40, 40), stringFormat);
-            g.DrawString(M6, font, Brushes.Black, new RectangleF(10, 180, 40, 40), stringFormat);
-            g.DrawString(m7, font, Brushes.Black, new RectangleF(30, 85, 40, 40), stringFormat);
-            g.DrawString(M7, font, Brushes.Black, new RectangleF(85, 30, 40, 40), stringFormat);
+            g.DrawString(R, font, Brushes.Black, new RectangleF(175, 10, 50, 40), stringFormat);
+            g.DrawString(m2, font, Brushes.Black, new RectangleF(270, 30, 50, 40), stringFormat);
+            g.DrawString(M2, font, Brushes.Black, new RectangleF(325, 85, 50, 40), stringFormat);
+            g.DrawString(m3, font, Brushes.Black, new RectangleF(345, 180, 50, 40), stringFormat);
+            g.DrawString(M3, font, Brushes.Black, new RectangleF(325, 275, 50, 40), stringFormat);
+            g.DrawString(P4, font, Brushes.Black, new RectangleF(270, 330, 50, 40), stringFormat);
+            g.DrawString(b5, font, Brushes.Black, new RectangleF(175, 350, 50, 40), stringFormat);
+            g.DrawString(P5, font, Brushes.Black, new RectangleF(80, 330, 50, 40), stringFormat);
+            g.DrawString(m6, font, Brushes.Black, new RectangleF(25, 275, 50, 40), stringFormat);
+            g.DrawString(M6, font, Brushes.Black, new RectangleF(5, 180, 50, 40), stringFormat);
+            g.DrawString(m7, font, Brushes.Black, new RectangleF(25, 85, 50, 40), stringFormat);
+            g.DrawString(M7, font, Brushes.Black, new RectangleF(80, 30, 50, 40), stringFormat);
 
             for (int i = 0; i < Progression.getSize(); i++)
             {
@@ -194,7 +193,7 @@ namespace ChordnomiconWebApplication.Pages
             g.DrawString(Progression.getKey().getName(), keyFont, Brushes.Black, new RectangleF(50, 325, 200, 100), stringFormat);
             if (Progression.getMode() != null)
             {
-                g.FillRectangle(Progression.getMode().getColor(), new Rectangle(10, 440, 290, 450));
+                g.FillRectangle(Progression.getMode().getBrush(), new Rectangle(10, 440, 290, 450));
                 g.DrawString(Progression.getMode().getName(), modeFont, Brushes.Black, new RectangleF(0, 400, 300, 50), stringFormat);
             }
 
@@ -205,8 +204,44 @@ namespace ChordnomiconWebApplication.Pages
             bitmap.Dispose();
         }
 
-        private void drawSheetMusic ()
+        private void drawSheetMusic()
         {
+            bool isTrebleClef = true;
+            bool isBassClef = false;
+            bool isAltoClef = false;
+
+            bool hasFirstSharp = false;
+            bool hasSecondSharp = false;
+            bool hasThirdSharp = false;
+            bool hasFourthSharp = false;
+            bool hasFifthSharp = false;
+            bool hasSixthSharp = false;
+            bool hasSeventhSharp = false;
+
+            bool hasFirstSharpAccidental = false;
+            bool hasSecondSharpAccidental = false;
+            bool hasThirdSharpAccidental = false;
+            bool hasFourthSharpAccidental = false;
+            bool hasFifthSharpAccidental = false;
+            bool hasSixthSharpAccidental = false;
+            bool hasSeventhSharpAccidental = false;
+
+            bool hasFirstFlat = false;
+            bool hasSecondFlat = false;
+            bool hasThirdFlat = false;
+            bool hasFourthFlat = false;
+            bool hasFifthFlat = false;
+            bool hasSixthFlat = false;
+            bool hasSeventhFlat = false;
+
+            bool hasFirstFlatAccidental = false;
+            bool hasSecondFlatAccidental = false;
+            bool hasThirdFlatAccidental = false;
+            bool hasFourthFlatAccidental = false;
+            bool hasFifthFlatAccidental = false;
+            bool hasSixthFlatAccidental = false;
+            bool hasSeventhFlatAccidental = false;
+
             int SheetSizeOffset = 0;
             int SheetLength;
             if (Progression.getSize() > 12)
@@ -229,26 +264,91 @@ namespace ChordnomiconWebApplication.Pages
 
             string key = Progression.getKey().getName();
             string mode = Progression.getMode().getName();
+
+            if (isTrebleClef) { g.DrawImage(Properties.Resources.TrebleClef, 5, 45, 140, 325); } 
+            else if (isBassClef) { g.DrawImage(Properties.Resources.BassClef, 5, 95, 150, 175); }
+            else if (isAltoClef) { g.DrawImage(Properties.Resources.AltoClef, 5, 100, 130, 200); }
+
+            if (isTrebleClef)
+            {
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("F#"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("F"), Progression.getKey())))
+                { hasFirstSharp = true; }
+                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("F#"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("F"), Progression.getKey()))
+                { hasFirstSharpAccidental = true; }
+
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("C#"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("C"), Progression.getKey())))
+                { hasSecondSharp = true; }
+                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("C#"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("C"), Progression.getKey()))
+                { hasSecondSharpAccidental = true; }
+
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("G#"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("G"), Progression.getKey())))
+                { hasThirdSharp = true; }
+                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("G#"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("G"), Progression.getKey()))
+                { hasThirdSharpAccidental = true; }
+
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("D#"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("D"), Progression.getKey())))
+                { hasFourthSharp = true; }
+                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("D#"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("D"), Progression.getKey()))
+                { hasFourthSharpAccidental = true; }
+
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("A#"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("A"), Progression.getKey())))
+                { hasFifthSharp = true; }
+                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("A#"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("A"), Progression.getKey()))
+                { hasFifthSharpAccidental = true; }
+
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("E#"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("E"), Progression.getKey())))
+                { hasSixthSharp = true; }
+                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("E#"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("E"), Progression.getKey()))
+                { hasSixthSharpAccidental = true; }
+
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("B#"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("B"), Progression.getKey())))
+                { hasSeventhSharp = true; }
+                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("B#"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("B"), Progression.getKey()))
+                { hasSeventhSharpAccidental = true; }
+
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Bb"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("B"), Progression.getKey())))
+                { hasFirstFlat = true; }
+                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Bb"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("B"), Progression.getKey()))
+                { hasFirstFlatAccidental = true; }
+
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Eb"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("E"), Progression.getKey())))
+                { hasSecondFlat = true; }
+                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Eb"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("E"), Progression.getKey()))
+                { hasSecondFlatAccidental = true; }
+
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Ab"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("A"), Progression.getKey())))
+                { hasThirdFlat = true; }
+                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Ab"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("A"), Progression.getKey()))
+                { hasThirdFlatAccidental = true; }
+
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Db"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("D"), Progression.getKey())))
+                { hasFourthFlat = true; }
+                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Db"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("D"), Progression.getKey()))
+                { hasFourthFlatAccidental = true; }
+
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Gb"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("G"), Progression.getKey())))
+                { hasFifthFlat = true; }
+                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Gb"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("G"), Progression.getKey()))
+                { hasFifthFlatAccidental = true; }
+
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Cb"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("C"), Progression.getKey())))
+                { hasSixthFlat = true; }
+                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Cb"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("C"), Progression.getKey()))
+                { hasSixthFlatAccidental = true; }
+
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Fb"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("F"), Progression.getKey())))
+                { hasSeventhFlat = true; }
+                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Fb"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("F"), Progression.getKey()))
+                { hasSeventhFlatAccidental = true; }
+            }
+            /*
             string chordOne = "vi6";
             string chordTwo = "ii";
             string chordThree = "V6";
             string chordFour = "I";
 
-            bool hasFirstSharp = false;
-            bool hasSecondSharp = false;
-            bool hasThirdSharp = false;
-            bool hasFourthSharp = false;
-            bool hasFifthSharp = false;
-            bool hasSixthSharp = false;
-            bool hasSeventhSharp = false;
-
-            bool hasFirstFlat = false;
-            bool hasSecondFlat = false;
-            bool hasThirdFlat = false;
-            bool hasFourthFlat = false;
-            bool hasFifthFlat = false;
-            bool hasSixthFlat = false;
-            bool hasSeventhFlat = false;
+            
+            */
 
             bool firstTopBar = false;
             bool secondTopBar = false;
@@ -477,12 +577,12 @@ namespace ChordnomiconWebApplication.Pages
 
             g.DrawString(Progression.getKey().getName(), keyFont, Brushes.Black, new RectangleF(50, 325, 200, 100), stringFormat);
             g.DrawString(Progression.getMode().getName(), modeFont, Brushes.Black, new RectangleF(0, 400, 300, 50), stringFormat);
-
+            /*
             g.DrawString(chordOne, font, Brushes.Black, new RectangleF(350, 380, 200, 70), stringFormat);
             g.DrawString(chordTwo, font, Brushes.Black, new RectangleF(550, 380, 200, 70), stringFormat);
             g.DrawString(chordThree, font, Brushes.Black, new RectangleF(750, 380, 200, 70), stringFormat);
             g.DrawString(chordFour, font, Brushes.Black, new RectangleF(950, 380, 200, 70), stringFormat);
-
+            */
             string path = Server.MapPath("~/Images/ProgressionSheetMusic.jpg");
             bitmap.Save(path, ImageFormat.Jpeg);
             ProgressionSheetMusic.ImageUrl = "~/Images/ProgressionSheetMusic.jpg";

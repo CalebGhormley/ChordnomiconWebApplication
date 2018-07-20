@@ -227,6 +227,12 @@
                 <div class="leftoptions">
                     Choose Instrument<br />
                     <asp:DropDownList ID="InstrumentDrowDownList" runat="server" OnSelectedIndexChanged="InstrumentDrowDownList_SelectedIndexChanged">
+                        <asp:ListItem Selected="True">Guitar</asp:ListItem>
+                        <asp:ListItem>Bass</asp:ListItem>
+                        <asp:ListItem>Ukulele</asp:ListItem>
+                        <asp:ListItem>Banjo</asp:ListItem>
+                        <asp:ListItem>Mandolin</asp:ListItem>
+                        <asp:ListItem>Piano</asp:ListItem>
                     </asp:DropDownList>
                 </div>
                 <div class="rightoptions">

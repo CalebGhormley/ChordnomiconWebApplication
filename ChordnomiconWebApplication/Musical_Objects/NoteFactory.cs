@@ -16,6 +16,8 @@ namespace ChordnomiconWebApplication
             else if (name == "A#") { _note = new Note(2, name); }
             else if (name == "Bb") { _note = new Note(2, name); }
             else if (name == "B") { _note = new Note(3, name); }
+            else if (name == "Cb") { _note = new Note(3, name); }
+            else if (name == "B#") { _note = new Note(4, name); }
             else if (name == "C") { _note = new Note(4, name); }
             else if (name == "C#") { _note = new Note(5, name); }
             else if (name == "Db") { _note = new Note(5, name); }
@@ -23,6 +25,8 @@ namespace ChordnomiconWebApplication
             else if (name == "D#") { _note = new Note(7, name); }
             else if (name == "Eb") { _note = new Note(7, name); }
             else if (name == "E") { _note = new Note(8, name); }
+            else if (name == "Fb") { _note = new Note(8, name); }
+            else if (name == "E#") { _note = new Note(9, name); }
             else if (name == "F") { _note = new Note(9, name); }
             else if (name == "F#") { _note = new Note(10, name); }
             else if (name == "Gb") { _note = new Note(10, name); }

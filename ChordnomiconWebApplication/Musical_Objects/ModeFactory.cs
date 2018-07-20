@@ -22,7 +22,8 @@ namespace ChordnomiconWebApplication
                 mode.addInterval(IntervalFactory.getIntervalByName("M6"));
                 mode.addInterval(IntervalFactory.getIntervalByName("M7"));
                 mode.setName("Lydian");
-                mode.setColor(Brushes.Gold);
+                mode.setPen(new Pen(Color.Gold, 3));
+                mode.setBrush(Brushes.Gold);
             }
             else if (name == "Ionian" || name == "ionian" || name == "Major" || name =="major")
             {
@@ -34,7 +35,7 @@ namespace ChordnomiconWebApplication
                 mode.addInterval(IntervalFactory.getIntervalByName("M6"));
                 mode.addInterval(IntervalFactory.getIntervalByName("M7"));
                 mode.setName("Ionian");
-                mode.setColor(Brushes.Gold);
+                mode.setPen(new Pen(Color.Gold, 3)); mode.setBrush(Brushes.Gold);
             }
             else if (name == "Mixolydian" || name == "mixolydian")
             {
@@ -46,7 +47,8 @@ namespace ChordnomiconWebApplication
                 mode.addInterval(IntervalFactory.getIntervalByName("M6"));
                 mode.addInterval(IntervalFactory.getIntervalByName("m7"));
                 mode.setName("Mixolydian");
-                mode.setColor(Brushes.Gold);
+                mode.setPen(new Pen(Color.Gold, 3));
+                mode.setBrush(Brushes.Gold);
             }
             else if (name == "Dorian" || name == "dorian")
             {
@@ -58,7 +60,8 @@ namespace ChordnomiconWebApplication
                 mode.addInterval(IntervalFactory.getIntervalByName("M6"));
                 mode.addInterval(IntervalFactory.getIntervalByName("m7"));
                 mode.setName("Dorian");
-                mode.setColor(Brushes.Gold);
+                mode.setPen(new Pen(Color.Gold, 3));
+                mode.setBrush(Brushes.Gold);
             }
             else if (name == "Aeolian" || name == "aeolian" || name == "Minor" || name == "minor")
             {
@@ -70,7 +73,8 @@ namespace ChordnomiconWebApplication
                 mode.addInterval(IntervalFactory.getIntervalByName("m6"));
                 mode.addInterval(IntervalFactory.getIntervalByName("m7"));
                 mode.setName("Aeolian");
-                mode.setColor(Brushes.Gold);
+                mode.setPen(new Pen(Color.Gold, 3));
+                mode.setBrush(Brushes.Gold);
             }
             else if (name == "Phrygian" || name == "phrygian")
             {
@@ -82,7 +86,8 @@ namespace ChordnomiconWebApplication
                 mode.addInterval(IntervalFactory.getIntervalByName("m6"));
                 mode.addInterval(IntervalFactory.getIntervalByName("m7"));
                 mode.setName("Phrygian");
-                mode.setColor(Brushes.Gold);
+                mode.setPen(new Pen(Color.Gold, 3));
+                mode.setBrush(Brushes.Gold);
             }
             else if (name == "Locrian" || name == "locrian")
             {
@@ -94,7 +99,7 @@ namespace ChordnomiconWebApplication
                 mode.addInterval(IntervalFactory.getIntervalByName("m6"));
                 mode.addInterval(IntervalFactory.getIntervalByName("m7"));
                 mode.setName("Locrian");
-                mode.setColor(Brushes.Gold);
+                mode.setPen(new Pen(Color.Gold, 3)); mode.setBrush(Brushes.Gold);
             }
             else if (name == "Blues" || name == "blues")
             {
@@ -105,7 +110,8 @@ namespace ChordnomiconWebApplication
                 mode.addInterval(IntervalFactory.getIntervalByName("P5"));
                 mode.addInterval(IntervalFactory.getIntervalByName("m7"));
                 mode.setName("Blues");
-                mode.setColor(Brushes.MidnightBlue);
+                mode.setPen(new Pen(Color.MidnightBlue, 3));
+                mode.setBrush(Brushes.MidnightBlue);
             }
             else if (name == "Pentatonic Major" || name == "pentatoninc major")
             {
@@ -115,7 +121,8 @@ namespace ChordnomiconWebApplication
                 mode.addInterval(IntervalFactory.getIntervalByName("P5"));
                 mode.addInterval(IntervalFactory.getIntervalByName("M6"));
                 mode.setName("Pentatoninc Major");
-                mode.setColor(Brushes.ForestGreen);
+                mode.setPen(new Pen(Color.ForestGreen, 3));
+                mode.setBrush(Brushes.ForestGreen);
             }
             else if (name == "Pentatonic Minor" || name == "pentatoninc minor")
             {
@@ -125,7 +132,8 @@ namespace ChordnomiconWebApplication
                 mode.addInterval(IntervalFactory.getIntervalByName("P5"));
                 mode.addInterval(IntervalFactory.getIntervalByName("m7"));
                 mode.setName("Pentatonic Minor");
-                mode.setColor(Brushes.ForestGreen);
+                mode.setPen(new Pen(Color.ForestGreen, 3));
+                mode.setBrush(Brushes.ForestGreen);
             }
             else if (name == "Suspended" || name == "suspended")
             {
@@ -135,7 +143,8 @@ namespace ChordnomiconWebApplication
                 mode.addInterval(IntervalFactory.getIntervalByName("P5"));
                 mode.addInterval(IntervalFactory.getIntervalByName("m7"));
                 mode.setName("Suspended");
-                mode.setColor(Brushes.ForestGreen);
+                mode.setPen(new Pen(Color.ForestGreen, 3));
+                mode.setBrush(Brushes.ForestGreen);
             }
             else if (name == "Blues Major" || name == "blues major")
             {
@@ -145,7 +154,8 @@ namespace ChordnomiconWebApplication
                 mode.addInterval(IntervalFactory.getIntervalByName("P5"));
                 mode.addInterval(IntervalFactory.getIntervalByName("M6"));
                 mode.setName("Blues Major");
-                mode.setColor(Brushes.ForestGreen);
+                mode.setPen(new Pen(Color.ForestGreen, 3));
+                mode.setBrush(Brushes.ForestGreen);
             }
             else if (name == "Blues Minor" || name == "blues minor")
             {
@@ -155,7 +165,8 @@ namespace ChordnomiconWebApplication
                 mode.addInterval(IntervalFactory.getIntervalByName("m6"));
                 mode.addInterval(IntervalFactory.getIntervalByName("m7"));
                 mode.setName("Blues Minor");
-                mode.setColor(Brushes.ForestGreen);
+                mode.setPen(new Pen(Color.ForestGreen, 3));
+                mode.setBrush(Brushes.ForestGreen);
             }
             else { throw new System.ArgumentException("Parameter must have a valid name", "Mode: " + name); }
             return mode;
