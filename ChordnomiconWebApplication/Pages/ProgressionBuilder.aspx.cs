@@ -305,7 +305,7 @@ namespace ChordnomiconWebApplication.Pages
                 { hasSeventhSharp = true; }
                 else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("B#"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("B"), Progression.getKey()))
                 { hasSeventhSharpAccidental = true; }
-
+                
                 if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Bb"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("B"), Progression.getKey())))
                 { hasFirstFlat = true; }
                 else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Bb"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("B"), Progression.getKey()))
@@ -335,11 +335,12 @@ namespace ChordnomiconWebApplication.Pages
                 { hasSixthFlat = true; }
                 else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Cb"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("C"), Progression.getKey()))
                 { hasSixthFlatAccidental = true; }
-
+                
                 if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Fb"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("F"), Progression.getKey())))
                 { hasSeventhFlat = true; }
                 else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Fb"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("F"), Progression.getKey()))
                 { hasSeventhFlatAccidental = true; }
+
             }
             /*
             string chordOne = "vi6";
@@ -466,13 +467,13 @@ namespace ChordnomiconWebApplication.Pages
             Rectangle thirdBassE2 = new Rectangle(800, 325, 65, 50);
             Rectangle fourthBassE2 = new Rectangle(1000, 325, 65, 50);
 
-            Rectangle firstSharp = new Rectangle(135, 175, 25, 50);
-            Rectangle secondSharp = new Rectangle(160, 100, 25, 50);
-            Rectangle thirdSharp = new Rectangle(190, 200, 25, 50);
-            Rectangle fourthSharp = new Rectangle(215, 125, 25, 50);
-            Rectangle fifthSharp = new Rectangle(240, 225, 25, 50);
-            Rectangle sixthSharp = new Rectangle(270, 150, 25, 50);
-            Rectangle seventhSharp = new Rectangle(295, 250, 25, 50);
+            Rectangle firstSharp = new Rectangle(130, 70, 40, 60);
+            Rectangle secondSharp = new Rectangle(160, 145, 40, 60);
+            Rectangle thirdSharp = new Rectangle(190, 45, 40, 60);
+            Rectangle fourthSharp = new Rectangle(220, 120, 40, 60);
+            Rectangle fifthSharp = new Rectangle(250, 195, 40, 60);
+            Rectangle sixthSharp = new Rectangle(280, 95, 40, 60);
+            Rectangle seventhSharp = new Rectangle(310, 170, 40, 60);
 
             Rectangle firstFlat = new Rectangle(140, 155, 25, 70);
             Rectangle secondFlat = new Rectangle(165, 80, 25, 70);

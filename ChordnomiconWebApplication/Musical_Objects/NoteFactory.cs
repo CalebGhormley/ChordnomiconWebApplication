@@ -37,7 +37,7 @@ namespace ChordnomiconWebApplication
             return _note;
         }
 
-        public static Note getNoteByValue (int value, Note key)
+        public static Note getNoteByValue(int value, Note key)
         {
             int distance = value - key.getValue();
             if (distance < 0) { distance = distance + 12; }
@@ -57,8 +57,18 @@ namespace ChordnomiconWebApplication
                 else { _note = new Note(value, "Bb"); }
 
             }
-            else if (value == 3) { _note = new Note(value, "B"); }
-            else if (value == 4) { _note = new Note(value, "C"); }
+            else if (value == 3)
+            {
+                if (key.getName() == "Bb") { _note = new Note(value, "Cb"); }
+                else if (key.getName() == "Gb") { _note = new Note(value, "Cb"); }
+                else { _note = new Note(value, "B"); }
+
+            }
+            else if (value == 4)
+            {
+                if (key.getName() == "C#") { _note = new Note(value, "B#"); }
+                else { _note = new Note(value, "C"); }
+            }
             else if (value == 5)
             {
                 if (distance == 0) { _note = new Note(value, key.getName()); }
@@ -86,8 +96,18 @@ namespace ChordnomiconWebApplication
                 { _note = new Note(value, "D#"); }
                 else { _note = new Note(value, "Eb"); }
             }
-            else if (value == 8) { _note = new Note(value, "E"); }
-            else if (value == 9) { _note = new Note(value, "F"); }
+            else if (value == 8)
+            {
+                if (key.getName() == "Eb") { _note = new Note(value, "Fb"); }
+                else if (key.getName() == "Cb") { _note = new Note(value, "Fb"); }
+                else { _note = new Note(value, "E"); }
+            }
+            else if (value == 9)
+            {
+                if (key.getName() == "F#") { _note = new Note(value, "E#"); }
+                else if (key.getName() == "C#") { _note = new Note(value, "E#"); }
+                else { _note = new Note(value, "F"); }
+            }
             else if (value == 10)
             {
                 if (distance == 0) { _note = new Note(value, key.getName()); }
