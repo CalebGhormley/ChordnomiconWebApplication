@@ -403,7 +403,7 @@ namespace ChordnomiconWebApplication.Pages
                 }
                 counter = 0;
                 staffLineOffset = 0;
-                int lastFoundCounter = 100;
+                int lastFoundStaffLine = 100;
                 for (int j = 0; j < Progression.getChord(i).getSize(); j++)
                 {
                     found = false;
@@ -416,7 +416,7 @@ namespace ChordnomiconWebApplication.Pages
                             (noteChars.Length > 1 && noteChars[1] == '#' && (Progression.getChord(i).getNoteAt(j).getValue() == NoteFactory.getNoteByValue(noteValueOffset, Progression.getKey()).getValue() + 1)))
                         {
                             found = true;
-                            if (counter == lastFoundCounter + 1)
+                            if (staffLineOffset == lastFoundStaffLine + 1)
                             {
                                 g.DrawImage(Properties.Resources.WholeNote, new Rectangle((400 + 65 + (i * 200)), (startingPosition - (staffLineOffset * 25)), 65, 50));
                             }
@@ -437,7 +437,7 @@ namespace ChordnomiconWebApplication.Pages
                                     g.DrawImage(Properties.Resources.FlatSign, new Rectangle((370 + (i * 200)), (startingPosition - 15 - (staffLineOffset * 25)), 25, 70));
                                 }
                             }
-                            lastFoundCounter = counter; 
+                            lastFoundStaffLine = staffLineOffset; 
                         }
                         else
                         {
