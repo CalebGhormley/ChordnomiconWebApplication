@@ -93,6 +93,16 @@ namespace ChordnomiconWebApplication.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap NaturalSign {
+            get {
+                object obj = ResourceManager.GetObject("NaturalSign", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SharpSign {
             get {
                 object obj = ResourceManager.GetObject("SharpSign", resourceCulture);

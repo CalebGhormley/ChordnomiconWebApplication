@@ -403,19 +403,41 @@ namespace ChordnomiconWebApplication.Pages
                 }
                 counter = 0;
                 staffLineOffset = 0;
+                int lastFoundCounter = 100;
                 for (int j = 0; j < Progression.getChord(i).getSize(); j++)
                 {
                     found = false;
+                    char[] noteChars = Progression.getChord(i).getNoteAt(j).getName().ToCharArray();
                     while (!found)
                     {
                         noteValueOffset = (startingNote.getValue() + counter);
                         while (noteValueOffset > 12) { noteValueOffset = noteValueOffset - 12; }
-                        if (NoteFactory.getNoteByValue(Progression.getChord(i).getNoteAt(j).getValue(), Progression.getKey()).getName() == NoteFactory.getNoteByValue(noteValueOffset, Progression.getKey()).getName())
+                        if (Progression.getChord(i).getNoteAt(j).getValue() == NoteFactory.getNoteByValue(noteValueOffset, Progression.getKey()).getValue() ||
+                            (noteChars.Length > 1 && noteChars[1] == '#' && (Progression.getChord(i).getNoteAt(j).getValue() == NoteFactory.getNoteByValue(noteValueOffset, Progression.getKey()).getValue() + 1)))
                         {
                             found = true;
-                            g.DrawImage(Properties.Resources.WholeNote, new Rectangle((400 + (i * 200)), (startingPosition - (staffLineOffset * 25)), 65, 50));
-                            //counter = counter + 1;
-                            //staffLineOffset = staffLineOffset + 1;
+                            if (counter == lastFoundCounter + 1)
+                            {
+                                g.DrawImage(Properties.Resources.WholeNote, new Rectangle((400 + 65 + (i * 200)), (startingPosition - (staffLineOffset * 25)), 65, 50));
+                            }
+                            else { g.DrawImage(Properties.Resources.WholeNote, new Rectangle((400 + (i * 200)), (startingPosition - (staffLineOffset * 25)), 65, 50)); }
+                            if (!(Progression.getMode().containsNoteName(Progression.getChord(i).getNoteAt(j), Progression.getKey())))
+                            {
+                                char[] chordChars = Progression.getChord(i).getNoteAt(j).getName().ToCharArray();
+                                if (chordChars.Length == 1)
+                                {
+                                    g.DrawImage(Properties.Resources.NaturalSign, new Rectangle((370 + (i * 200)), (startingPosition - (staffLineOffset * 25)), 25, 50));
+                                }
+                                else if (chordChars.Length == 2 && chordChars[1] == '#')
+                                {
+                                    g.DrawImage(Properties.Resources.SharpSign, new Rectangle((350 + (i * 200)), (startingPosition - 10 - (staffLineOffset * 25)), 40, 60));
+                                }
+                                else if (chordChars.Length == 2 && chordChars[1] == 'b')
+                                {
+                                    g.DrawImage(Properties.Resources.FlatSign, new Rectangle((370 + (i * 200)), (startingPosition - 15 - (staffLineOffset * 25)), 25, 70));
+                                }
+                            }
+                            lastFoundCounter = counter; 
                         }
                         else
                         {

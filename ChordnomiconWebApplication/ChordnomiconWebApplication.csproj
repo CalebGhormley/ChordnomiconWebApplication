@@ -179,6 +179,7 @@
     <None Include="Resources\SharpSign.jpg" />
     <None Include="Resources\TrebleClef.jpg" />
     <None Include="Resources\WholeNote.jpg" />
+    <None Include="Resources\NaturalSign.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
