@@ -42,9 +42,15 @@ namespace ChordnomiconWebApplication.Pages
                 modifyInstrument.Visible = false;
                 clearProgression.Visible = false;
 
-                drawModalShape();
+                pentatonicModes.Visible = false;
+                hexatonicModes.Visible = false;
+                heptatonicModes.Visible = true;
+                octatonicModes.Visible = false;
+
             }
-            
+
+            drawModalShape();
+
             if (RadioButtonTabOrSheet.SelectedIndex == 0)
             {
                 drawSheetMusic();
@@ -831,6 +837,145 @@ namespace ChordnomiconWebApplication.Pages
         protected void RadioButtonTabOrSheet_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void KeyEntryDropdownButton_Click(object sender, EventArgs e)
+        {
+            if (KeyDropDownList.SelectedIndex == 1) { Progression.changeKey(NoteFactory.getNoteByName("Ab")); }
+            else if (KeyDropDownList.SelectedIndex == 2) { Progression.changeKey(NoteFactory.getNoteByName("A")); }
+            else if (KeyDropDownList.SelectedIndex == 3) { Progression.changeKey(NoteFactory.getNoteByName("A#")); }
+            else if (KeyDropDownList.SelectedIndex == 4) { Progression.changeKey(NoteFactory.getNoteByName("Bb")); }
+            else if (KeyDropDownList.SelectedIndex == 5) { Progression.changeKey(NoteFactory.getNoteByName("B")); }
+            else if (KeyDropDownList.SelectedIndex == 6) { Progression.changeKey(NoteFactory.getNoteByName("C")); }
+            else if (KeyDropDownList.SelectedIndex == 7) { Progression.changeKey(NoteFactory.getNoteByName("C#")); }
+            else if (KeyDropDownList.SelectedIndex == 8) { Progression.changeKey(NoteFactory.getNoteByName("Db")); }
+            else if (KeyDropDownList.SelectedIndex == 9) { Progression.changeKey(NoteFactory.getNoteByName("D")); }
+            else if (KeyDropDownList.SelectedIndex == 10) { Progression.changeKey(NoteFactory.getNoteByName("D#")); }
+            else if (KeyDropDownList.SelectedIndex == 11) { Progression.changeKey(NoteFactory.getNoteByName("Eb")); }
+            else if (KeyDropDownList.SelectedIndex == 12) { Progression.changeKey(NoteFactory.getNoteByName("E")); }
+            else if (KeyDropDownList.SelectedIndex == 13) { Progression.changeKey(NoteFactory.getNoteByName("F")); }
+            else if (KeyDropDownList.SelectedIndex == 14) { Progression.changeKey(NoteFactory.getNoteByName("F#")); }
+            else if (KeyDropDownList.SelectedIndex == 15) { Progression.changeKey(NoteFactory.getNoteByName("Gb")); }
+            else if (KeyDropDownList.SelectedIndex == 16) { Progression.changeKey(NoteFactory.getNoteByName("G")); }
+            else if (KeyDropDownList.SelectedIndex == 17) { Progression.changeKey(NoteFactory.getNoteByName("G#")); }
+            else { }
+
+            drawModalShape();
+            if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
+            else { drawTablature(); }
+        }
+
+        protected void KeyDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ModeToneDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void PentatonicDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void HexatonicDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void HeptatonicDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void OctsatonicDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void RecommendedChordsDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ModeTypeButton_Click(object sender, EventArgs e)
+        {
+            if (ModeToneDropDownList.SelectedIndex == 0)
+            {
+                pentatonicModes.Visible = true;
+                hexatonicModes.Visible = false;
+                heptatonicModes.Visible = false;
+                octatonicModes.Visible = false;
+            }
+            else if (ModeToneDropDownList.SelectedIndex == 1)
+            {
+                pentatonicModes.Visible = false;
+                hexatonicModes.Visible = true;
+                heptatonicModes.Visible = false;
+                octatonicModes.Visible = false;
+            }
+            else if (ModeToneDropDownList.SelectedIndex == 2)
+            {
+                pentatonicModes.Visible = false;
+                hexatonicModes.Visible = false;
+                heptatonicModes.Visible = true;
+                octatonicModes.Visible = false;
+            }
+            else if (ModeToneDropDownList.SelectedIndex == 3)
+            {
+                pentatonicModes.Visible = false;
+                hexatonicModes.Visible = false;
+                heptatonicModes.Visible = false;
+                octatonicModes.Visible = true;
+            }
+        }
+
+        protected void PentatonicModeDropDownEntryButton_Click(object sender, EventArgs e)
+        {
+            if(PentatonicDropDownList.SelectedIndex == 0) { Progression.changeMode("Blues Major"); }
+            else if (PentatonicDropDownList.SelectedIndex == 1) { Progression.changeMode("Pentatonic Major"); }
+            else if (PentatonicDropDownList.SelectedIndex == 2) { Progression.changeMode("Suspended"); }
+            else if (PentatonicDropDownList.SelectedIndex == 3) { Progression.changeMode("Pentatonic Minor"); }
+            else if (PentatonicDropDownList.SelectedIndex == 4) { Progression.changeMode("Blues Minor"); }
+
+            drawModalShape();
+            if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
+            else { drawTablature(); }
+        }
+
+        protected void HexatonicModeDropDownEntryButton_Click(object sender, EventArgs e)
+        {
+
+
+            drawModalShape();
+            if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
+            else { drawTablature(); }
+        }
+
+        protected void HeptatonicModeDropDownEntryButton_Click(object sender, EventArgs e)
+        {
+            if (HeptatonicDropDownList.SelectedIndex == 0) { Progression.changeMode("Lydian"); }
+            else if (HeptatonicDropDownList.SelectedIndex == 1) { Progression.changeMode("Ionian"); }
+            else if (HeptatonicDropDownList.SelectedIndex == 2) { Progression.changeMode("Mixolydian"); }
+            else if (HeptatonicDropDownList.SelectedIndex == 3) { Progression.changeMode("Dorian"); }
+            else if (HeptatonicDropDownList.SelectedIndex == 4) { Progression.changeMode("Aeolian"); }
+            else if (HeptatonicDropDownList.SelectedIndex == 5) { Progression.changeMode("Phrygian"); }
+            else if (HeptatonicDropDownList.SelectedIndex == 6) { Progression.changeMode("Locrian"); }
+
+            drawModalShape();
+            if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
+            else { drawTablature(); }
+        }
+
+        protected void OctatonicModeDropDownEntryButton_Click(object sender, EventArgs e)
+        {
+
+
+            drawModalShape();
+            if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
+            else { drawTablature(); }
         }
     }
 }

@@ -104,22 +104,26 @@
 
         .leftoptions {
             margin-top:20px;
-            font-weight:bold;
             width:50%;
             float:left;
         }
         .rightoptions {
             margin-top:20px;
-            font-weight:bold;
             width:50%;
             float:right;
         }
         .centeroptions {
             margin-top:20px;
-            font-weight:bold;
             width:50%;
         }
-        
+        .boldp {
+            font-weight:bold;
+            margin:0px;
+        }
+        .subp {
+            margin:0px;
+        }
+
     </style>
 </head>
 <body>
@@ -141,31 +145,106 @@
         <div class="progressionOptionsWindow">
             <div runat="server" id="keyOrMode">
                    <div class="leftoptions">
-                        Please enter the key for your progression.<br />
-                        Use the &#39;#&#39; (number sign) character for sharp and the<br />
-                        &#39;b&#39; (lower case b) character for flat.<br />
+                        <p class="boldp">Enter key</p>
+                        <p class="subp">b = flat, # = flat</p>
 
                         <asp:TextBox ID="KeyEntryBox" runat="server" OnTextChanged="KeyEntryBox_TextChanged" style=""></asp:TextBox>
 
                         <asp:Button ID="KeyEntryButton" runat="server" OnClick="KeyEntryButton_Click" Text="Enter Key" />
                         <br />
                         <asp:Label ID="KeyEntryLabel" runat="server" Text="" ForeColor="DarkRed"></asp:Label>
+                        <br />
+                        <p class="boldp">Or</p>
+                        <p class="boldp">Select key</p>
+                        &nbsp;<asp:DropDownList ID="KeyDropDownList" runat="server" OnSelectedIndexChanged="KeyDropDownList_SelectedIndexChanged">
+                            <asp:ListItem Selected="True">-</asp:ListItem>
+                            <asp:ListItem>Ab</asp:ListItem>
+                            <asp:ListItem>A</asp:ListItem>
+                            <asp:ListItem>A#</asp:ListItem>
+                            <asp:ListItem>Bb</asp:ListItem>
+                            <asp:ListItem>B</asp:ListItem>
+                            <asp:ListItem>C</asp:ListItem>
+                            <asp:ListItem>C#</asp:ListItem>
+                            <asp:ListItem>Db</asp:ListItem>
+                            <asp:ListItem>D</asp:ListItem>
+                            <asp:ListItem>D#</asp:ListItem>
+                            <asp:ListItem>Eb</asp:ListItem>
+                            <asp:ListItem>E</asp:ListItem>
+                            <asp:ListItem>F</asp:ListItem>
+                            <asp:ListItem>F#</asp:ListItem>
+                            <asp:ListItem>Gb</asp:ListItem>
+                            <asp:ListItem>G</asp:ListItem>
+                            <asp:ListItem>G#</asp:ListItem>
+                        </asp:DropDownList>
+                       <asp:Button ID="KeyEntryDropdownButton" runat="server" OnClick="KeyEntryDropdownButton_Click" Text="Enter Key" />
+                        <br />
                     </div>
                     <div class="rightoptions">
-                        Please enter the mode for your progression.<br />
-
+                        <p class="boldp">Enter mode</p>
                         <asp:TextBox ID="ModeEntryBox" runat="server" OnTextChanged="ModeEntryBox_TextChanged" style=""></asp:TextBox>
 
                         <asp:Button ID="ModeEntryButton" runat="server" OnClick="ModeEntryButton_Click" Text="Enter Mode" />
                         <br />
                         <asp:Label ID="ModeEntryLabel" runat="server" Text="" ForeColor="DarkRed"></asp:Label>
+                        <br />
+                        <p class="boldp">Or</p>
+                        <p class="boldp">Select mode</p>
+                        <p class="subp">Select mode type</p>
+                        <asp:DropDownList ID="ModeToneDropDownList" runat="server" OnSelectedIndexChanged="ModeToneDropDownList_SelectedIndexChanged">
+                            <asp:ListItem>Pentatonic</asp:ListItem>
+                            <asp:ListItem>Hexatonic</asp:ListItem>
+                            <asp:ListItem Selected="True">Heptatonic</asp:ListItem>
+                            <asp:ListItem>Octotonic</asp:ListItem>
+                        </asp:DropDownList>
+                        <asp:Button ID="ModeTypeButton" runat="server" OnClick="ModeTypeButton_Click" Text="Enter Mode Type" />
+                        <br />
+                        <br />
+                        <p class="subp">Select mode</p>
+                        <div runat="server" id="pentatonicModes">
+                            <asp:DropDownList ID="PentatonicDropDownList" runat="server" OnSelectedIndexChanged="PentatonicDropDownList_SelectedIndexChanged">
+                                <asp:ListItem>Blues Major</asp:ListItem>
+                                <asp:ListItem>Pentatonic Major</asp:ListItem>
+                                <asp:ListItem>Suspended</asp:ListItem>
+                                <asp:ListItem>Pentatonic Minor</asp:ListItem>
+                                <asp:ListItem>Blues Minor</asp:ListItem>
+                            </asp:DropDownList>
+                            <asp:Button ID="PentatonicModeDropDownButton" runat="server" OnClick="PentatonicModeDropDownEntryButton_Click" Text="Enter Mode" />
+                        </div>
+
+                        <div runat="server" id="hexatonicModes">
+                            <asp:DropDownList ID="HexatonicDropDownList" runat="server" OnSelectedIndexChanged="HexatonicDropDownList_SelectedIndexChanged">
+                                <asp:ListItem>Whole Step</asp:ListItem>
+                                <asp:ListItem>Blues</asp:ListItem>
+                            </asp:DropDownList>
+                            <asp:Button ID="HexatonicModeDropDownButton" runat="server" OnClick="HexatonicModeDropDownEntryButton_Click" Text="Enter Mode" />
+                        </div>
+
+                        <div runat="server" id="heptatonicModes">
+                            <asp:DropDownList ID="HeptatonicDropDownList" runat="server" OnSelectedIndexChanged="HeptatonicDropDownList_SelectedIndexChanged">
+                                <asp:ListItem>Lydian</asp:ListItem>
+                                <asp:ListItem>Ionian (Major)</asp:ListItem>
+                                <asp:ListItem>Mixolydian</asp:ListItem>
+                                <asp:ListItem>Dorian</asp:ListItem>
+                                <asp:ListItem>Aeolian (Minor)</asp:ListItem>
+                                <asp:ListItem>Phrygian</asp:ListItem>
+                                <asp:ListItem>Locrian</asp:ListItem>
+                            </asp:DropDownList>
+                        <asp:Button ID="HeptatonicModeDropDownButton" runat="server" OnClick="HeptatonicModeDropDownEntryButton_Click" Text="Enter Mode" />
+                        </div>
+
+                        <div runat="server" id="octatonicModes">
+                            <asp:DropDownList ID="OctatonicDropDownList" runat="server" OnSelectedIndexChanged="OctsatonicDropDownList_SelectedIndexChanged">
+                                <asp:ListItem>Diminished Whole-Half</asp:ListItem>
+                                <asp:ListItem>Diminished Half-Whole</asp:ListItem>
+                            </asp:DropDownList>
+                        <asp:Button ID="OctatonicModeDropDownButton" runat="server" OnClick="OctatonicModeDropDownEntryButton_Click" Text="Enter Mode" />
+                        </div>
                     </div>
             </div>
             <div runat="server" id="addChord">
                 <div class="leftoptions">
-                        Please enter the chord you want to add to your progression.<br />
-                        Use the &#39;#&#39; (number sign) character for sharp and the<br />
-                        &#39;b&#39; (lower case b) character for flat.<br />
+                        <p class="boldp">Enter chord</p>
+                        <p class="subp">b = flat, # = sharp</p>
 
                         <asp:TextBox ID="ChordEntryBox" runat="server" OnTextChanged="ChordEntryBox_TextChanged" style=""></asp:TextBox>
 
@@ -177,7 +256,7 @@
                 <div class="rightoptions">
                     Recommended Chords
                     <br />
-                    <asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+                    <asp:DropDownList ID="RecommendedChordsDropDownList" runat="server" OnSelectedIndexChanged="RecommendedChordsDropDownList_SelectedIndexChanged">
                     </asp:DropDownList>
 
                 </div>
@@ -189,7 +268,7 @@
                     </asp:DropDownList>
                     <br />
                     <br />
-                    Replace a Chrod<br />
+                    Replace a Chord<br />
                     Select Chord to be replaced<br />
                     <asp:DropDownList ID="ReplaceChordDropDownList" runat="server" OnSelectedIndexChanged="ReplaceChordDropDownList_SelectedIndexChanged">
                     </asp:DropDownList><br />
