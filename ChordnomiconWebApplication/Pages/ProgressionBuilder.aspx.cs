@@ -50,18 +50,15 @@ namespace ChordnomiconWebApplication.Pages
             }
 
             drawModalShape();
-
-            if (RadioButtonTabOrSheet.SelectedIndex == 0)
-            {
-                drawSheetMusic();
-            }
-            else
-            {
-                drawTablature();
-            }
+            if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
+            else { drawTablature(); }
             //ChromaticGraphicFactory.drawChromaticGeometry("~/Images/ProgressionChromaticCircle.jpg", ProgressionChromaticCircle);
+            
         }
-        
+
+        // -----------------------------------------------------------
+        // ----------------Graphic Generating Functions---------------
+        //------------------------------------------------------------
         private void drawModalShape()
         {
             bitmap = new Bitmap(400, 400);
@@ -550,93 +547,14 @@ namespace ChordnomiconWebApplication.Pages
             bitmap.Dispose();
         }
 
-        protected void KeyEntryBox_TextChanged(object sender, EventArgs e)
+        protected void RadioButtonTabOrSheet_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (NoteController.checkNoteName(KeyEntryBox.Text))
-            {
-                Progression.changeKey(NoteFactory.getNoteByName(KeyEntryBox.Text));
-                drawModalShape();
-                if (RadioButtonTabOrSheet.SelectedIndex == 0)
-                {
-                    drawSheetMusic();
-                }
-                else
-                {
-                    drawTablature();
-                }
-            }
-        }
-
-        protected void KeyEntryButton_Click(object sender, EventArgs e)
-        {
-            if (Progression.getKey() != null)
-            {
-                KeyEntryLabel.Text = "The current key is: " + Progression.getKey().getName();
-            }
-            else { KeyEntryLabel.Text = "Please select a valid key name"; }
-        }
-
-        protected void ModeEntryBox_TextChanged(object sender, EventArgs e)
-        {
-            if (ModeController.checkModeName(ModeEntryBox.Text))
-            {
-                Progression.changeMode(ModeEntryBox.Text);
-                drawModalShape();
-                if (RadioButtonTabOrSheet.SelectedIndex == 0)
-                {
-                    drawSheetMusic();
-                }
-                else
-                {
-                    drawTablature();
-                }
-            }
-        }
-
-        protected void ModeEntryButton_Click(object sender, EventArgs e)
-        {
-            if (Progression.getMode() != null)
-            {
-                ModeEntryLabel.Text = "The current mode is: " + Progression.getMode().getName();
-            }
-            else { KeyEntryLabel.Text = "Please select a valid mode name"; }
-        }
-
-        protected void ChordEntryButton_Click(object sender, EventArgs e)
-        {
-            
-            if (ChordController.checkChordName(ChordEntryBox.Text))
-            {
-                ChordEntryLabel.Text = "The current chords in your progression are: " + Progression.getChordNames();
-            }
-            else { ChordEntryLabel.Text = "Please select a valid chord name"; }
 
         }
 
-        protected void ChordEntryBox_TextChanged(object sender, EventArgs e)
-        {
-            if (ChordController.checkChordName(ChordEntryBox.Text))
-            {
-                Progression.addChord(ChordFactory.getChordByName(ChordEntryBox.Text));
-                CreateChordPointArray(Progression.getChord(Progression.getSize() - 1));
-                drawModalShape();
-                if (RadioButtonTabOrSheet.SelectedIndex == 0)
-                {
-                    drawSheetMusic();
-                }
-                else
-                {
-                    drawTablature();
-                }
-            }
-        }
-
-
-        protected void clearProgFunction(object sender, EventArgs e)
-        {
-            Progression.clearProgression();
-        }
-
+        //------------------------------------------------------------
+        //--------------------Option Navigation Buttons---------------
+        //------------------------------------------------------------
         protected void keyOrModeOptions_Click(object sender, EventArgs e)
         {
             keyOrMode.Visible = true;
@@ -645,6 +563,7 @@ namespace ChordnomiconWebApplication.Pages
             modifyInstrument.Visible = false;
             clearProgression.Visible = false;
         }
+
         protected void addChordOptions_Click(object sender, EventArgs e)
         {
             keyOrMode.Visible = false;
@@ -682,161 +601,33 @@ namespace ChordnomiconWebApplication.Pages
             clearProgression.Visible = true;
         }
 
-        protected void RadioButtonList1_SelectedIndexChanged(object sender, EventArgs e)
+        //------------------------------------------------------------
+        //-----------------Key Modifying Functions--------------------
+        //------------------------------------------------------------
+        protected void KeyEntryBox_TextChanged(object sender, EventArgs e)
         {
-
-        }
-
-        protected void RecommendedChordDropDownList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void SwitchFirstChordDropDownList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void SwitchSecondDropDownList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void SwitchChordsButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void ChordPitchDropDownList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void RaiseChordPitchButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void LowerChordPitchButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void RemoveChordDropDownList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void ReplaceChordDropDownList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void ReplaceChordEntryBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void ReplaceChordEntryButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void InstrumentDrowDownList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void FirstStringDropDownList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void FourthStringDropDownList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void SecondStringDropDownList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void FifthStringDropDownList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void ThirdStringDropDownList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void SixthStringDropDownList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void yesClearButton_Click(object sender, EventArgs e)
-        {
-            keyOrMode.Visible = true;
-            addChord.Visible = false;
-            modifyChord.Visible = false;
-            modifyInstrument.Visible = false;
-            clearProgression.Visible = false;
-
-            Progression.clearProgression();
-            drawModalShape();
-            if (RadioButtonTabOrSheet.SelectedIndex == 0)
+            if (NoteController.checkNoteName(KeyEntryBox.Text))
             {
-                drawSheetMusic();
-            }
-            else
-            {
-                drawTablature();
-            }
-        }
-
-        protected void noClearButton_Click(object sender, EventArgs e)
-        {
-            keyOrMode.Visible = true;
-            addChord.Visible = false;
-            modifyChord.Visible = false;
-            modifyInstrument.Visible = false;
-            clearProgression.Visible = false;
-        }
-
-        private void CreateChordPointArray(Chord chord)
-        {
-            Point[] polygonPointArray = new Point[chord.getSize()];
-            int tonicValue = Progression.getKey().getValue();
-            int noteValueOffset;
-            int polygonSize = 0;
-
-            for (int i = 0; i < 12; i++)
-            {
-                for (int j = 0; j < chord.getSize(); j++)
+                Progression.changeKey(NoteFactory.getNoteByName(KeyEntryBox.Text));
+                drawModalShape();
+                if (RadioButtonTabOrSheet.SelectedIndex == 0)
                 {
-                    noteValueOffset = tonicValue + i;
-                    if (noteValueOffset > 12) { noteValueOffset = noteValueOffset - 12; }
-                    if (chord.getNoteAt(j).getValue() == noteValueOffset)
-                    {
-                        polygonPointArray[polygonSize] = ModalShapePoints.ElementAt(i);
-                        polygonSize++;
-                    }
+                    drawSheetMusic();
+                }
+                else
+                {
+                    drawTablature();
                 }
             }
-            Progression.addChordPolygon(polygonPointArray);
         }
 
-        protected void RadioButtonTabOrSheet_SelectedIndexChanged(object sender, EventArgs e)
+        protected void KeyEntryButton_Click(object sender, EventArgs e)
         {
-
+            if (Progression.getKey() != null)
+            {
+                KeyEntryLabel.Text = "The current key is: " + Progression.getKey().getName();
+            }
+            else { KeyEntryLabel.Text = "Please select a valid key name"; }
         }
 
         protected void KeyEntryDropdownButton_Click(object sender, EventArgs e)
@@ -870,9 +661,38 @@ namespace ChordnomiconWebApplication.Pages
 
         }
 
+        //------------------------------------------------------------
+        //----------------Mode Modifying Functions--------------------
+        //------------------------------------------------------------
+        protected void ModeEntryBox_TextChanged(object sender, EventArgs e)
+        {
+            if (ModeController.checkModeName(ModeEntryBox.Text))
+            {
+                Progression.changeMode(ModeEntryBox.Text);
+                drawModalShape();
+                if (RadioButtonTabOrSheet.SelectedIndex == 0)
+                {
+                    drawSheetMusic();
+                }
+                else
+                {
+                    drawTablature();
+                }
+            }
+        }
+
+        protected void ModeEntryButton_Click(object sender, EventArgs e)
+        {
+            if (Progression.getMode() != null)
+            {
+                ModeEntryLabel.Text = "The current mode is: " + Progression.getMode().getName();
+            }
+            else { KeyEntryLabel.Text = "Please select a valid mode name"; }
+        }
+
         protected void ModeToneDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void PentatonicDropDownList_SelectedIndexChanged(object sender, EventArgs e)
@@ -891,11 +711,6 @@ namespace ChordnomiconWebApplication.Pages
         }
 
         protected void OctsatonicDropDownList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void RecommendedChordsDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
@@ -934,7 +749,7 @@ namespace ChordnomiconWebApplication.Pages
 
         protected void PentatonicModeDropDownEntryButton_Click(object sender, EventArgs e)
         {
-            if(PentatonicDropDownList.SelectedIndex == 0) { Progression.changeMode("Blues Major"); }
+            if (PentatonicDropDownList.SelectedIndex == 0) { Progression.changeMode("Blues Major"); }
             else if (PentatonicDropDownList.SelectedIndex == 1) { Progression.changeMode("Pentatonic Major"); }
             else if (PentatonicDropDownList.SelectedIndex == 2) { Progression.changeMode("Suspended"); }
             else if (PentatonicDropDownList.SelectedIndex == 3) { Progression.changeMode("Pentatonic Minor"); }
@@ -976,6 +791,271 @@ namespace ChordnomiconWebApplication.Pages
             drawModalShape();
             if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
             else { drawTablature(); }
+        }
+
+        //-------------------------------------------------------------
+        //---------------------Chord Add Functions---------------------
+        //-------------------------------------------------------------
+        protected void ChordEntryButton_Click(object sender, EventArgs e)
+        {
+            
+            if (ChordController.checkChordName(ChordEntryBox.Text))
+            {
+                ChordEntryLabel.Text = "The current chords in your progression are: " + Progression.getChordNames();
+            }
+            else { ChordEntryLabel.Text = "Please select a valid chord name"; }
+
+        }
+
+        protected void ChordEntryBox_TextChanged(object sender, EventArgs e)
+        {
+            if (ChordController.checkChordName(ChordEntryBox.Text))
+            {
+                Progression.addChord(ChordFactory.getChordByName(ChordEntryBox.Text));
+                CreateChordPointArray(Progression.getChord(Progression.getSize() - 1));
+                RemoveChordDropDownList.Items.Add(new ListItem(ChordEntryBox.Text));
+                SwitchFirstChordDropDownList.Items.Add(new ListItem(ChordEntryBox.Text));
+                SwitchSecondDropDownList.Items.Add(new ListItem(ChordEntryBox.Text));
+                drawModalShape();
+                if (RadioButtonTabOrSheet.SelectedIndex == 0)
+                {
+                    drawSheetMusic();
+                }
+                else
+                {
+                    drawTablature();
+                }
+            }
+        }
+
+        protected void RecommendedChordDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void RecommendedChordsDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------
+        //-------------------Chord Modifying Functions----------------
+        //------------------------------------------------------------
+        protected void SwitchFirstChordDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void SwitchSecondDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void SwitchChordsButton_Click(object sender, EventArgs e)
+        {
+            if (SwitchFirstChordDropDownList.SelectedIndex >= 1 && SwitchSecondDropDownList.SelectedIndex >= 1)
+            {
+                int i = SwitchFirstChordDropDownList.SelectedIndex;
+                int j = SwitchSecondDropDownList.SelectedIndex;
+                Progression.swapChords(i - 1, j - 1);
+                String tempOne = SwitchFirstChordDropDownList.SelectedItem.Text;
+                String tempTwo = SwitchSecondDropDownList.SelectedItem.Text;
+                SwapItemsInDynamicLists(i, tempOne, j, tempTwo);
+            }
+
+            drawModalShape();
+            if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
+            else { drawTablature(); }
+        }
+
+        protected void ChordPitchDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void RaiseChordPitchButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LowerChordPitchButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void RemoveChordDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ReplaceChordDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ReplaceChordEntryBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ReplaceChordEntryButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void RemoveChordButton_Click(object sender, EventArgs e)
+        {
+            if (RemoveChordDropDownList.SelectedIndex >= 1)
+            {
+                int i = RemoveChordDropDownList.SelectedIndex;
+                Progression.removeChord(i - 1);
+                RemoveItemFromDynamicLists(i - 1);
+            }
+
+            drawModalShape();
+            if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
+            else { drawTablature(); }
+        }
+
+        //-------------------------------------------------------------
+        //-----------------Instrument Modifying Options----------------
+        //-------------------------------------------------------------
+        protected void InstrumentDrowDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void FirstStringDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void FourthStringDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void SecondStringDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void FifthStringDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ThirdStringDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void SixthStringDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        //-------------------------------------------------------------
+        //-------------------Clear Progression Functions---------------
+        //-------------------------------------------------------------
+        protected void clearProgFunction(object sender, EventArgs e)
+        {
+            Progression.clearProgression();
+        }
+
+        protected void yesClearButton_Click(object sender, EventArgs e)
+        {
+            keyOrMode.Visible = true;
+            addChord.Visible = false;
+            modifyChord.Visible = false;
+            modifyInstrument.Visible = false;
+            clearProgression.Visible = false;
+
+            for (int i = 0; i < Progression.getSize(); i++)
+            {
+                RemoveItemFromDynamicLists(i);
+            }
+            Progression.clearProgression();
+            drawModalShape();
+            if (RadioButtonTabOrSheet.SelectedIndex == 0)
+            {
+                drawSheetMusic();
+            }
+            else
+            {
+                drawTablature();
+            }
+            
+        }
+
+        protected void noClearButton_Click(object sender, EventArgs e)
+        {
+            keyOrMode.Visible = true;
+            addChord.Visible = false;
+            modifyChord.Visible = false;
+            modifyInstrument.Visible = false;
+            clearProgression.Visible = false;
+        }
+
+        //-------------------------------------------------------------
+        //------------------Private Helper Functions-------------------
+        //-------------------------------------------------------------
+        private void CreateChordPointArray(Chord chord)
+        {
+            Point[] polygonPointArray = new Point[chord.getSize()];
+            int tonicValue = Progression.getKey().getValue();
+            int noteValueOffset;
+            int polygonSize = 0;
+
+            for (int i = 0; i < 12; i++)
+            {
+                for (int j = 0; j < chord.getSize(); j++)
+                {
+                    noteValueOffset = tonicValue + i;
+                    if (noteValueOffset > 12) { noteValueOffset = noteValueOffset - 12; }
+                    if (chord.getNoteAt(j).getValue() == noteValueOffset)
+                    {
+                        polygonPointArray[polygonSize] = ModalShapePoints.ElementAt(i);
+                        polygonSize++;
+                    }
+                }
+            }
+            Progression.addChordPolygon(polygonPointArray);
+        }
+        
+        /// <summary>
+        /// Removes the chord from all dynamic lists, position is the position in the progression not the dynamic lists
+        /// </summary>
+        /// <param name="position"></param>
+        private void RemoveItemFromDynamicLists (int position)
+        {
+            RemoveChordDropDownList.Items.RemoveAt(position + 1);
+            SwitchFirstChordDropDownList.Items.RemoveAt(position + 1);
+            SwitchSecondDropDownList.Items.RemoveAt(position + 1);
+            Progression.removeChordPolygon(position);
+            
+        }
+
+        private void SwapItemsInDynamicLists (int positionOne, string itemOne, int positionTwo, string itemTwo)
+        {
+            SwitchFirstChordDropDownList.Items.RemoveAt(positionOne);
+            SwitchFirstChordDropDownList.Items.Insert(positionOne, itemTwo);
+            SwitchFirstChordDropDownList.Items.RemoveAt(positionTwo);
+            SwitchFirstChordDropDownList.Items.Insert(positionTwo, itemOne);
+            
+            SwitchSecondDropDownList.Items.RemoveAt(positionTwo);
+            SwitchSecondDropDownList.Items.Insert(positionTwo, itemOne);
+            SwitchSecondDropDownList.Items.RemoveAt(positionOne);
+            SwitchSecondDropDownList.Items.Insert(positionOne, itemTwo);
+
+            RemoveChordDropDownList.Items.RemoveAt(positionOne);
+            RemoveChordDropDownList.Items.Insert(positionOne, itemTwo);
+            RemoveChordDropDownList.Items.RemoveAt(positionTwo);
+            RemoveChordDropDownList.Items.Insert(positionTwo, itemOne);
+
+            Point[] tempPolygon = Progression.getChordPolygon(positionOne - 1);
+            Progression.changeChordPolygon(positionOne - 1, Progression.getChordPolygon(positionTwo - 1));
+            Progression.changeChordPolygon(positionTwo - 1, tempPolygon);
         }
     }
 }

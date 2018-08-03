@@ -118,8 +118,14 @@ namespace ChordnomiconWebApplication
             tablature.Insert(chordPosition - 1, TabChordFactory.getTabByChord(tempChord, newPitchPosition, _guitar));
         }
 
-        public static void addChordPolygon(Point[] point) { ChordPolygons.Add(point); }
+        public static void addChordPolygon(Point[] polygon) { ChordPolygons.Add(polygon); }
+        public static void changeChordPolygon(int position, Point[] polygon)
+        {
+            ChordPolygons.RemoveAt(position);
+            ChordPolygons.Insert(position, polygon);
+        }
         public static Point[] getChordPolygon(int position) { return ChordPolygons.ElementAt(position); }
+        public static void removeChordPolygon (int position) { ChordPolygons.RemoveAt(position); }
         public static void clearChordPolygons() { ChordPolygons.Clear(); }
     }
 }

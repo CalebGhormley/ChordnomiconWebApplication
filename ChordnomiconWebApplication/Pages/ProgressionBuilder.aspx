@@ -263,9 +263,11 @@
             </div>
             <div runat="server" id="modifyChord">
                 <div class="leftoptions">
-                    Remove a Chord<br />
+                    <p class="boldp">Remove a Chord</p>
                     <asp:DropDownList ID="RemoveChordDropDownList" runat="server" OnSelectedIndexChanged="RemoveChordDropDownList_SelectedIndexChanged">
+                        <asp:ListItem Value="0">-</asp:ListItem>
                     </asp:DropDownList>
+                    <asp:Button ID="RemoveChordButton" runat="server" OnClick="RemoveChordButton_Click" Text="Remove Chord"/>
                     <br />
                     <br />
                     Replace a Chord<br />
@@ -282,10 +284,12 @@
                 <div class="rightoptions">
                     Switch two Chords<br />
                     <asp:DropDownList ID="SwitchFirstChordDropDownList" runat="server" OnSelectedIndexChanged="SwitchFirstChordDropDownList_SelectedIndexChanged">
+                        <asp:ListItem Value="0">-</asp:ListItem>
                     </asp:DropDownList><br />
                     <asp:DropDownList ID="SwitchSecondDropDownList" runat="server" OnSelectedIndexChanged="SwitchSecondDropDownList_SelectedIndexChanged">
+                        <asp:ListItem Value="0">-</asp:ListItem>
                     </asp:DropDownList><br />
-                    <asp:Button ID="SwitchChordsButton" runat="server" OnClick="SwitchChordsButton_Click" Text="Switch Chord" />
+                    <asp:Button ID="SwitchChordsButton" runat="server" OnClick="SwitchChordsButton_Click" Text="Switch Chords" />
                     <br />
                     <asp:Label ID="SwitchChordsLabel" runat="server" Text="" ForeColor="DarkRed"></asp:Label>
                     <br />
