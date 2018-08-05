@@ -14,16 +14,15 @@ namespace ChordnomiconWebApplication
             Interval interval;
             if (name == "R") { interval = new Interval(0, name); }
             else if (name == "m2") { interval = new Interval(1, name); }
-            else if (name == "M2") { interval = new Interval(2, name); }
-            else if (name == "m3") { interval = new Interval(3, name); }
-            else if (name == "M3") { interval = new Interval(4, name); }
-            else if (name == "P4") { interval = new Interval(5, name); }
-            else if (name == "aug4") { interval = new Interval(6, name); }
-            else if (name == "dim5") { interval = new Interval(6, name); }
-            else if (name == "P5") { interval = new Interval(7, name); }
-            else if (name == "m6") { interval = new Interval(8, name); }
-            else if (name == "M6") { interval = new Interval(9, name); }
-            else if (name == "m7") { interval = new Interval(10, name); }
+            else if (name == "M2" || name == "dim3") { interval = new Interval(2, name); }
+            else if (name == "m3" || name == "aug2") { interval = new Interval(3, name); }
+            else if (name == "M3" || name == "dim4") { interval = new Interval(4, name); }
+            else if (name == "P4" || name =="aug3") { interval = new Interval(5, name); }
+            else if (name == "aug4" || name == "dim5") { interval = new Interval(6, name); }
+            else if (name == "P5" || name == "dim6") { interval = new Interval(7, name); }
+            else if (name == "m6" || name == "aug5") { interval = new Interval(8, name); }
+            else if (name == "M6" || name == "dim7") { interval = new Interval(9, name); }
+            else if (name == "m7" || name == "aug6") { interval = new Interval(10, name); }
             else if (name == "M7") { interval = new Interval(11, name); }
             else { throw new System.ArgumentException("Argument must have a valid name", "Interval: " + name); }
             return interval;
