@@ -225,6 +225,7 @@
     <Compile Include="Musical_Objects\ChordController.cs" />
     <Compile Include="Musical_Objects\ChordFactory.cs" />
     <Compile Include="Musical_Objects\ModeController.cs" />
+    <Compile Include="Musical_Objects\RecommendedChordFactory.cs" />
     <Compile Include="Pages\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

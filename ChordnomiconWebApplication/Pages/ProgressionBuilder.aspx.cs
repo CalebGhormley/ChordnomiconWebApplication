@@ -15,7 +15,8 @@ namespace ChordnomiconWebApplication.Pages
     {
         Bitmap bitmap;
         int nextNote;
-        List<Chord> recomendations = new List<Chord>();
+        List<Chord> recommendations = new List<Chord>();
+        List<Note> recommendedDegrees = new List<Note>();
         List<Point> ModalShapePoints = new List<Point>()
         {
             new Point(200, 50),
@@ -47,14 +48,12 @@ namespace ChordnomiconWebApplication.Pages
                 heptatonicModes.Visible = true;
                 heptatonicAlternativeModes.Visible = false;
                 octatonicModes.Visible = false;
-
+                
+                drawModalShape();
+                if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
+                else { drawTablature(); }
+                UpdateRecommendations();
             }
-
-            drawModalShape();
-            if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
-            else { drawTablature(); }
-            //ChromaticGraphicFactory.drawChromaticGeometry("~/Images/ProgressionChromaticCircle.jpg", ProgressionChromaticCircle);
-            
         }
 
         // -----------------------------------------------------------
@@ -222,14 +221,6 @@ namespace ChordnomiconWebApplication.Pages
             bool hasSixthSharp = false;
             bool hasSeventhSharp = false;
 
-            bool hasFirstSharpAccidental = false;
-            bool hasSecondSharpAccidental = false;
-            bool hasThirdSharpAccidental = false;
-            bool hasFourthSharpAccidental = false;
-            bool hasFifthSharpAccidental = false;
-            bool hasSixthSharpAccidental = false;
-            bool hasSeventhSharpAccidental = false;
-
             bool hasFirstFlat = false;
             bool hasSecondFlat = false;
             bool hasThirdFlat = false;
@@ -237,14 +228,6 @@ namespace ChordnomiconWebApplication.Pages
             bool hasFifthFlat = false;
             bool hasSixthFlat = false;
             bool hasSeventhFlat = false;
-
-            bool hasFirstFlatAccidental = false;
-            bool hasSecondFlatAccidental = false;
-            bool hasThirdFlatAccidental = false;
-            bool hasFourthFlatAccidental = false;
-            bool hasFifthFlatAccidental = false;
-            bool hasSixthFlatAccidental = false;
-            bool hasSeventhFlatAccidental = false;
 
             int SheetSizeOffset = 0;
             int SheetLength;
@@ -275,91 +258,24 @@ namespace ChordnomiconWebApplication.Pages
 
             if (isTrebleClef)
             {
-                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("F#"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("F"), Progression.getKey())))
-                { hasFirstSharp = true; }
-                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("F#"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("F"), Progression.getKey()))
-                { hasFirstSharpAccidental = true; }
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("F#"), Progression.getKey())) { hasFirstSharp = true; }
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("C#"), Progression.getKey())) { hasSecondSharp = true; }
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("G#"), Progression.getKey())) { hasThirdSharp = true; }
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("D#"), Progression.getKey())) { hasFourthSharp = true; }
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("A#"), Progression.getKey())) { hasFifthSharp = true; }
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("E#"), Progression.getKey())) { hasSixthSharp = true; }
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("B#"), Progression.getKey())) { hasSeventhSharp = true; }
 
-                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("C#"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("C"), Progression.getKey())))
-                { hasSecondSharp = true; }
-                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("C#"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("C"), Progression.getKey()))
-                { hasSecondSharpAccidental = true; }
-
-                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("G#"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("G"), Progression.getKey())))
-                { hasThirdSharp = true; }
-                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("G#"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("G"), Progression.getKey()))
-                { hasThirdSharpAccidental = true; }
-
-                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("D#"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("D"), Progression.getKey())))
-                { hasFourthSharp = true; }
-                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("D#"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("D"), Progression.getKey()))
-                { hasFourthSharpAccidental = true; }
-
-                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("A#"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("A"), Progression.getKey())))
-                { hasFifthSharp = true; }
-                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("A#"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("A"), Progression.getKey()))
-                { hasFifthSharpAccidental = true; }
-
-                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("E#"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("E"), Progression.getKey())))
-                { hasSixthSharp = true; }
-                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("E#"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("E"), Progression.getKey()))
-                { hasSixthSharpAccidental = true; }
-
-                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("B#"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("B"), Progression.getKey())))
-                { hasSeventhSharp = true; }
-                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("B#"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("B"), Progression.getKey()))
-                { hasSeventhSharpAccidental = true; }
-                
-                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Bb"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("B"), Progression.getKey())))
-                { hasFirstFlat = true; }
-                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Bb"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("B"), Progression.getKey()))
-                { hasFirstFlatAccidental = true; }
-
-                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Eb"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("E"), Progression.getKey())))
-                { hasSecondFlat = true; }
-                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Eb"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("E"), Progression.getKey()))
-                { hasSecondFlatAccidental = true; }
-
-                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Ab"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("A"), Progression.getKey())))
-                { hasThirdFlat = true; }
-                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Ab"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("A"), Progression.getKey()))
-                { hasThirdFlatAccidental = true; }
-
-                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Db"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("D"), Progression.getKey())))
-                { hasFourthFlat = true; }
-                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Db"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("D"), Progression.getKey()))
-                { hasFourthFlatAccidental = true; }
-
-                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Gb"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("G"), Progression.getKey())))
-                { hasFifthFlat = true; }
-                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Gb"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("G"), Progression.getKey()))
-                { hasFifthFlatAccidental = true; }
-
-                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Cb"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("C"), Progression.getKey())))
-                { hasSixthFlat = true; }
-                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Cb"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("C"), Progression.getKey()))
-                { hasSixthFlatAccidental = true; }
-                
-                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Fb"), Progression.getKey()) && !(Progression.getMode().containsNoteName(NoteFactory.getNoteByName("F"), Progression.getKey())))
-                { hasSeventhFlat = true; }
-                else if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Fb"), Progression.getKey()) && Progression.getMode().containsNoteName(NoteFactory.getNoteByName("F"), Progression.getKey()))
-                { hasSeventhFlatAccidental = true; }
-
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Bb"), Progression.getKey())) { hasFirstFlat = true; }
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Eb"), Progression.getKey())) { hasSecondFlat = true; }
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Ab"), Progression.getKey())) { hasThirdFlat = true; }
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Db"), Progression.getKey())) { hasFourthFlat = true; }
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Gb"), Progression.getKey())) { hasFifthFlat = true; }
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Cb"), Progression.getKey())) { hasSixthFlat = true; }
+                if (Progression.getMode().containsNoteName(NoteFactory.getNoteByName("Fb"), Progression.getKey())) { hasSeventhFlat = true; }
             }
-
-            bool firstTopBar = false;
-            bool secondTopBar = false;
-            bool thirdTopBar = false;
-            //bool fourthTopBar = false;
-
-            bool firstBottomBar = false;
-            bool secondBottomBar = false;
-            bool thirdBottomBar = false;
-            //bool fourthBottomBar = false;
-
-            Note startingNote;
             
-
+            Note startingNote;
             int startingPosition;
             bool found;
             int counter;
@@ -520,16 +436,8 @@ namespace ChordnomiconWebApplication.Pages
             g.DrawLine(blackPen, 2550, 100, 2550, 300);
             g.DrawLine(blackPen, 2750, 100, 2750, 300);
             g.FillRectangle(Brushes.Black, new Rectangle(2775, 100, 25, 200));
-
-            if (firstTopBar) { g.DrawLine(blackPen, 385, 50, 480, 50); }
-            if (secondTopBar) { g.DrawLine(blackPen, 585, 50, 680, 50); }
-            if (thirdTopBar) { g.DrawLine(blackPen, 785, 50, 880, 50); }
-            //if (fourthTopBar) { g.DrawLine(blackPen, 985, 50, 1080, 50); }
-
-            if (firstBottomBar) { g.DrawLine(blackPen, 385, 350, 480, 350); }
-            if (secondBottomBar) { g.DrawLine(blackPen, 585, 350, 680, 350); }
-            if (thirdBottomBar) { g.DrawLine(blackPen, 785, 350, 880, 350); }
-            //if (fourthBottomBar) { g.DrawLine(blackPen, 985, 350, 1080, 350); }
+            
+            //if (firstBottomBar) { g.DrawLine(blackPen, 385, 350, 480, 350); }
 
             for (int i = 0; i < Progression.getSize(); i++)
             {
@@ -540,7 +448,8 @@ namespace ChordnomiconWebApplication.Pages
 
             g.DrawString(Progression.getKey().getName(), keyFont, Brushes.Black, new RectangleF(50, 325, 200, 100), stringFormat);
             g.DrawString(Progression.getMode().getName(), modeFont, Brushes.Black, new RectangleF(0, 400, 300, 50), stringFormat);
-            
+            g.FillRectangle(Progression.getMode().getBrush(), new Rectangle(10, 440, 290, 450));
+
             string path = Server.MapPath("~/Images/ProgressionSheetMusic.jpg");
             bitmap.Save(path, ImageFormat.Jpeg);
             ProgressionSheetMusic.ImageUrl = "~/Images/ProgressionSheetMusic.jpg";
@@ -572,7 +481,7 @@ namespace ChordnomiconWebApplication.Pages
             modifyChord.Visible = false;
             modifyInstrument.Visible = false;
             clearProgression.Visible = false;
-            recomendations = ChordFactory.getChordRecomendationsTriads(Progression.getKey(), Progression.getMode());
+            recommendations = ChordFactory.getChordRecomendationsTriads(Progression.getKey(), Progression.getMode());
         }
 
         protected void modifyChordOptions_Click(object sender, EventArgs e)
@@ -619,6 +528,7 @@ namespace ChordnomiconWebApplication.Pages
                 if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
                 else { drawTablature(); }
                 KeyEntryLabel.Text = "The key has been changed to: " + Progression.getKey().getName();
+                UpdateRecommendations();
             }
             else { KeyEntryLabel.Text = "Please select a valid key name"; }
         }
@@ -647,6 +557,7 @@ namespace ChordnomiconWebApplication.Pages
             drawModalShape();
             if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
             else { drawTablature(); }
+            UpdateRecommendations();
         }
 
         protected void KeyDropDownList_SelectedIndexChanged(object sender, EventArgs e)
@@ -671,6 +582,8 @@ namespace ChordnomiconWebApplication.Pages
                 if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
                 else { drawTablature(); }
                 ModeEntryLabel.Text = "The mode has been changed to: " + Progression.getMode().getName();
+
+                UpdateRecommendations();
             }
             else { ModeEntryLabel.Text = "Please select a valid mode name"; }
         }
@@ -764,6 +677,7 @@ namespace ChordnomiconWebApplication.Pages
             drawModalShape();
             if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
             else { drawTablature(); }
+            UpdateRecommendations();
         }
 
         protected void HexatonicModeDropDownEntryButton_Click(object sender, EventArgs e)
@@ -779,6 +693,7 @@ namespace ChordnomiconWebApplication.Pages
             drawModalShape();
             if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
             else { drawTablature(); }
+            UpdateRecommendations();
         }
 
         protected void HeptatonicModeDropDownEntryButton_Click(object sender, EventArgs e)
@@ -801,6 +716,7 @@ namespace ChordnomiconWebApplication.Pages
             drawModalShape();
             if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
             else { drawTablature(); }
+            UpdateRecommendations();
         }
 
         protected void HeptatonicAlternativeModeDropDownEntryButton_Click(object sender, EventArgs e)
@@ -824,6 +740,7 @@ namespace ChordnomiconWebApplication.Pages
             drawModalShape();
             if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
             else { drawTablature(); }
+            UpdateRecommendations();
         }
 
         protected void OctatonicModeDropDownEntryButton_Click(object sender, EventArgs e)
@@ -836,6 +753,7 @@ namespace ChordnomiconWebApplication.Pages
             drawModalShape();
             if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
             else { drawTablature(); }
+            UpdateRecommendations();
         }
 
         //-------------------------------------------------------------
@@ -853,6 +771,7 @@ namespace ChordnomiconWebApplication.Pages
                 drawModalShape();
                 if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
                 else { drawTablature(); }
+                UpdateRecommendations();
             }
             else { ChordEntryLabel.Text = "Please enter a valid chord name"; }
         }
@@ -861,15 +780,59 @@ namespace ChordnomiconWebApplication.Pages
         {
             
         }
-
-        protected void RecommendedChordDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        
+        protected void RecommendedChordsDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        protected void RecommendedChordsDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        protected void RecommendedDegreeDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void RecommendedDegreeButton_Click(object sender, EventArgs e)
+        {
+            if (RecommendedDegreeDropDownList.SelectedIndex >= 1)
+            {
+                if (Progression.getSize() == 0)
+                { recommendedDegrees = RecommendedChordFactory.GetFirstReccommendedDegrees(Progression.getKey(), Progression.getMode()); }
+                else
+                { recommendedDegrees = RecommendedChordFactory.GetRecommendedDegreesByLast(Progression.getKey(), Progression.getChord(Progression.getSize() - 1).getNoteAt(0), Progression.getMode()); }
+                
+                RecommendedChordsDropDownList.Items.Clear();
+                RecommendedChordsDropDownList.Items.Add(new ListItem("-"));
+                recommendations = RecommendedChordFactory.GetChordsByDegree(Progression.getKey(), recommendedDegrees.ElementAt(RecommendedDegreeDropDownList.SelectedIndex - 1), Progression.getMode());
+                for (int i = 0; i < recommendations.Count; i++)
+                {
+                    RecommendedChordsDropDownList.Items.Add(new ListItem(recommendations.ElementAt(i).getName()));
+                }
+            }
+        }
+
+        protected void RecommendedChordAddButton_Click(object sender, EventArgs e)
+        {
+            if (RecommendedChordsDropDownList.SelectedIndex >= 1)
+            {
+                int tempSelectedIndex = RecommendedChordsDropDownList.SelectedIndex;
+
+                if (Progression.getSize() == 0)
+                { recommendedDegrees = RecommendedChordFactory.GetFirstReccommendedDegrees(Progression.getKey(), Progression.getMode()); }
+                else
+                { recommendedDegrees = RecommendedChordFactory.GetRecommendedDegreesByLast(Progression.getKey(), Progression.getChord(Progression.getSize() - 1).getNoteAt(0), Progression.getMode()); }
+
+                recommendations = RecommendedChordFactory.GetChordsByDegree(Progression.getKey(), recommendedDegrees.ElementAt(tempSelectedIndex - 1), Progression.getMode());
+
+                Progression.addChord(recommendations.ElementAt(tempSelectedIndex - 1));
+                AddItemToDynamicLists(Progression.getSize(), recommendations.ElementAt(RecommendedChordsDropDownList.SelectedIndex - 1).getName());
+                AddChordPointArray(recommendations.ElementAt(RecommendedChordsDropDownList.SelectedIndex - 1));
+                RecommendedChordEntryLabel.Text = Progression.getChord(Progression.getSize() - 1).getName() + " has been added to the chord progression";
+
+                drawModalShape();
+                if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
+                else { drawTablature(); }
+                UpdateRecommendations();
+            }
         }
 
         //------------------------------------------------------------
@@ -895,6 +858,22 @@ namespace ChordnomiconWebApplication.Pages
                 drawModalShape();
                 if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
                 else { drawTablature(); }
+
+                if (Progression.getSize() == 0)
+                { recommendedDegrees = RecommendedChordFactory.GetFirstReccommendedDegrees(Progression.getKey(), Progression.getMode()); }
+                else
+                { recommendedDegrees = RecommendedChordFactory.GetRecommendedDegreesByLast(Progression.getKey(), Progression.getChord(Progression.getSize() - 1).getNoteAt(0), Progression.getMode()); }
+                RecommendedDegreeDropDownList.Items.Clear();
+                for (int i = 0; i < recommendedDegrees.Count; i++)
+                {
+                    RecommendedDegreeDropDownList.Items.Add(new ListItem(recommendedDegrees.ElementAt(i).getName()));
+                }
+                RecommendedChordsDropDownList.Items.Clear();
+                recommendations = RecommendedChordFactory.GetChordsByDegree(Progression.getKey(), recommendedDegrees.ElementAt(RecommendedDegreeDropDownList.SelectedIndex), Progression.getMode());
+                for (int i = 0; i < recommendations.Count; i++)
+                {
+                    RecommendedChordsDropDownList.Items.Add(new ListItem(recommendations.ElementAt(i).getName()));
+                }
             }
         }
 
@@ -972,6 +951,22 @@ namespace ChordnomiconWebApplication.Pages
                     drawModalShape();
                     if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
                     else { drawTablature(); }
+
+                    if (Progression.getSize() == 0)
+                    { recommendedDegrees = RecommendedChordFactory.GetFirstReccommendedDegrees(Progression.getKey(), Progression.getMode()); }
+                    else
+                    { recommendedDegrees = RecommendedChordFactory.GetRecommendedDegreesByLast(Progression.getKey(), Progression.getChord(Progression.getSize() - 1).getNoteAt(0), Progression.getMode()); }
+                    RecommendedDegreeDropDownList.Items.Clear();
+                    for (int i = 0; i < recommendedDegrees.Count; i++)
+                    {
+                        RecommendedDegreeDropDownList.Items.Add(new ListItem(recommendedDegrees.ElementAt(i).getName()));
+                    }
+                    RecommendedChordsDropDownList.Items.Clear();
+                    recommendations = RecommendedChordFactory.GetChordsByDegree(Progression.getKey(), recommendedDegrees.ElementAt(RecommendedDegreeDropDownList.SelectedIndex), Progression.getMode());
+                    for (int i = 0; i < recommendations.Count; i++)
+                    {
+                        RecommendedChordsDropDownList.Items.Add(new ListItem(recommendations.ElementAt(i).getName()));
+                    }
                 }
                 else { ReplaceChordLabel.Text = "Please enter a valid chord name"; }
             }
@@ -989,6 +984,22 @@ namespace ChordnomiconWebApplication.Pages
                 drawModalShape();
                 if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
                 else { drawTablature(); }
+
+                if (Progression.getSize() == 0)
+                { recommendedDegrees = RecommendedChordFactory.GetFirstReccommendedDegrees(Progression.getKey(), Progression.getMode()); }
+                else
+                { recommendedDegrees = RecommendedChordFactory.GetRecommendedDegreesByLast(Progression.getKey(), Progression.getChord(Progression.getSize() - 1).getNoteAt(0), Progression.getMode()); }
+                RecommendedDegreeDropDownList.Items.Clear();
+                for (int i = 0; i < recommendedDegrees.Count; i++)
+                {
+                    RecommendedDegreeDropDownList.Items.Add(new ListItem(recommendedDegrees.ElementAt(i).getName()));
+                }
+                RecommendedChordsDropDownList.Items.Clear();
+                recommendations = RecommendedChordFactory.GetChordsByDegree(Progression.getKey(), recommendedDegrees.ElementAt(RecommendedDegreeDropDownList.SelectedIndex), Progression.getMode());
+                for (int i = 0; i < recommendations.Count; i++)
+                {
+                    RecommendedChordsDropDownList.Items.Add(new ListItem(recommendations.ElementAt(i).getName()));
+                }
             }
         }
 
@@ -1164,7 +1175,7 @@ namespace ChordnomiconWebApplication.Pages
         //-------------------------------------------------------------
         protected void clearProgFunction(object sender, EventArgs e)
         {
-            Progression.clearProgression();
+            //Progression.clearProgression();
         }
 
         protected void yesClearButton_Click(object sender, EventArgs e)
@@ -1175,11 +1186,12 @@ namespace ChordnomiconWebApplication.Pages
             modifyInstrument.Visible = false;
             clearProgression.Visible = false;
 
-            for (int i = 1; i <= Progression.getSize(); i++)
-            {
-                RemoveItemFromDynamicLists(i);
-            }
             Progression.clearProgression();
+            ClearDynamicLists();
+            Progression.changeKey(NoteFactory.getNoteByName("D"));
+            Progression.setMode(ModeFactory.getModeByName("Dorian"));
+            Progression.changeTuning(NoteFactory.getNoteByName("E"), NoteFactory.getNoteByName("A"), NoteFactory.getNoteByName("D"),
+                NoteFactory.getNoteByName("G"), NoteFactory.getNoteByName("B"), NoteFactory.getNoteByName("E"));
 
             drawModalShape();
             if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
@@ -1293,6 +1305,47 @@ namespace ChordnomiconWebApplication.Pages
             Progression.changeChordPolygon(positionOne - 1, Progression.getChordPolygon(positionTwo - 1));
             Progression.changeChordPolygon(positionTwo - 1, tempPolygon);
             */
+        }
+        
+        private void ClearDynamicLists()
+        {
+            SwitchFirstChordDropDownList.Items.Clear();
+            SwitchFirstChordDropDownList.Items.Add(new ListItem("-"));
+            SwitchSecondDropDownList.Items.Clear();
+            SwitchSecondDropDownList.Items.Add(new ListItem("-"));
+            RemoveChordDropDownList.Items.Clear();
+            RemoveChordDropDownList.Items.Add(new ListItem("-"));
+            ReplaceChordDropDownList.Items.Clear();
+            ReplaceChordDropDownList.Items.Add(new ListItem("-"));
+            ShiftChordDropDownList.Items.Clear();
+            ShiftChordDropDownList.Items.Add(new ListItem("-"));
+        }
+
+        private void UpdateRecommendations()
+        {
+            if (Progression.getSize() == 0)
+            { recommendedDegrees = RecommendedChordFactory.GetFirstReccommendedDegrees(Progression.getKey(), Progression.getMode()); }
+            else
+            { recommendedDegrees = RecommendedChordFactory.GetRecommendedDegreesByLast(Progression.getKey(), Progression.getChord(Progression.getSize() - 1).getNoteAt(0), Progression.getMode()); }
+
+            RecommendedDegreeDropDownList.Items.Clear();
+            RecommendedDegreeDropDownList.Items.Add(new ListItem("-"));
+            for (int i = 0; i < recommendedDegrees.Count; i++)
+            {
+                RecommendedDegreeDropDownList.Items.Add(new ListItem(recommendedDegrees.ElementAt(i).getName()));
+            }
+
+            RecommendedChordsDropDownList.Items.Clear();
+            RecommendedChordsDropDownList.Items.Add(new ListItem("-"));
+
+            if (RecommendedDegreeDropDownList.SelectedIndex > 0)
+            {
+                recommendations = RecommendedChordFactory.GetChordsByDegree(Progression.getKey(), recommendedDegrees.ElementAt(RecommendedDegreeDropDownList.SelectedIndex), Progression.getMode());
+                for (int i = 0; i < recommendations.Count; i++)
+                {
+                    RecommendedChordsDropDownList.Items.Add(new ListItem(recommendations.ElementAt(i).getName()));
+                }
+            }
         }
     }
 }

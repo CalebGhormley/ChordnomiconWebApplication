@@ -346,6 +346,24 @@ namespace ChordnomiconWebApplication.Pages {
         protected global::System.Web.UI.WebControls.Label ChordEntryLabel;
         
         /// <summary>
+        /// RecommendedDegreeDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList RecommendedDegreeDropDownList;
+        
+        /// <summary>
+        /// RecommendedDegreeButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button RecommendedDegreeButton;
+        
+        /// <summary>
         /// RecommendedChordsDropDownList control.
         /// </summary>
         /// <remarks>
@@ -353,6 +371,24 @@ namespace ChordnomiconWebApplication.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList RecommendedChordsDropDownList;
+        
+        /// <summary>
+        /// RecommendedChordAddButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button RecommendedChordAddButton;
+        
+        /// <summary>
+        /// RecommendedChordEntryLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label RecommendedChordEntryLabel;
         
         /// <summary>
         /// modifyChord control.

@@ -294,11 +294,18 @@
                         <br />
                 </div>
                 <div class="rightoptions">
-                    Recommended Chords
-                    <br />
-                    <asp:DropDownList ID="RecommendedChordsDropDownList" runat="server" OnSelectedIndexChanged="RecommendedChordsDropDownList_SelectedIndexChanged">
+                    <p class="boldp">Recommended Chords</p>
+                    <p class="subp">Select degree</p>
+                    <asp:DropDownList ID="RecommendedDegreeDropDownList" runat="server" OnSelectedIndexChanged="RecommendedDegreeDropDownList_SelectedIndexChanged">
+                        <asp:ListItem>-</asp:ListItem>
                     </asp:DropDownList>
-
+                    <asp:Button ID="RecommendedDegreeButton" runat="server" OnClick="RecommendedDegreeButton_Click" Text="Enter Degree" />
+                    <p class="subp">Select chord</p>
+                    <asp:DropDownList ID="RecommendedChordsDropDownList" runat="server" OnSelectedIndexChanged="RecommendedChordsDropDownList_SelectedIndexChanged">
+                        <asp:ListItem>-</asp:ListItem>
+                    </asp:DropDownList>
+                    <asp:Button ID="RecommendedChordAddButton" runat="server" OnClick="RecommendedChordAddButton_Click" Text="Enter Chord" /><br />
+                    <asp:Label ID="RecommendedChordEntryLabel" runat="server" Text="" ForeColor="DarkRed"></asp:Label>
                 </div>
             </div>
             <div runat="server" id="modifyChord">
@@ -350,6 +357,7 @@
             </div>
             <div runat="server" id="modifyInstrument">
                 <div class="leftoptions">
+                    <br />
                     <p class="boldp">Change Instrument</p>
                     <asp:DropDownList ID="InstrumentDrowDownList" runat="server" OnSelectedIndexChanged="InstrumentDrowDownList_SelectedIndexChanged">
                         <asp:ListItem Selected="True">Guitar</asp:ListItem>
