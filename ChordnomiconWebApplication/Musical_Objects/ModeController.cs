@@ -26,6 +26,7 @@ namespace ChordnomiconWebApplication.Musical_Objects
             else if (name == "Lydian Flat-Seven" || name == "lydian flat-seven" || name == "Lydian flat-seven" ||
                 name == "Lydian Flat Seven" || name == "lydian flat seven" || name == "Lydian flat seven" ||
                 name == "Lydian flat 7" || name == "Lydian b7" || name == "Acoustic" || name == "acoustic") { return true; }
+            else if (name == "Half Diminished" || name == "Half diminished" || name == "half diminished") { return true; }
             else if (name == "Harmonic Mixolydian" || name == "Harmonic mixolydian" || name == "harmonic mixolydian") { return true; }
             else if (name == "Altered" || name == "altered") { return true; }
             else if (name == "Melodic Minor" || name == "Melodic minor" || name == "melodic minor" ||
@@ -70,6 +71,7 @@ namespace ChordnomiconWebApplication.Musical_Objects
                 name == "Diminished Half Whole" || name == "Diminished Half whole" || name == "Diminished half whole" || name == "diminished half whole") { return true; }
             else if (name == "Major Bebop" || name == "Major bebop" || name == "major bebop") { return true; }
             else if (name == "Bebop Dominant" || name == "Bebop dominant" || name == "bebop dominant") { return true; }
+            else if (name == "Chromatic" || name == "chromatic") { return true; }   
             else { return false; }
         }
     }

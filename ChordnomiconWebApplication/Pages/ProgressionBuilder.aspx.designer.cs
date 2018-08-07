@@ -256,6 +256,33 @@ namespace ChordnomiconWebApplication.Pages {
         protected global::System.Web.UI.WebControls.Button HeptatonicModeDropDownButton;
         
         /// <summary>
+        /// heptatonicAlternativeModes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl heptatonicAlternativeModes;
+        
+        /// <summary>
+        /// HeptatonicAlternativeDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList HeptatonicAlternativeDropDownList;
+        
+        /// <summary>
+        /// HeptatonicAlternativeModeDropDownEntryButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button HeptatonicAlternativeModeDropDownEntryButton;
+        
+        /// <summary>
         /// octatonicModes control.
         /// </summary>
         /// <remarks>
@@ -427,40 +454,40 @@ namespace ChordnomiconWebApplication.Pages {
         protected global::System.Web.UI.WebControls.Label SwitchChordsLabel;
         
         /// <summary>
-        /// ChordPitchDropDownList control.
+        /// ShiftChordDropDownList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ChordPitchDropDownList;
+        protected global::System.Web.UI.WebControls.DropDownList ShiftChordDropDownList;
         
         /// <summary>
-        /// RaisePitchButton control.
+        /// ShiftChordLeftButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button RaisePitchButton;
+        protected global::System.Web.UI.WebControls.Button ShiftChordLeftButton;
         
         /// <summary>
-        /// LowerPutchButton control.
+        /// ShiftChordRightButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button LowerPutchButton;
+        protected global::System.Web.UI.WebControls.Button ShiftChordRightButton;
         
         /// <summary>
-        /// ModifyPitchLabel control.
+        /// ModifyVoicingLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ModifyPitchLabel;
+        protected global::System.Web.UI.WebControls.Label ModifyVoicingLabel;
         
         /// <summary>
         /// modifyInstrument control.
@@ -479,6 +506,15 @@ namespace ChordnomiconWebApplication.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList InstrumentDrowDownList;
+        
+        /// <summary>
+        /// ChangeInstrumentButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ChangeInstrumentButton;
         
         /// <summary>
         /// stringedInstrumentTunning control.
@@ -542,6 +578,24 @@ namespace ChordnomiconWebApplication.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList SixthStringDropDownList;
+        
+        /// <summary>
+        /// ChangeTunningButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ChangeTunningButton;
+        
+        /// <summary>
+        /// ChangeTunningLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ChangeTunningLabel;
         
         /// <summary>
         /// clearProgression control.

@@ -62,6 +62,11 @@ namespace ChordnomiconWebApplication
         }
         public static void swapChords(int locationOne, int locationTwo)
         {
+            if (locationOne < 0 || locationOne >= getSize())
+            { throw new System.ArgumentException("Parameter must have a valid name", "value: " + locationOne); }
+            else if(locationTwo < 0 || locationTwo >= getSize())
+            { throw new System.ArgumentException("Parameter must have a valid name", "value: " + locationTwo); }
+
             Chord tempOne = chords.ElementAt(locationOne);
             Chord tempTwo = chords.ElementAt(locationTwo);
             chords.RemoveAt(locationOne);
@@ -75,6 +80,11 @@ namespace ChordnomiconWebApplication
             tablature.Insert(locationOne, tempTabTwo);
             tablature.RemoveAt(locationTwo);
             tablature.Insert(locationTwo, tempTabOne);
+
+            Point[] tempPolygonOne = ChordPolygons.ElementAt(locationOne);
+            Point[] tempPolygonTwo = ChordPolygons.ElementAt(locationTwo);
+            changeChordPolygon(locationOne, tempPolygonTwo);
+            changeChordPolygon(locationTwo, tempPolygonOne);
         }
         public static void removeChord(int location)
         {
@@ -113,9 +123,9 @@ namespace ChordnomiconWebApplication
 
         public static void changeTabPitch (int chordPosition, int newPitchPosition)
         {
-            Chord tempChord = chords.ElementAt(chordPosition - 1);
-            tablature.RemoveAt(chordPosition - 1);
-            tablature.Insert(chordPosition - 1, TabChordFactory.getTabByChord(tempChord, newPitchPosition, _guitar));
+            Chord tempChord = chords.ElementAt(chordPosition);
+            tablature.RemoveAt(chordPosition);
+            tablature.Insert(chordPosition, TabChordFactory.getTabByChord(tempChord, newPitchPosition, _guitar));
         }
 
         public static void addChordPolygon(Point[] polygon) { ChordPolygons.Add(polygon); }

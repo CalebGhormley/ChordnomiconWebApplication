@@ -45,6 +45,7 @@ namespace ChordnomiconWebApplication.Pages
                 pentatonicModes.Visible = false;
                 hexatonicModes.Visible = false;
                 heptatonicModes.Visible = true;
+                heptatonicAlternativeModes.Visible = false;
                 octatonicModes.Visible = false;
 
             }
@@ -177,7 +178,7 @@ namespace ChordnomiconWebApplication.Pages
             {
                 for (int j = 0; j < Progression.getGuitar().getNumberOfStrings(); j++)
                 {
-                    g.DrawString(Progression.getTabNumber(i, j + 1), font, Brushes.Black, new Rectangle(400 + (i * 200), 23 + (j * 50), 65, 50), stringFormat);
+                    g.DrawString(Progression.getTabNumber(i, j + 1), font, Brushes.Black, new Rectangle(400 + (i * 200), 23 + (j * 50), 80, 50), stringFormat);
                 }
             }
 
@@ -606,26 +607,18 @@ namespace ChordnomiconWebApplication.Pages
         //------------------------------------------------------------
         protected void KeyEntryBox_TextChanged(object sender, EventArgs e)
         {
-            if (NoteController.checkNoteName(KeyEntryBox.Text))
-            {
-                Progression.changeKey(NoteFactory.getNoteByName(KeyEntryBox.Text));
-                drawModalShape();
-                if (RadioButtonTabOrSheet.SelectedIndex == 0)
-                {
-                    drawSheetMusic();
-                }
-                else
-                {
-                    drawTablature();
-                }
-            }
+            
         }
 
         protected void KeyEntryButton_Click(object sender, EventArgs e)
         {
-            if (Progression.getKey() != null)
+            if (NoteController.checkNoteName(KeyEntryBox.Text))
             {
-                KeyEntryLabel.Text = "The current key is: " + Progression.getKey().getName();
+                Progression.changeKey(NoteFactory.getNoteByName(KeyEntryBox.Text));
+                drawModalShape();
+                if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
+                else { drawTablature(); }
+                KeyEntryLabel.Text = "The key has been changed to: " + Progression.getKey().getName();
             }
             else { KeyEntryLabel.Text = "Please select a valid key name"; }
         }
@@ -666,28 +659,20 @@ namespace ChordnomiconWebApplication.Pages
         //------------------------------------------------------------
         protected void ModeEntryBox_TextChanged(object sender, EventArgs e)
         {
-            if (ModeController.checkModeName(ModeEntryBox.Text))
-            {
-                Progression.changeMode(ModeEntryBox.Text);
-                drawModalShape();
-                if (RadioButtonTabOrSheet.SelectedIndex == 0)
-                {
-                    drawSheetMusic();
-                }
-                else
-                {
-                    drawTablature();
-                }
-            }
+            
         }
 
         protected void ModeEntryButton_Click(object sender, EventArgs e)
         {
-            if (Progression.getMode() != null)
+            if (ModeController.checkModeName(ModeEntryBox.Text))
             {
-                ModeEntryLabel.Text = "The current mode is: " + Progression.getMode().getName();
+                Progression.changeMode(ModeEntryBox.Text);
+                drawModalShape();
+                if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
+                else { drawTablature(); }
+                ModeEntryLabel.Text = "The mode has been changed to: " + Progression.getMode().getName();
             }
-            else { KeyEntryLabel.Text = "Please select a valid mode name"; }
+            else { ModeEntryLabel.Text = "Please select a valid mode name"; }
         }
 
         protected void ModeToneDropDownList_SelectedIndexChanged(object sender, EventArgs e)
@@ -705,6 +690,11 @@ namespace ChordnomiconWebApplication.Pages
 
         }
 
+        protected void HeptatonicAlternativeDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        
         protected void HeptatonicDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -722,6 +712,7 @@ namespace ChordnomiconWebApplication.Pages
                 pentatonicModes.Visible = true;
                 hexatonicModes.Visible = false;
                 heptatonicModes.Visible = false;
+                heptatonicAlternativeModes.Visible = false;
                 octatonicModes.Visible = false;
             }
             else if (ModeToneDropDownList.SelectedIndex == 1)
@@ -729,6 +720,7 @@ namespace ChordnomiconWebApplication.Pages
                 pentatonicModes.Visible = false;
                 hexatonicModes.Visible = true;
                 heptatonicModes.Visible = false;
+                heptatonicAlternativeModes.Visible = false;
                 octatonicModes.Visible = false;
             }
             else if (ModeToneDropDownList.SelectedIndex == 2)
@@ -736,6 +728,7 @@ namespace ChordnomiconWebApplication.Pages
                 pentatonicModes.Visible = false;
                 hexatonicModes.Visible = false;
                 heptatonicModes.Visible = true;
+                heptatonicAlternativeModes.Visible = false;
                 octatonicModes.Visible = false;
             }
             else if (ModeToneDropDownList.SelectedIndex == 3)
@@ -743,6 +736,15 @@ namespace ChordnomiconWebApplication.Pages
                 pentatonicModes.Visible = false;
                 hexatonicModes.Visible = false;
                 heptatonicModes.Visible = false;
+                heptatonicAlternativeModes.Visible = true;
+                octatonicModes.Visible = false;
+            }
+            else if (ModeToneDropDownList.SelectedIndex == 4)
+            {
+                pentatonicModes.Visible = false;
+                hexatonicModes.Visible = false;
+                heptatonicModes.Visible = false;
+                heptatonicAlternativeModes.Visible = false;
                 octatonicModes.Visible = true;
             }
         }
@@ -754,6 +756,10 @@ namespace ChordnomiconWebApplication.Pages
             else if (PentatonicDropDownList.SelectedIndex == 2) { Progression.changeMode("Suspended"); }
             else if (PentatonicDropDownList.SelectedIndex == 3) { Progression.changeMode("Pentatonic Minor"); }
             else if (PentatonicDropDownList.SelectedIndex == 4) { Progression.changeMode("Blues Minor"); }
+            else if (PentatonicDropDownList.SelectedIndex == 5) { Progression.changeMode("Hirajoshi"); }
+            else if (PentatonicDropDownList.SelectedIndex == 6) { Progression.changeMode("In"); }
+            else if (PentatonicDropDownList.SelectedIndex == 7) { Progression.changeMode("Iwato"); }
+            else if (PentatonicDropDownList.SelectedIndex == 8) { Progression.changeMode("Insen"); }
 
             drawModalShape();
             if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
@@ -762,8 +768,14 @@ namespace ChordnomiconWebApplication.Pages
 
         protected void HexatonicModeDropDownEntryButton_Click(object sender, EventArgs e)
         {
-
-
+            if (HexatonicDropDownList.SelectedIndex == 0) { Progression.changeMode("Blues"); }
+            else if (HexatonicDropDownList.SelectedIndex == 1) { Progression.changeMode("Whole Tone"); }
+            else if (HexatonicDropDownList.SelectedIndex == 2) { Progression.changeMode("Augmented"); }
+            else if (HexatonicDropDownList.SelectedIndex == 3) { Progression.changeMode("Hexatonic Diminished"); }
+            else if (HexatonicDropDownList.SelectedIndex == 4) { Progression.changeMode("Tritone"); }
+            else if (HexatonicDropDownList.SelectedIndex == 5) { Progression.changeMode("Prometheus"); }
+            else if (HexatonicDropDownList.SelectedIndex == 6) { Progression.changeMode("Istran"); }
+            
             drawModalShape();
             if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
             else { drawTablature(); }
@@ -778,6 +790,36 @@ namespace ChordnomiconWebApplication.Pages
             else if (HeptatonicDropDownList.SelectedIndex == 4) { Progression.changeMode("Aeolian"); }
             else if (HeptatonicDropDownList.SelectedIndex == 5) { Progression.changeMode("Phrygian"); }
             else if (HeptatonicDropDownList.SelectedIndex == 6) { Progression.changeMode("Locrian"); }
+            else if (HeptatonicDropDownList.SelectedIndex == 7) { Progression.changeMode("Lydian Augmented"); }
+            else if (HeptatonicDropDownList.SelectedIndex == 8) { Progression.changeMode("Lydian Flat-Seven"); }
+            else if (HeptatonicDropDownList.SelectedIndex == 9) { Progression.changeMode("Harmonic Mixolydian"); }
+            else if (HeptatonicDropDownList.SelectedIndex == 10) { Progression.changeMode("Half Diminished"); }
+            else if (HeptatonicDropDownList.SelectedIndex == 11) { Progression.changeMode("Altered"); }
+            else if (HeptatonicDropDownList.SelectedIndex == 12) { Progression.changeMode("Melodic Minor"); }
+            else if (HeptatonicDropDownList.SelectedIndex == 13) { Progression.changeMode("Harmonic Phrygian"); }
+
+            drawModalShape();
+            if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
+            else { drawTablature(); }
+        }
+
+        protected void HeptatonicAlternativeModeDropDownEntryButton_Click(object sender, EventArgs e)
+        {
+            if (HeptatonicAlternativeDropDownList.SelectedIndex == 0) { Progression.changeMode("Neapolitan Major"); }
+            else if (HeptatonicAlternativeDropDownList.SelectedIndex == 1) { Progression.changeMode("Super Augmented"); }
+            else if (HeptatonicAlternativeDropDownList.SelectedIndex == 2) { Progression.changeMode("Mixolydian Augmented"); }
+            else if (HeptatonicAlternativeDropDownList.SelectedIndex == 3) { Progression.changeMode("Minor Lydian"); }
+            else if (HeptatonicAlternativeDropDownList.SelectedIndex == 4) { Progression.changeMode("Major Locrian"); }
+            else if (HeptatonicAlternativeDropDownList.SelectedIndex == 5) { Progression.changeMode("Aeolian Diminished"); }
+            else if (HeptatonicAlternativeDropDownList.SelectedIndex == 6) { Progression.changeMode("Super Diminished"); }
+            else if (HeptatonicAlternativeDropDownList.SelectedIndex == 7) { Progression.changeMode("Hungarian Minor"); }
+            else if (HeptatonicAlternativeDropDownList.SelectedIndex == 8) { Progression.changeMode("Double Harmonic"); }
+            else if (HeptatonicAlternativeDropDownList.SelectedIndex == 9) { Progression.changeMode("Harmonic Minor"); }
+            else if (HeptatonicAlternativeDropDownList.SelectedIndex == 10) { Progression.changeMode("Pfluke"); }
+            else if (HeptatonicAlternativeDropDownList.SelectedIndex == 11) { Progression.changeMode("Neapolitan Minor"); }
+            else if (HeptatonicAlternativeDropDownList.SelectedIndex == 12) { Progression.changeMode("Enigmatic"); }
+            else if (HeptatonicAlternativeDropDownList.SelectedIndex == 13) { Progression.changeMode("Persian"); }
+            else if (HeptatonicAlternativeDropDownList.SelectedIndex == 14) { Progression.changeMode("Blues with Flat-Four"); }
 
             drawModalShape();
             if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
@@ -786,8 +828,11 @@ namespace ChordnomiconWebApplication.Pages
 
         protected void OctatonicModeDropDownEntryButton_Click(object sender, EventArgs e)
         {
-
-
+            if (OctatonicDropDownList.SelectedIndex == 0) { Progression.changeMode("Diminished Whole-Half"); }
+            else if (OctatonicDropDownList.SelectedIndex == 1) { Progression.changeMode("Diminished Half-Whole"); }
+            else if (OctatonicDropDownList.SelectedIndex == 2) { Progression.changeMode("Major Bebop"); }
+            else if (OctatonicDropDownList.SelectedIndex == 3) { Progression.changeMode("Bebop Dominant"); }
+            
             drawModalShape();
             if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
             else { drawTablature(); }
@@ -798,34 +843,23 @@ namespace ChordnomiconWebApplication.Pages
         //-------------------------------------------------------------
         protected void ChordEntryButton_Click(object sender, EventArgs e)
         {
-            
             if (ChordController.checkChordName(ChordEntryBox.Text))
             {
-                ChordEntryLabel.Text = "The current chords in your progression are: " + Progression.getChordNames();
-            }
-            else { ChordEntryLabel.Text = "Please select a valid chord name"; }
+                Progression.addChord(ChordFactory.getChordByName(ChordEntryBox.Text));
+                AddItemToDynamicLists(Progression.getSize(), ChordEntryBox.Text);
+                AddChordPointArray(ChordFactory.getChordByName(ChordEntryBox.Text));
+                ChordEntryLabel.Text = ChordEntryBox.Text + " has been added to the chord progression";
 
+                drawModalShape();
+                if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
+                else { drawTablature(); }
+            }
+            else { ChordEntryLabel.Text = "Please enter a valid chord name"; }
         }
 
         protected void ChordEntryBox_TextChanged(object sender, EventArgs e)
         {
-            if (ChordController.checkChordName(ChordEntryBox.Text))
-            {
-                Progression.addChord(ChordFactory.getChordByName(ChordEntryBox.Text));
-                CreateChordPointArray(Progression.getChord(Progression.getSize() - 1));
-                RemoveChordDropDownList.Items.Add(new ListItem(ChordEntryBox.Text));
-                SwitchFirstChordDropDownList.Items.Add(new ListItem(ChordEntryBox.Text));
-                SwitchSecondDropDownList.Items.Add(new ListItem(ChordEntryBox.Text));
-                drawModalShape();
-                if (RadioButtonTabOrSheet.SelectedIndex == 0)
-                {
-                    drawSheetMusic();
-                }
-                else
-                {
-                    drawTablature();
-                }
-            }
+            
         }
 
         protected void RecommendedChordDropDownList_SelectedIndexChanged(object sender, EventArgs e)
@@ -855,32 +889,56 @@ namespace ChordnomiconWebApplication.Pages
         {
             if (SwitchFirstChordDropDownList.SelectedIndex >= 1 && SwitchSecondDropDownList.SelectedIndex >= 1)
             {
-                int i = SwitchFirstChordDropDownList.SelectedIndex;
-                int j = SwitchSecondDropDownList.SelectedIndex;
-                Progression.swapChords(i - 1, j - 1);
-                String tempOne = SwitchFirstChordDropDownList.SelectedItem.Text;
-                String tempTwo = SwitchSecondDropDownList.SelectedItem.Text;
-                SwapItemsInDynamicLists(i, tempOne, j, tempTwo);
+                Progression.swapChords(SwitchFirstChordDropDownList.SelectedIndex - 1, SwitchSecondDropDownList.SelectedIndex - 1);
+                SwapItemsInDynamicLists(SwitchFirstChordDropDownList.SelectedIndex, SwitchFirstChordDropDownList.SelectedItem.Text, SwitchSecondDropDownList.SelectedIndex, SwitchSecondDropDownList.SelectedItem.Text);
+
+                drawModalShape();
+                if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
+                else { drawTablature(); }
             }
-
-            drawModalShape();
-            if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
-            else { drawTablature(); }
         }
 
-        protected void ChordPitchDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ShiftChordDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        protected void RaiseChordPitchButton_Click(object sender, EventArgs e)
+        protected void ShiftChordLeftButton_Click(object sender, EventArgs e)
         {
-
+            if (ShiftChordDropDownList.SelectedIndex >= 1)
+            {
+                int i = ShiftChordDropDownList.SelectedIndex - 1;
+                if (TabController.checkPitchRange(Progression.getTabPitch(i) - 1, Progression.getChord(i).getNoteAt(0), Progression.getGuitar()))
+                {
+                    Progression.changeTabPitch(i, Progression.getTabPitch(i) - 1);
+                    ModifyVoicingLabel.Text = Progression.getChord(i).getName() + " has been shifted left";
+                    
+                    drawModalShape();
+                    if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
+                    else { drawTablature(); }
+                }
+                else { ModifyVoicingLabel.Text = "This Chord cannot be shifted left"; }
+            }
+            else { ModifyVoicingLabel.Text = "Select a chord to alter"; }
         }
 
-        protected void LowerChordPitchButton_Click(object sender, EventArgs e)
+        protected void ShiftChordRightButton_Click(object sender, EventArgs e)
         {
+            if (ShiftChordDropDownList.SelectedIndex >= 1)
+            {
+                int i = ShiftChordDropDownList.SelectedIndex - 1;
+                if (TabController.checkPitchRange(Progression.getTabPitch(i) + 1, Progression.getChord(i).getNoteAt(0), Progression.getGuitar()))
+                {
+                    Progression.changeTabPitch(i, Progression.getTabPitch(i) + 1);
+                    ModifyVoicingLabel.Text = Progression.getChord(i).getName() +" has been shifted right";
 
+                    drawModalShape();
+                    if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
+                    else { drawTablature(); }
+                }
+                else { ModifyVoicingLabel.Text = "This Chord cannot be shifted right"; }
+            }
+            else { ModifyVoicingLabel.Text = "Select a chord to alter"; }
         }
 
         protected void RemoveChordDropDownList_SelectedIndexChanged(object sender, EventArgs e)
@@ -900,21 +958,38 @@ namespace ChordnomiconWebApplication.Pages
 
         protected void ReplaceChordEntryButton_Click(object sender, EventArgs e)
         {
+            if(ReplaceChordDropDownList.SelectedIndex != 0)
+            {
+                if (ChordController.checkChordName(ReplaceChordTextBox.Text))
+                {
+                    int temp = ReplaceChordDropDownList.SelectedIndex;
+                    ReplaceChordLabel.Text = Progression.getChord(ReplaceChordDropDownList.SelectedIndex - 1).getName() + " has been replaced with " + ReplaceChordTextBox.Text;
+                    Progression.replaceChord(ReplaceChordDropDownList.SelectedIndex - 1, ChordFactory.getChordByName(ReplaceChordTextBox.Text));
+                    Progression.changeChordPolygon(ReplaceChordDropDownList.SelectedIndex - 1, GetChordPointArray(ChordFactory.getChordByName(ReplaceChordTextBox.Text)));
+                    RemoveItemFromDynamicLists(ReplaceChordDropDownList.SelectedIndex);
+                    AddItemToDynamicLists(temp, ReplaceChordTextBox.Text);
 
+                    drawModalShape();
+                    if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
+                    else { drawTablature(); }
+                }
+                else { ReplaceChordLabel.Text = "Please enter a valid chord name"; }
+            }
+            else { ReplaceChordLabel.Text = "Select a chord to replace"; }
         }
 
         protected void RemoveChordButton_Click(object sender, EventArgs e)
         {
             if (RemoveChordDropDownList.SelectedIndex >= 1)
             {
-                int i = RemoveChordDropDownList.SelectedIndex;
-                Progression.removeChord(i - 1);
-                RemoveItemFromDynamicLists(i - 1);
-            }
+                Progression.removeChord(RemoveChordDropDownList.SelectedIndex - 1);
+                Progression.removeChordPolygon(RemoveChordDropDownList.SelectedIndex - 1);
+                RemoveItemFromDynamicLists(RemoveChordDropDownList.SelectedIndex);
 
-            drawModalShape();
-            if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
-            else { drawTablature(); }
+                drawModalShape();
+                if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
+                else { drawTablature(); }
+            }
         }
 
         //-------------------------------------------------------------
@@ -923,6 +998,135 @@ namespace ChordnomiconWebApplication.Pages
         protected void InstrumentDrowDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void ChangeInstrumentButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ChangeTunningButton_Click(object sender, EventArgs e)
+        {
+            Note tempNoteSix, tempNoteFive, tempNoteFour, tempNoteThree, tempNoteTwo, tempNoteOne;
+            if (SixthStringDropDownList.SelectedIndex == 0) { tempNoteSix = NoteFactory.getNoteByName("Ab"); }
+            else if (SixthStringDropDownList.SelectedIndex == 1) { tempNoteSix = NoteFactory.getNoteByName("A"); }
+            else if (SixthStringDropDownList.SelectedIndex == 2) { tempNoteSix = NoteFactory.getNoteByName("A#"); }
+            else if (SixthStringDropDownList.SelectedIndex == 3) { tempNoteSix = NoteFactory.getNoteByName("Bb"); }
+            else if (SixthStringDropDownList.SelectedIndex == 4) { tempNoteSix = NoteFactory.getNoteByName("B"); }
+            else if (SixthStringDropDownList.SelectedIndex == 5) { tempNoteSix = NoteFactory.getNoteByName("C"); }
+            else if (SixthStringDropDownList.SelectedIndex == 6) { tempNoteSix = NoteFactory.getNoteByName("C#"); }
+            else if (SixthStringDropDownList.SelectedIndex == 7) { tempNoteSix = NoteFactory.getNoteByName("Db"); }
+            else if (SixthStringDropDownList.SelectedIndex == 8) { tempNoteSix = NoteFactory.getNoteByName("D"); }
+            else if (SixthStringDropDownList.SelectedIndex == 9) { tempNoteSix = NoteFactory.getNoteByName("D#"); }
+            else if (SixthStringDropDownList.SelectedIndex == 10) { tempNoteSix = NoteFactory.getNoteByName("Eb"); }
+            else if (SixthStringDropDownList.SelectedIndex == 11) { tempNoteSix = NoteFactory.getNoteByName("E"); }
+            else if (SixthStringDropDownList.SelectedIndex == 12) { tempNoteSix = NoteFactory.getNoteByName("F"); }
+            else if (SixthStringDropDownList.SelectedIndex == 13) { tempNoteSix = NoteFactory.getNoteByName("F#"); }
+            else if (SixthStringDropDownList.SelectedIndex == 14) { tempNoteSix = NoteFactory.getNoteByName("Gb"); }
+            else if (SixthStringDropDownList.SelectedIndex == 15) { tempNoteSix = NoteFactory.getNoteByName("G"); }
+            else if (SixthStringDropDownList.SelectedIndex == 16) { tempNoteSix = NoteFactory.getNoteByName("G#"); }
+            else { tempNoteSix = NoteFactory.getNoteByName("E"); }
+
+            if (FifthStringDropDownList.SelectedIndex == 0) { tempNoteFive = NoteFactory.getNoteByName("Ab"); }
+            else if (FifthStringDropDownList.SelectedIndex == 1) { tempNoteFive = NoteFactory.getNoteByName("A"); }
+            else if (FifthStringDropDownList.SelectedIndex == 2) { tempNoteFive = NoteFactory.getNoteByName("A#"); }
+            else if (FifthStringDropDownList.SelectedIndex == 3) { tempNoteFive = NoteFactory.getNoteByName("Bb"); }
+            else if (FifthStringDropDownList.SelectedIndex == 4) { tempNoteFive = NoteFactory.getNoteByName("B"); }
+            else if (FifthStringDropDownList.SelectedIndex == 5) { tempNoteFive = NoteFactory.getNoteByName("C"); }
+            else if (FifthStringDropDownList.SelectedIndex == 6) { tempNoteFive = NoteFactory.getNoteByName("C#"); }
+            else if (FifthStringDropDownList.SelectedIndex == 7) { tempNoteFive = NoteFactory.getNoteByName("Db"); }
+            else if (FifthStringDropDownList.SelectedIndex == 8) { tempNoteFive = NoteFactory.getNoteByName("D"); }
+            else if (FifthStringDropDownList.SelectedIndex == 9) { tempNoteFive = NoteFactory.getNoteByName("D#"); }
+            else if (FifthStringDropDownList.SelectedIndex == 10) { tempNoteFive = NoteFactory.getNoteByName("Eb"); }
+            else if (FifthStringDropDownList.SelectedIndex == 11) { tempNoteFive = NoteFactory.getNoteByName("E"); }
+            else if (FifthStringDropDownList.SelectedIndex == 12) { tempNoteFive = NoteFactory.getNoteByName("F"); }
+            else if (FifthStringDropDownList.SelectedIndex == 13) { tempNoteFive = NoteFactory.getNoteByName("F#"); }
+            else if (FifthStringDropDownList.SelectedIndex == 14) { tempNoteFive = NoteFactory.getNoteByName("Gb"); }
+            else if (FifthStringDropDownList.SelectedIndex == 15) { tempNoteFive = NoteFactory.getNoteByName("G"); }
+            else if (FifthStringDropDownList.SelectedIndex == 16) { tempNoteFive = NoteFactory.getNoteByName("G#"); }
+            else { tempNoteFive = NoteFactory.getNoteByName("B"); }
+
+            if (FourthStringDropDownList.SelectedIndex == 0) { tempNoteFour = NoteFactory.getNoteByName("Ab"); }
+            else if (FourthStringDropDownList.SelectedIndex == 1) { tempNoteFour = NoteFactory.getNoteByName("A"); }
+            else if (FourthStringDropDownList.SelectedIndex == 2) { tempNoteFour = NoteFactory.getNoteByName("A#"); }
+            else if (FourthStringDropDownList.SelectedIndex == 3) { tempNoteFour = NoteFactory.getNoteByName("Bb"); }
+            else if (FourthStringDropDownList.SelectedIndex == 4) { tempNoteFour = NoteFactory.getNoteByName("B"); }
+            else if (FourthStringDropDownList.SelectedIndex == 5) { tempNoteFour = NoteFactory.getNoteByName("C"); }
+            else if (FourthStringDropDownList.SelectedIndex == 6) { tempNoteFour = NoteFactory.getNoteByName("C#"); }
+            else if (FourthStringDropDownList.SelectedIndex == 7) { tempNoteFour = NoteFactory.getNoteByName("Db"); }
+            else if (FourthStringDropDownList.SelectedIndex == 8) { tempNoteFour = NoteFactory.getNoteByName("D"); }
+            else if (FourthStringDropDownList.SelectedIndex == 9) { tempNoteFour = NoteFactory.getNoteByName("D#"); }
+            else if (FourthStringDropDownList.SelectedIndex == 10) { tempNoteFour = NoteFactory.getNoteByName("Eb"); }
+            else if (FourthStringDropDownList.SelectedIndex == 11) { tempNoteFour = NoteFactory.getNoteByName("E"); }
+            else if (FourthStringDropDownList.SelectedIndex == 12) { tempNoteFour = NoteFactory.getNoteByName("F"); }
+            else if (FourthStringDropDownList.SelectedIndex == 13) { tempNoteFour = NoteFactory.getNoteByName("F#"); }
+            else if (FourthStringDropDownList.SelectedIndex == 14) { tempNoteFour = NoteFactory.getNoteByName("Gb"); }
+            else if (FourthStringDropDownList.SelectedIndex == 15) { tempNoteFour = NoteFactory.getNoteByName("G"); }
+            else if (FourthStringDropDownList.SelectedIndex == 16) { tempNoteFour = NoteFactory.getNoteByName("G#"); }
+            else { tempNoteFour = NoteFactory.getNoteByName("G"); }
+
+            if (ThirdStringDropDownList.SelectedIndex == 0) { tempNoteThree = NoteFactory.getNoteByName("Ab"); }
+            else if (ThirdStringDropDownList.SelectedIndex == 1) { tempNoteThree = NoteFactory.getNoteByName("A"); }
+            else if (ThirdStringDropDownList.SelectedIndex == 2) { tempNoteThree = NoteFactory.getNoteByName("A#"); }
+            else if (ThirdStringDropDownList.SelectedIndex == 3) { tempNoteThree = NoteFactory.getNoteByName("Bb"); }
+            else if (ThirdStringDropDownList.SelectedIndex == 4) { tempNoteThree = NoteFactory.getNoteByName("B"); }
+            else if (ThirdStringDropDownList.SelectedIndex == 5) { tempNoteThree = NoteFactory.getNoteByName("C"); }
+            else if (ThirdStringDropDownList.SelectedIndex == 6) { tempNoteThree = NoteFactory.getNoteByName("C#"); }
+            else if (ThirdStringDropDownList.SelectedIndex == 7) { tempNoteThree = NoteFactory.getNoteByName("Db"); }
+            else if (ThirdStringDropDownList.SelectedIndex == 8) { tempNoteThree = NoteFactory.getNoteByName("D"); }
+            else if (ThirdStringDropDownList.SelectedIndex == 9) { tempNoteThree = NoteFactory.getNoteByName("D#"); }
+            else if (ThirdStringDropDownList.SelectedIndex == 10) { tempNoteThree = NoteFactory.getNoteByName("Eb"); }
+            else if (ThirdStringDropDownList.SelectedIndex == 11) { tempNoteThree = NoteFactory.getNoteByName("E"); }
+            else if (ThirdStringDropDownList.SelectedIndex == 12) { tempNoteThree = NoteFactory.getNoteByName("F"); }
+            else if (ThirdStringDropDownList.SelectedIndex == 13) { tempNoteThree = NoteFactory.getNoteByName("F#"); }
+            else if (ThirdStringDropDownList.SelectedIndex == 14) { tempNoteThree = NoteFactory.getNoteByName("Gb"); }
+            else if (ThirdStringDropDownList.SelectedIndex == 15) { tempNoteThree = NoteFactory.getNoteByName("G"); }
+            else if (ThirdStringDropDownList.SelectedIndex == 16) { tempNoteThree = NoteFactory.getNoteByName("G#"); }
+            else { tempNoteThree = NoteFactory.getNoteByName("D"); }
+
+            if (SecondStringDropDownList.SelectedIndex == 0) { tempNoteTwo = NoteFactory.getNoteByName("Ab"); }
+            else if (SecondStringDropDownList.SelectedIndex == 1) { tempNoteTwo = NoteFactory.getNoteByName("A"); }
+            else if (SecondStringDropDownList.SelectedIndex == 2) { tempNoteTwo = NoteFactory.getNoteByName("A#"); }
+            else if (SecondStringDropDownList.SelectedIndex == 3) { tempNoteTwo = NoteFactory.getNoteByName("Bb"); }
+            else if (SecondStringDropDownList.SelectedIndex == 4) { tempNoteTwo = NoteFactory.getNoteByName("B"); }
+            else if (SecondStringDropDownList.SelectedIndex == 5) { tempNoteTwo = NoteFactory.getNoteByName("C"); }
+            else if (SecondStringDropDownList.SelectedIndex == 6) { tempNoteTwo = NoteFactory.getNoteByName("C#"); }
+            else if (SecondStringDropDownList.SelectedIndex == 7) { tempNoteTwo = NoteFactory.getNoteByName("Db"); }
+            else if (SecondStringDropDownList.SelectedIndex == 8) { tempNoteTwo = NoteFactory.getNoteByName("D"); }
+            else if (SecondStringDropDownList.SelectedIndex == 9) { tempNoteTwo = NoteFactory.getNoteByName("D#"); }
+            else if (SecondStringDropDownList.SelectedIndex == 10) { tempNoteTwo = NoteFactory.getNoteByName("Eb"); }
+            else if (SecondStringDropDownList.SelectedIndex == 11) { tempNoteTwo = NoteFactory.getNoteByName("E"); }
+            else if (SecondStringDropDownList.SelectedIndex == 12) { tempNoteTwo = NoteFactory.getNoteByName("F"); }
+            else if (SecondStringDropDownList.SelectedIndex == 13) { tempNoteTwo = NoteFactory.getNoteByName("F#"); }
+            else if (SecondStringDropDownList.SelectedIndex == 14) { tempNoteTwo = NoteFactory.getNoteByName("Gb"); }
+            else if (SecondStringDropDownList.SelectedIndex == 15) { tempNoteTwo = NoteFactory.getNoteByName("G"); }
+            else if (SecondStringDropDownList.SelectedIndex == 16) { tempNoteTwo = NoteFactory.getNoteByName("G#"); }
+            else { tempNoteTwo = NoteFactory.getNoteByName("A"); }
+
+            if (FirstStringDropDownList.SelectedIndex == 0) { tempNoteOne = NoteFactory.getNoteByName("Ab"); }
+            else if (FirstStringDropDownList.SelectedIndex == 1) { tempNoteOne = NoteFactory.getNoteByName("A"); }
+            else if (FirstStringDropDownList.SelectedIndex == 2) { tempNoteOne = NoteFactory.getNoteByName("A#"); }
+            else if (FirstStringDropDownList.SelectedIndex == 3) { tempNoteOne = NoteFactory.getNoteByName("Bb"); }
+            else if (FirstStringDropDownList.SelectedIndex == 4) { tempNoteOne = NoteFactory.getNoteByName("B"); }
+            else if (FirstStringDropDownList.SelectedIndex == 5) { tempNoteOne = NoteFactory.getNoteByName("C"); }
+            else if (FirstStringDropDownList.SelectedIndex == 6) { tempNoteOne = NoteFactory.getNoteByName("C#"); }
+            else if (FirstStringDropDownList.SelectedIndex == 7) { tempNoteOne = NoteFactory.getNoteByName("Db"); }
+            else if (FirstStringDropDownList.SelectedIndex == 8) { tempNoteOne = NoteFactory.getNoteByName("D"); }
+            else if (FirstStringDropDownList.SelectedIndex == 9) { tempNoteOne = NoteFactory.getNoteByName("D#"); }
+            else if (FirstStringDropDownList.SelectedIndex == 10) { tempNoteOne = NoteFactory.getNoteByName("Eb"); }
+            else if (FirstStringDropDownList.SelectedIndex == 11) { tempNoteOne = NoteFactory.getNoteByName("E"); }
+            else if (FirstStringDropDownList.SelectedIndex == 12) { tempNoteOne = NoteFactory.getNoteByName("F"); }
+            else if (FirstStringDropDownList.SelectedIndex == 13) { tempNoteOne = NoteFactory.getNoteByName("F#"); }
+            else if (FirstStringDropDownList.SelectedIndex == 14) { tempNoteOne = NoteFactory.getNoteByName("Gb"); }
+            else if (FirstStringDropDownList.SelectedIndex == 15) { tempNoteOne = NoteFactory.getNoteByName("G"); }
+            else if (FirstStringDropDownList.SelectedIndex == 16) { tempNoteOne = NoteFactory.getNoteByName("G#"); }
+            else { tempNoteOne = NoteFactory.getNoteByName("E"); }
+            Progression.changeTuning(tempNoteSix, tempNoteFive, tempNoteFour, tempNoteThree, tempNoteTwo, tempNoteOne);
+            ChangeTunningLabel.Text = "The tunning has been changed to: " + Progression.getTuning();
+
+            drawModalShape();
+            if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
+            else { drawTablature(); }
         }
 
         protected void FirstStringDropDownList_SelectedIndexChanged(object sender, EventArgs e)
@@ -971,21 +1175,15 @@ namespace ChordnomiconWebApplication.Pages
             modifyInstrument.Visible = false;
             clearProgression.Visible = false;
 
-            for (int i = 0; i < Progression.getSize(); i++)
+            for (int i = 1; i <= Progression.getSize(); i++)
             {
                 RemoveItemFromDynamicLists(i);
             }
             Progression.clearProgression();
+
             drawModalShape();
-            if (RadioButtonTabOrSheet.SelectedIndex == 0)
-            {
-                drawSheetMusic();
-            }
-            else
-            {
-                drawTablature();
-            }
-            
+            if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
+            else { drawTablature(); }
         }
 
         protected void noClearButton_Click(object sender, EventArgs e)
@@ -1000,7 +1198,7 @@ namespace ChordnomiconWebApplication.Pages
         //-------------------------------------------------------------
         //------------------Private Helper Functions-------------------
         //-------------------------------------------------------------
-        private void CreateChordPointArray(Chord chord)
+        private void AddChordPointArray(Chord chord)
         {
             Point[] polygonPointArray = new Point[chord.getSize()];
             int tonicValue = Progression.getKey().getValue();
@@ -1022,18 +1220,46 @@ namespace ChordnomiconWebApplication.Pages
             }
             Progression.addChordPolygon(polygonPointArray);
         }
-        
-        /// <summary>
-        /// Removes the chord from all dynamic lists, position is the position in the progression not the dynamic lists
-        /// </summary>
-        /// <param name="position"></param>
+
+        private Point[] GetChordPointArray(Chord chord)
+        {
+            Point[] polygonPointArray = new Point[chord.getSize()];
+            int tonicValue = Progression.getKey().getValue();
+            int noteValueOffset;
+            int polygonSize = 0;
+
+            for (int i = 0; i < 12; i++)
+            {
+                for (int j = 0; j < chord.getSize(); j++)
+                {
+                    noteValueOffset = tonicValue + i;
+                    if (noteValueOffset > 12) { noteValueOffset = noteValueOffset - 12; }
+                    if (chord.getNoteAt(j).getValue() == noteValueOffset)
+                    {
+                        polygonPointArray[polygonSize] = ModalShapePoints.ElementAt(i);
+                        polygonSize++;
+                    }
+                }
+            }
+            return(polygonPointArray);
+        }
+
+        private void AddItemToDynamicLists (int position, string item)
+        {
+            SwitchFirstChordDropDownList.Items.Insert(position, item);
+            SwitchSecondDropDownList.Items.Insert(position, item);
+            RemoveChordDropDownList.Items.Insert(position, item);
+            ReplaceChordDropDownList.Items.Insert(position, item);
+            ShiftChordDropDownList.Items.Insert(position, item);
+        }
+
         private void RemoveItemFromDynamicLists (int position)
         {
-            RemoveChordDropDownList.Items.RemoveAt(position + 1);
-            SwitchFirstChordDropDownList.Items.RemoveAt(position + 1);
-            SwitchSecondDropDownList.Items.RemoveAt(position + 1);
-            Progression.removeChordPolygon(position);
-            
+            RemoveChordDropDownList.Items.RemoveAt(position);
+            SwitchFirstChordDropDownList.Items.RemoveAt(position);
+            SwitchSecondDropDownList.Items.RemoveAt(position);
+            ReplaceChordDropDownList.Items.RemoveAt(position);
+            ShiftChordDropDownList.Items.RemoveAt(position);
         }
 
         private void SwapItemsInDynamicLists (int positionOne, string itemOne, int positionTwo, string itemTwo)
@@ -1052,10 +1278,21 @@ namespace ChordnomiconWebApplication.Pages
             RemoveChordDropDownList.Items.Insert(positionOne, itemTwo);
             RemoveChordDropDownList.Items.RemoveAt(positionTwo);
             RemoveChordDropDownList.Items.Insert(positionTwo, itemOne);
+            
+            ReplaceChordDropDownList.Items.RemoveAt(positionOne);
+            ReplaceChordDropDownList.Items.Insert(positionOne, itemTwo);
+            ReplaceChordDropDownList.Items.RemoveAt(positionTwo);
+            ReplaceChordDropDownList.Items.Insert(positionTwo, itemOne);
 
+            ShiftChordDropDownList.Items.RemoveAt(positionOne);
+            ShiftChordDropDownList.Items.Insert(positionOne, itemTwo);
+            ShiftChordDropDownList.Items.RemoveAt(positionTwo);
+            ShiftChordDropDownList.Items.Insert(positionTwo, itemOne);
+            /*
             Point[] tempPolygon = Progression.getChordPolygon(positionOne - 1);
             Progression.changeChordPolygon(positionOne - 1, Progression.getChordPolygon(positionTwo - 1));
             Progression.changeChordPolygon(positionTwo - 1, tempPolygon);
+            */
         }
     }
 }
