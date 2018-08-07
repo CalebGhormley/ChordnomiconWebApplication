@@ -15,8 +15,6 @@ namespace ChordnomiconWebApplication.Pages
     {
         Bitmap bitmap;
         int nextNote;
-        List<Chord> recommendations = new List<Chord>();
-        List<Note> recommendedDegrees = new List<Note>();
         List<Point> ModalShapePoints = new List<Point>()
         {
             new Point(200, 50),
@@ -48,12 +46,13 @@ namespace ChordnomiconWebApplication.Pages
                 heptatonicModes.Visible = true;
                 heptatonicAlternativeModes.Visible = false;
                 octatonicModes.Visible = false;
-                
-                drawModalShape();
-                if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
-                else { drawTablature(); }
+
                 UpdateRecommendations();
             }
+
+            drawModalShape();
+            if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
+            else { drawTablature(); }
         }
 
         // -----------------------------------------------------------
@@ -481,7 +480,6 @@ namespace ChordnomiconWebApplication.Pages
             modifyChord.Visible = false;
             modifyInstrument.Visible = false;
             clearProgression.Visible = false;
-            recommendations = ChordFactory.getChordRecomendationsTriads(Progression.getKey(), Progression.getMode());
         }
 
         protected void modifyChordOptions_Click(object sender, EventArgs e)
@@ -795,37 +793,26 @@ namespace ChordnomiconWebApplication.Pages
         {
             if (RecommendedDegreeDropDownList.SelectedIndex >= 1)
             {
-                if (Progression.getSize() == 0)
-                { recommendedDegrees = RecommendedChordFactory.GetFirstReccommendedDegrees(Progression.getKey(), Progression.getMode()); }
-                else
-                { recommendedDegrees = RecommendedChordFactory.GetRecommendedDegreesByLast(Progression.getKey(), Progression.getChord(Progression.getSize() - 1).getNoteAt(0), Progression.getMode()); }
-                
                 RecommendedChordsDropDownList.Items.Clear();
                 RecommendedChordsDropDownList.Items.Add(new ListItem("-"));
-                recommendations = RecommendedChordFactory.GetChordsByDegree(Progression.getKey(), recommendedDegrees.ElementAt(RecommendedDegreeDropDownList.SelectedIndex - 1), Progression.getMode());
-                for (int i = 0; i < recommendations.Count; i++)
+                Progression.SetRecommendedChords(RecommendedChordFactory.GetChordsByDegree(Progression.getKey(), Progression.GetRecommendedDegrees().ElementAt(RecommendedDegreeDropDownList.SelectedIndex - 1), Progression.getMode()));
+                for (int i = 0; i < Progression.GetRecommendedChords().Count; i++)
                 {
-                    RecommendedChordsDropDownList.Items.Add(new ListItem(recommendations.ElementAt(i).getName()));
+                    RecommendedChordsDropDownList.Items.Add(new ListItem(Progression.GetRecommendedChords().ElementAt(i).getName()));
                 }
             }
+            else { RecommendedChordEntryLabel.Text = "Please select a degree"; }
         }
 
         protected void RecommendedChordAddButton_Click(object sender, EventArgs e)
         {
             if (RecommendedChordsDropDownList.SelectedIndex >= 1)
             {
-                int tempSelectedIndex = RecommendedChordsDropDownList.SelectedIndex;
+                Progression.SetRecommendedChords(RecommendedChordFactory.GetChordsByDegree(Progression.getKey(), Progression.GetRecommendedDegrees().ElementAt(RecommendedDegreeDropDownList.SelectedIndex - 1), Progression.getMode()));
 
-                if (Progression.getSize() == 0)
-                { recommendedDegrees = RecommendedChordFactory.GetFirstReccommendedDegrees(Progression.getKey(), Progression.getMode()); }
-                else
-                { recommendedDegrees = RecommendedChordFactory.GetRecommendedDegreesByLast(Progression.getKey(), Progression.getChord(Progression.getSize() - 1).getNoteAt(0), Progression.getMode()); }
-
-                recommendations = RecommendedChordFactory.GetChordsByDegree(Progression.getKey(), recommendedDegrees.ElementAt(tempSelectedIndex - 1), Progression.getMode());
-
-                Progression.addChord(recommendations.ElementAt(tempSelectedIndex - 1));
-                AddItemToDynamicLists(Progression.getSize(), recommendations.ElementAt(RecommendedChordsDropDownList.SelectedIndex - 1).getName());
-                AddChordPointArray(recommendations.ElementAt(RecommendedChordsDropDownList.SelectedIndex - 1));
+                Progression.addChord(Progression.GetRecommendedChords().ElementAt(RecommendedDegreeDropDownList.SelectedIndex - 1));
+                AddItemToDynamicLists(Progression.getSize(), Progression.GetRecommendedChords().ElementAt(RecommendedChordsDropDownList.SelectedIndex - 1).getName());
+                AddChordPointArray(Progression.GetRecommendedChords().ElementAt(RecommendedChordsDropDownList.SelectedIndex - 1));
                 RecommendedChordEntryLabel.Text = Progression.getChord(Progression.getSize() - 1).getName() + " has been added to the chord progression";
 
                 drawModalShape();
@@ -858,22 +845,7 @@ namespace ChordnomiconWebApplication.Pages
                 drawModalShape();
                 if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
                 else { drawTablature(); }
-
-                if (Progression.getSize() == 0)
-                { recommendedDegrees = RecommendedChordFactory.GetFirstReccommendedDegrees(Progression.getKey(), Progression.getMode()); }
-                else
-                { recommendedDegrees = RecommendedChordFactory.GetRecommendedDegreesByLast(Progression.getKey(), Progression.getChord(Progression.getSize() - 1).getNoteAt(0), Progression.getMode()); }
-                RecommendedDegreeDropDownList.Items.Clear();
-                for (int i = 0; i < recommendedDegrees.Count; i++)
-                {
-                    RecommendedDegreeDropDownList.Items.Add(new ListItem(recommendedDegrees.ElementAt(i).getName()));
-                }
-                RecommendedChordsDropDownList.Items.Clear();
-                recommendations = RecommendedChordFactory.GetChordsByDegree(Progression.getKey(), recommendedDegrees.ElementAt(RecommendedDegreeDropDownList.SelectedIndex), Progression.getMode());
-                for (int i = 0; i < recommendations.Count; i++)
-                {
-                    RecommendedChordsDropDownList.Items.Add(new ListItem(recommendations.ElementAt(i).getName()));
-                }
+                UpdateRecommendations();
             }
         }
 
@@ -951,22 +923,7 @@ namespace ChordnomiconWebApplication.Pages
                     drawModalShape();
                     if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
                     else { drawTablature(); }
-
-                    if (Progression.getSize() == 0)
-                    { recommendedDegrees = RecommendedChordFactory.GetFirstReccommendedDegrees(Progression.getKey(), Progression.getMode()); }
-                    else
-                    { recommendedDegrees = RecommendedChordFactory.GetRecommendedDegreesByLast(Progression.getKey(), Progression.getChord(Progression.getSize() - 1).getNoteAt(0), Progression.getMode()); }
-                    RecommendedDegreeDropDownList.Items.Clear();
-                    for (int i = 0; i < recommendedDegrees.Count; i++)
-                    {
-                        RecommendedDegreeDropDownList.Items.Add(new ListItem(recommendedDegrees.ElementAt(i).getName()));
-                    }
-                    RecommendedChordsDropDownList.Items.Clear();
-                    recommendations = RecommendedChordFactory.GetChordsByDegree(Progression.getKey(), recommendedDegrees.ElementAt(RecommendedDegreeDropDownList.SelectedIndex), Progression.getMode());
-                    for (int i = 0; i < recommendations.Count; i++)
-                    {
-                        RecommendedChordsDropDownList.Items.Add(new ListItem(recommendations.ElementAt(i).getName()));
-                    }
+                    UpdateRecommendations();
                 }
                 else { ReplaceChordLabel.Text = "Please enter a valid chord name"; }
             }
@@ -984,22 +941,7 @@ namespace ChordnomiconWebApplication.Pages
                 drawModalShape();
                 if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
                 else { drawTablature(); }
-
-                if (Progression.getSize() == 0)
-                { recommendedDegrees = RecommendedChordFactory.GetFirstReccommendedDegrees(Progression.getKey(), Progression.getMode()); }
-                else
-                { recommendedDegrees = RecommendedChordFactory.GetRecommendedDegreesByLast(Progression.getKey(), Progression.getChord(Progression.getSize() - 1).getNoteAt(0), Progression.getMode()); }
-                RecommendedDegreeDropDownList.Items.Clear();
-                for (int i = 0; i < recommendedDegrees.Count; i++)
-                {
-                    RecommendedDegreeDropDownList.Items.Add(new ListItem(recommendedDegrees.ElementAt(i).getName()));
-                }
-                RecommendedChordsDropDownList.Items.Clear();
-                recommendations = RecommendedChordFactory.GetChordsByDegree(Progression.getKey(), recommendedDegrees.ElementAt(RecommendedDegreeDropDownList.SelectedIndex), Progression.getMode());
-                for (int i = 0; i < recommendations.Count; i++)
-                {
-                    RecommendedChordsDropDownList.Items.Add(new ListItem(recommendations.ElementAt(i).getName()));
-                }
+                UpdateRecommendations();
             }
         }
 
@@ -1300,11 +1242,6 @@ namespace ChordnomiconWebApplication.Pages
             ShiftChordDropDownList.Items.Insert(positionOne, itemTwo);
             ShiftChordDropDownList.Items.RemoveAt(positionTwo);
             ShiftChordDropDownList.Items.Insert(positionTwo, itemOne);
-            /*
-            Point[] tempPolygon = Progression.getChordPolygon(positionOne - 1);
-            Progression.changeChordPolygon(positionOne - 1, Progression.getChordPolygon(positionTwo - 1));
-            Progression.changeChordPolygon(positionTwo - 1, tempPolygon);
-            */
         }
         
         private void ClearDynamicLists()
@@ -1324,28 +1261,19 @@ namespace ChordnomiconWebApplication.Pages
         private void UpdateRecommendations()
         {
             if (Progression.getSize() == 0)
-            { recommendedDegrees = RecommendedChordFactory.GetFirstReccommendedDegrees(Progression.getKey(), Progression.getMode()); }
+            { Progression.SetRecommededDegrees(RecommendedChordFactory.GetFirstRecommendedDegrees(Progression.getKey(), Progression.getMode())); }
             else
-            { recommendedDegrees = RecommendedChordFactory.GetRecommendedDegreesByLast(Progression.getKey(), Progression.getChord(Progression.getSize() - 1).getNoteAt(0), Progression.getMode()); }
+            { Progression.SetRecommededDegrees(RecommendedChordFactory.GetRecommendedDegreesByLast(Progression.getKey(), Progression.getChord(Progression.getSize() - 1).getNoteAt(0), Progression.getMode())); }
 
             RecommendedDegreeDropDownList.Items.Clear();
             RecommendedDegreeDropDownList.Items.Add(new ListItem("-"));
-            for (int i = 0; i < recommendedDegrees.Count; i++)
+            for (int i = 0; i < Progression.GetRecommendedDegrees().Count; i++)
             {
-                RecommendedDegreeDropDownList.Items.Add(new ListItem(recommendedDegrees.ElementAt(i).getName()));
+                RecommendedDegreeDropDownList.Items.Add(new ListItem(Progression.GetRecommendedDegrees().ElementAt(i).getName()));
             }
 
             RecommendedChordsDropDownList.Items.Clear();
             RecommendedChordsDropDownList.Items.Add(new ListItem("-"));
-
-            if (RecommendedDegreeDropDownList.SelectedIndex > 0)
-            {
-                recommendations = RecommendedChordFactory.GetChordsByDegree(Progression.getKey(), recommendedDegrees.ElementAt(RecommendedDegreeDropDownList.SelectedIndex), Progression.getMode());
-                for (int i = 0; i < recommendations.Count; i++)
-                {
-                    RecommendedChordsDropDownList.Items.Add(new ListItem(recommendations.ElementAt(i).getName()));
-                }
-            }
         }
     }
 }

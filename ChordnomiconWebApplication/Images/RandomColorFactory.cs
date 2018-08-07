@@ -128,9 +128,8 @@ namespace ChordnomiconWebApplication.Images
         public static Brush GetRandomColor()
         {
             Random random = new Random();
-            int seed = random.Next(brushes.Count());
+            int seed = random.Next(brushes.Count() - 1);
             Brush tempBrush = brushes.ElementAt(seed);
-            brushes.RemoveAt(seed);
             return tempBrush;
         }
     }

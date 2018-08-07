@@ -27,6 +27,9 @@ namespace ChordnomiconWebApplication
 
         public static List<Point[]> ChordPolygons = new List<Point[]>();
 
+        private static List<Note> RecommendedDegrees = new List<Note>();
+        private static List<Chord> RecommendedChords = new List<Chord>();
+ 
         public static void changeTuning(Note six, Note five, Note four, Note three, Note two, Note one) 
         {
             _guitar.changeTunning(six, five, four, three, two, one);
@@ -127,6 +130,12 @@ namespace ChordnomiconWebApplication
             tablature.RemoveAt(chordPosition);
             tablature.Insert(chordPosition, TabChordFactory.getTabByChord(tempChord, newPitchPosition, _guitar));
         }
+
+        public static void SetRecommededDegrees (List<Note> degrees) { RecommendedDegrees = degrees; }
+        public static List<Note> GetRecommendedDegrees() { return RecommendedDegrees; }
+
+        public static void SetRecommendedChords (List<Chord> chords) { RecommendedChords = chords; }
+        public static List<Chord> GetRecommendedChords() { return RecommendedChords; }
 
         public static void addChordPolygon(Point[] polygon) { ChordPolygons.Add(polygon); }
         public static void changeChordPolygon(int position, Point[] polygon)
