@@ -522,16 +522,17 @@ namespace ChordnomiconWebApplication.Pages
             if (NoteController.checkNoteName(KeyEntryBox.Text))
             {
                 Progression.changeKey(NoteFactory.getNoteByName(KeyEntryBox.Text));
-                drawModalShape();
-                if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
-                else { drawTablature(); }
                 KeyEntryLabel.Text = "The key has been changed to: " + Progression.getKey().getName();
-                UpdateRecommendations();
                 Progression.clearChordPolygons();
                 for (int i = 0; i < Progression.getSize(); i++)
                 {
                     Progression.addChordPolygon(GetChordPointArray(Progression.getChord(i)));
                 }
+
+                drawModalShape();
+                if (RadioButtonTabOrSheet.SelectedIndex == 0) { drawSheetMusic(); }
+                else { drawTablature(); }
+                UpdateRecommendations();
             }
             else { KeyEntryLabel.Text = "Please select a valid key name"; }
         }
@@ -766,8 +767,8 @@ namespace ChordnomiconWebApplication.Pages
         {
             if (ChordController.checkChordName(ChordEntryBox.Text))
             {
+                AddItemToDynamicLists(Progression.getSize() + 1, ChordEntryBox.Text);
                 Progression.addChord(ChordFactory.getChordByName(ChordEntryBox.Text));
-                AddItemToDynamicLists(Progression.getSize(), ChordEntryBox.Text);
                 AddChordPointArray(ChordFactory.getChordByName(ChordEntryBox.Text));
                 ChordEntryLabel.Text = ChordEntryBox.Text + " has been added to the chord progression";
 
