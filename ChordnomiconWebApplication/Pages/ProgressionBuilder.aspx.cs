@@ -527,6 +527,11 @@ namespace ChordnomiconWebApplication.Pages
                 else { drawTablature(); }
                 KeyEntryLabel.Text = "The key has been changed to: " + Progression.getKey().getName();
                 UpdateRecommendations();
+                Progression.clearChordPolygons();
+                for (int i = 0; i < Progression.getSize(); i++)
+                {
+                    Progression.addChordPolygon(GetChordPointArray(Progression.getChord(i)));
+                }
             }
             else { KeyEntryLabel.Text = "Please select a valid key name"; }
         }
@@ -810,7 +815,7 @@ namespace ChordnomiconWebApplication.Pages
             {
                 Progression.SetRecommendedChords(RecommendedChordFactory.GetChordsByDegree(Progression.getKey(), Progression.GetRecommendedDegrees().ElementAt(RecommendedDegreeDropDownList.SelectedIndex - 1), Progression.getMode()));
 
-                Progression.addChord(Progression.GetRecommendedChords().ElementAt(RecommendedDegreeDropDownList.SelectedIndex - 1));
+                Progression.addChord(Progression.GetRecommendedChords().ElementAt(RecommendedChordsDropDownList.SelectedIndex - 1));
                 AddItemToDynamicLists(Progression.getSize(), Progression.GetRecommendedChords().ElementAt(RecommendedChordsDropDownList.SelectedIndex - 1).getName());
                 AddChordPointArray(Progression.GetRecommendedChords().ElementAt(RecommendedChordsDropDownList.SelectedIndex - 1));
                 RecommendedChordEntryLabel.Text = Progression.getChord(Progression.getSize() - 1).getName() + " has been added to the chord progression";
@@ -820,6 +825,7 @@ namespace ChordnomiconWebApplication.Pages
                 else { drawTablature(); }
                 UpdateRecommendations();
             }
+            else { RecommendedChordEntryLabel.Text = "Please select a chord"; } 
         }
 
         //------------------------------------------------------------

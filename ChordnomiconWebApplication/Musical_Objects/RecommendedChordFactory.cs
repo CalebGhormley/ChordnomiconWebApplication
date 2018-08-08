@@ -89,75 +89,76 @@ namespace ChordnomiconWebApplication.Musical_Objects
             int noteOffset;
             int distance = lastTonic.getValue() - key.getValue();
             if (distance < 12) { distance = distance + 12; }
-
-            notes.Add(lastTonic);
-
-            if (mode.containsInterval(5 + distance) || mode.containsInterval(5 + distance - 12))
+            
+            if (mode.containsInterval(5 + distance) || mode.containsInterval(5 + distance - 12) || mode.containsInterval(5 + distance - 24))
             {
                 noteOffset = lastTonic.getValue() + 5;
                 if (noteOffset > 12) { noteOffset = noteOffset - 12; }
                 notes.Add(NoteFactory.getNoteByValue(noteOffset, key));
             }
-            if (mode.containsInterval(2 + distance) || mode.containsInterval(2 + distance - 12))
+            if (mode.containsInterval(2 + distance) || mode.containsInterval(2 + distance - 12) || mode.containsInterval(2 + distance - 24))
             {
                 noteOffset = lastTonic.getValue() + 2;
                 if (noteOffset > 12) { noteOffset = noteOffset - 12; }
                 notes.Add(NoteFactory.getNoteByValue(noteOffset, key));
             }
-            if (mode.containsInterval(1 + distance) || mode.containsInterval(1 + distance - 12))
+            if (mode.containsInterval(1 + distance) || mode.containsInterval(1 + distance - 12) || mode.containsInterval(1 + distance - 24))
             {
                 noteOffset = lastTonic.getValue() + 1;
                 if (noteOffset > 12) { noteOffset = noteOffset - 12; }
                 notes.Add(NoteFactory.getNoteByValue(noteOffset, key));
             }
-            if (mode.containsInterval(4 + distance) || mode.containsInterval(4 + distance - 12))
+            if (mode.containsInterval(4 + distance) || mode.containsInterval(4 + distance - 12) || mode.containsInterval(4 + distance - 24))
             {
                 noteOffset = lastTonic.getValue() + 4;
                 if (noteOffset > 12) { noteOffset = noteOffset - 12; }
                 notes.Add(NoteFactory.getNoteByValue(noteOffset, key));
             }
-            if (mode.containsInterval(3 + distance) || mode.containsInterval(3 + distance - 12))
+            if (mode.containsInterval(3 + distance) || mode.containsInterval(3 + distance - 12) || mode.containsInterval(3 + distance - 24))
             {
                 noteOffset = lastTonic.getValue() + 3;
                 if (noteOffset > 12) { noteOffset = noteOffset - 12; }
                 notes.Add(NoteFactory.getNoteByValue(noteOffset, key));
             }
-            if (mode.containsInterval(7 + distance) || mode.containsInterval(7 + distance - 12))
+            if (mode.containsInterval(7 + distance) || mode.containsInterval(7 + distance - 12) || mode.containsInterval(7 + distance - 24))
             {
                 noteOffset = lastTonic.getValue() + 7;
                 if (noteOffset > 12) { noteOffset = noteOffset - 12; }
                 notes.Add(NoteFactory.getNoteByValue(noteOffset, key));
             }
-            if (mode.containsInterval(10 + distance) || mode.containsInterval(10 + distance - 12))
+            if (mode.containsInterval(10 + distance) || mode.containsInterval(10 + distance - 12) || mode.containsInterval(10 + distance - 24))
             {
                 noteOffset = lastTonic.getValue() + 10;
                 if (noteOffset > 12) { noteOffset = noteOffset - 12; }
                 notes.Add(NoteFactory.getNoteByValue(noteOffset, key));
             }
-            if (mode.containsInterval(11 + distance) || mode.containsInterval(11 + distance - 12))
+            if (mode.containsInterval(11 + distance) || mode.containsInterval(11 + distance - 12) || mode.containsInterval(11 + distance - 24))
             {
                 noteOffset = lastTonic.getValue() + 11;
                 if (noteOffset > 12) { noteOffset = noteOffset - 12; }
                 notes.Add(NoteFactory.getNoteByValue(noteOffset, key));
             }
-            if (mode.containsInterval(8 + distance) || mode.containsInterval(8 + distance - 12))
+            if (mode.containsInterval(8 + distance) || mode.containsInterval(8 + distance - 12) || mode.containsInterval(8 + distance - 24))
             {
                 noteOffset = lastTonic.getValue() + 8;
                 if (noteOffset > 12) { noteOffset = noteOffset - 12; }
                 notes.Add(NoteFactory.getNoteByValue(noteOffset, key));
             }
-            if (mode.containsInterval(9 + distance) || mode.containsInterval(9 + distance - 12))
+            if (mode.containsInterval(9 + distance) || mode.containsInterval(9 + distance - 12) || mode.containsInterval(9 + distance - 24))
             {
                 noteOffset = lastTonic.getValue() + 9;
                 if (noteOffset > 12) { noteOffset = noteOffset - 12; }
                 notes.Add(NoteFactory.getNoteByValue(noteOffset, key));
             }
-            if (mode.containsInterval(6 + distance) || mode.containsInterval(6 + distance - 12))
+            if (mode.containsInterval(6 + distance) || mode.containsInterval(6 + distance - 12) || mode.containsInterval(6 + distance - 24))
             {
                 noteOffset = lastTonic.getValue() + 6;
                 if (noteOffset > 12) { noteOffset = noteOffset - 12; }
                 notes.Add(NoteFactory.getNoteByValue(noteOffset, key));
             }
+
+            notes.Add(lastTonic);
+
             return notes;
         }
         public static List<Chord> GetChordsByDegree (Note key, Note tonic, Mode mode)
