@@ -150,7 +150,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Pages\About.aspx" />
-    <Content Include="Pages\ChangeKeyOrMode.aspx" />
     <Content Include="Pages\ChordBuilder.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -232,13 +231,6 @@
     </Compile>
     <Compile Include="Pages\About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\ChangeKeyOrMode.aspx.cs">
-      <DependentUpon>ChangeKeyOrMode.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\ChangeKeyOrMode.aspx.designer.cs">
-      <DependentUpon>ChangeKeyOrMode.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\ChordBuilder.aspx.cs">
       <DependentUpon>ChordBuilder.aspx</DependentUpon>

@@ -1276,7 +1276,13 @@ namespace ChordnomiconWebApplication.Pages
             RecommendedDegreeDropDownList.Items.Add(new ListItem("-"));
             for (int i = 0; i < Progression.GetRecommendedDegrees().Count; i++)
             {
-                RecommendedDegreeDropDownList.Items.Add(new ListItem(Progression.GetRecommendedDegrees().ElementAt(i).getName()));
+                if (i == 0 && Progression.getSize() > 0)
+                { RecommendedDegreeDropDownList.Items.Add(new ListItem(Progression.GetRecommendedDegrees().ElementAt(i).getName() + " (High Consonance)")); }
+                else if (i + 2 == Progression.GetRecommendedDegrees().Count && Progression.getSize() > 0)
+                { RecommendedDegreeDropDownList.Items.Add(new ListItem(Progression.GetRecommendedDegrees().ElementAt(i).getName() + " (Low Consonance)")); }
+                else if (i + 1 == Progression.GetRecommendedDegrees().Count && Progression.getSize() > 0)
+                { RecommendedDegreeDropDownList.Items.Add(new ListItem(Progression.GetRecommendedDegrees().ElementAt(i).getName() + " (Same Degree)")); }
+                else { RecommendedDegreeDropDownList.Items.Add(new ListItem(Progression.GetRecommendedDegrees().ElementAt(i).getName())); }
             }
 
             RecommendedChordsDropDownList.Items.Clear();
