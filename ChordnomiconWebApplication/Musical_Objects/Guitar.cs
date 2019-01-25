@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChordnomiconWebApplication
 {
-    class Guitar
+    class Guitar : IInstrument
     {
         private List<Note> tuning = new List<Note>();
         int numberOfStrings = 6;

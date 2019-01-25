@@ -31,7 +31,6 @@ C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplicatio
 C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication\bin\Microsoft.AI.Web.xml
-C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication\obj\Debug\ChordnomiconWebApplication.csprojResolveAssemblyReference.cache
 C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication\obj\Debug\ChordnomiconWebApplication.csproj.CoreCompileInputs.cache
 C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication\obj\Debug\ChordnomiconWebApplication.dll
 C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication\obj\Debug\ChordnomiconWebApplication.pdb
@@ -52,3 +51,5 @@ C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplicatio
 C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication\bin\System.Web.WebPages.xml
 C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication\bin\System.Web.WebPages.Deployment.xml
 C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication\bin\System.Web.WebPages.Razor.xml
+C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication\obj\Debug\ChordnomiconWebApplication.csprojAssemblyReference.cache
+C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication\obj\Debug\ChordnomiconWebApplication.csproj.CopyComplete

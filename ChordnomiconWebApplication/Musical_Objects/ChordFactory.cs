@@ -17,6 +17,7 @@ namespace ChordnomiconWebApplication
             int i = 0;
             bool needsMore = true;
             string tonicName;
+            string slashBass;
             Note tonic;
             Chord chord = new Chord();
             chord.setName(name);
@@ -30,7 +31,7 @@ namespace ChordnomiconWebApplication
                 tonicName = tonicName + chordName[i].ToString(); 
                 i++;
             }
-
+            
             tonic = NoteFactory.getNoteByName(tonicName);
             chord.addNote(tonic);
 
@@ -314,21 +315,23 @@ namespace ChordnomiconWebApplication
 
             // X/bassNote
             if (i < chordName.Count() && chordName[i] == '/')
+            {
+                i++;
+                if (i < chordName.Count() && NoteController.checkNoteName(chordName[i].ToString()))
                 {
+                    slashBass = chordName[i].ToString();
                     i++;
-                    tonicName = chordName[i].ToString();
-                    i++;
-                    if (i < chordName.Count())
-                    {
-                        if (chordName[i] == 'b' || chordName[i] == '#')
-                        {
-                            tonicName = tonicName + chordName[i].ToString();
-                            i++;
-                        }
                 }
-                tonic = NoteFactory.getNoteByName(tonicName);
-                chord.insertNote(tonic, 0);
+                else { throw new System.ArgumentException("\nThe character length for " + name + " is: " + chordName.Length + "\nThe index for " + name + " is: " + i, "Chord Name: " + name); }
+
+                if (i < chordName.Count() && (chordName[i] == 'b' || chordName[i] == '#'))
+                {
+                    slashBass = slashBass + chordName[i].ToString();
+                    i++;
+                }
+                chord.insertNote(NoteFactory.getNoteByName(slashBass), 0);
             }
+
             if (i < chordName.Length)
             { throw new System.ArgumentException("\nThe character length for " + name + " is: " + chordName.Length + "\nThe index for " + name + " is: " + i, "Chord Name: " + name); }
 

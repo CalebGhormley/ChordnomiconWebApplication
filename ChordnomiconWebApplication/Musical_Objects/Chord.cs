@@ -8,7 +8,7 @@ using System.Drawing.Imaging;
 
 namespace ChordnomiconWebApplication
 {
-    class Chord
+    class Chord : IMusicalElement
     {
         public Chord() { }
 

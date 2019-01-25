@@ -9,7 +9,7 @@
         body { background-color:black; }
 
         .header {
-            text-align:center;
+            text-align:center;  
         }
 
         .header h1 {

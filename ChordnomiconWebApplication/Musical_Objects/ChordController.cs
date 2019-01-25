@@ -248,6 +248,24 @@ namespace ChordnomiconWebApplication
                     }
                     else { return false; }
                 }
+                // Double check (or possibly just fix ChordFactory so that it is bool
+                else if (newChordNameSuffix.Length >= 1 && newChordNameSuffix[0] == '/')
+                {
+                    if (newChordNameSuffix.Length >= 2 && NoteController.checkNoteName(newChordNameSuffix[1].ToString()))
+                    {
+                        if (newChordNameSuffix.Length >= 3)
+                        {
+                            if (newChordNameSuffix[2] == 'b' || newChordNameSuffix[2] == '#')
+                            {
+                                if (newChordNameSuffix.Length == 3) { return true; }
+                                else { return false; }
+                            }
+                            else { return false; }
+                        }
+                        else { return true; }
+                    }
+                    else { return false; }
+                }
                 else { return false; }
             }
             else { return false; }

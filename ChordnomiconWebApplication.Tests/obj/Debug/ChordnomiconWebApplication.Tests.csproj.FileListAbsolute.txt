@@ -16,7 +16,6 @@ C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplicatio
 C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication.Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
 C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication.Tests\bin\Debug\System.Web.Optimization.xml
 C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication.Tests\bin\Debug\Microsoft.AspNet.FriendlyUrls.xml
-C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication.Tests\obj\Debug\ChordnomiconWebApplication.Tests.csprojResolveAssemblyReference.cache
 C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication.Tests\obj\Debug\ChordnomiconWebApplication.Tests.csproj.CoreCompileInputs.cache
 C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication.Tests\obj\Debug\ChordnomiconWebApplication.Tests.dll
 C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication.Tests\obj\Debug\ChordnomiconWebApplication.Tests.pdb
@@ -24,3 +23,5 @@ C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplicatio
 C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication.Tests\bin\Debug\nunit.framework.dll
 C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication.Tests\bin\Debug\nunit.framework.pdb
 C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication.Tests\bin\Debug\nunit.framework.xml
+C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication.Tests\obj\Debug\ChordnomiconWebApplication.Tests.csprojAssemblyReference.cache
+C:\Users\caleb\source\repos\ChordnomiconWebApplication\ChordnomiconWebApplication.Tests\obj\Debug\ChordnomiconWebApplication.Tests.csproj.CopyComplete

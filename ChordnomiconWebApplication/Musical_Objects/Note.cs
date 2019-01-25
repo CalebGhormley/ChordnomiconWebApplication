@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChordnomiconWebApplication
 {
-    class Note
+    public class Note
     {
         private Note() { }
         public Note (int v, string n )
@@ -18,6 +18,5 @@ namespace ChordnomiconWebApplication
         private int value { get; }
         public int getValue () { return value; }
         public string getName () { return name; }
-        
     }
 }

@@ -223,8 +223,14 @@
     <Compile Include="Musical_Objects\Chord.cs" />
     <Compile Include="Musical_Objects\ChordController.cs" />
     <Compile Include="Musical_Objects\ChordFactory.cs" />
+    <Compile Include="Musical_Objects\IInstrument.cs" />
+    <Compile Include="Musical_Objects\IMusicalElement.cs" />
+    <Compile Include="Musical_Objects\Lyric.cs" />
     <Compile Include="Musical_Objects\ModeController.cs" />
     <Compile Include="Musical_Objects\RecommendedChordFactory.cs" />
+    <Compile Include="Musical_Objects\Rhythm.cs" />
+    <Compile Include="Musical_Objects\SheetNote.cs" />
+    <Compile Include="Musical_Objects\Song.cs" />
     <Compile Include="Pages\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
