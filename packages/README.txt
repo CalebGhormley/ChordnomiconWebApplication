@@ -1,0 +1,1 @@
+All packages will have to be updated through Visula Studio for a clone to build and run on your machine.
